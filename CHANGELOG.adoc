@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.1.0
-:revdate: 2019-08-13T15:55:00+0900
-:revmark: Add v0.0.1
+:revnumber: v1.2.0
+:revdate: 2019-08-13T15:56:36+0900
+:revmark: Add v0.1.0
 :doctype: article
 :title-separtor: :
 :sectids:
@@ -25,6 +25,18 @@
 :author-link-url: https://github.com/hitsuji-no-shippo
 :gatsby-github-url: https://github.com/gatsbyjs/gatsby
 :repository-issues-url: https://github.com/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
+
+== 0.1.0 (2019-08-13)
+
+=== Features
+
+* Unify to return null if a non existing field is specified Unify null or
+  empty string (``) to null. (close link:{repository-issues-url}/6[#6]) +
+  The reason for null is the same as
+  link:https://github.com/gatsbyjs/gatsby/blob/master/packages/gatsby-transformer-remark/README.md#configuring-the-tableofcontents[
+  gatsby-transformer-remark]. +
+  Title has not been verified. I did not know how to make it undefined.
+
 
 == 0.0.1 (2019-08-13)
 

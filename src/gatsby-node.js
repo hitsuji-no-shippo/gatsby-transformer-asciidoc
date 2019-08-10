@@ -64,10 +64,10 @@ async function onCreateNode(
       author = {
         fullName: doc.getAttribute(`author`),
         firstName: doc.getAttribute(`firstname`),
-        lastName: doc.getAttribute(`lastname`) || ``,
-        middleName: doc.getAttribute(`middlename`) || ``,
-        authorInitials: doc.getAttribute(`authorinitials`) || ``,
-        email: doc.getAttribute(`email`) || ``,
+        lastName: doc.getAttribute(`lastname`),
+        middleName: doc.getAttribute(`middlename`),
+        authorInitials: doc.getAttribute(`authorinitials`),
+        email: doc.getAttribute(`email`),
       }
     }
 
@@ -84,7 +84,7 @@ async function onCreateNode(
       html,
       document: {
         title: title.getCombined(),
-        subtitle: title.hasSubtitle() ? title.getSubtitle() : ``,
+        subtitle: title.getSubtitle(),
         main: title.getMain(),
       },
       revision,
