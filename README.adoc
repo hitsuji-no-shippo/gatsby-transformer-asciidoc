@@ -1,0 +1,244 @@
+= gatsby-transformer-asciidoc
+:author-name: hitsuji no shippo
+:!author-email:
+:author: {author-name}
+:!email: {author-email}
+:revnumber: v1.0.0
+:revdate: 2019-08-12T22:56:08+0900
+:revmark: Convert markdown to asciidoc
+:doctype: article
+:title-separtor: :
+:!showtitle:
+:!sectnums:
+:sectids:
+:toc: preamble
+:sectlinks:
+:sectanchors:
+:idprefix:
+:idseparator: -
+:xrefstyle: full
+:!example-caption:
+:!figure-caption:
+:!table-caption:
+:!listing-caption:
+// Page Attributes
+:page-create-date: 2019-08-12T22:56:08+0900
+// Variables
+:author-link-url: https://github.com/hitsuji-no-shippo
+:asciidoctor-official-docs-url: https://asciidoctor.org/docs
+:asciidoctor-js-docs-antora-url: https://asciidoctor-docs.netlify.com/asciidoctor.js
+
+Parses AsciiDoc files using
+link:{asciidoctor-official-docs-url}/asciidoctor.js/[Asciidoctor.js].
+
+== Install
+
+`npm install --save gatsby-transformer-asciidoc`
+
+== How to use
+
+[source, JavaScript]
+----
+// In your gatsby-config.js
+plugins: [`gatsby-transformer-asciidoc`]
+----
+
+A full explanation of asciidoc can be found here:
+link:https://github.com/asciidoctor/asciidoctor.js[Asciidoctor.js]
+
+You can also pass all
+link:{asciidoctor-js-docs-antora-url}/processor/convert-options/[
+Asciidoctor's convert options] to the transformer. An example would be:
+
+[source, JavaScript]
+----
+// In your gatsby-config.js
+plugins: [
+  {
+    resolve: `gatsby-transformer-asciidoc`,
+    options: {
+      attributes: {
+        showtitle: true,
+      },
+    },
+  },
+]
+----
+
+== Parsing algorithm
+
+It recognizes files with the following
+link:{asciidoctor-official-docs-url}/asciidoc-recommended-practices/#document-extension[
+extensions] as AsciiDoc:
+
+- `adoc`
+- `asciidoc`
+
+Additional extensions can be configured via the fileExtensions option:
+
+[source, JavaScript]
+----
+// In your gatsby-config.js
+// In your gatsby-config.js
+plugins: [
+  {
+    resolve: `gatsby-transformer-asciidoc`,
+    options: {
+      attributes: {
+        showtitle: true,
+      },
+      fileExtensions: [`ad`, `adoc`],
+    },
+  },
+]
+----
+
+Each AsciiDoc file is parsed into a node of type `asciidoc`.
+
+== Set imagesdir
+
+You also can define where the asciidoc file can find the images by setting the
+imagesdir attribute.
+
+[source, JavaScript]
+----
+// In your gatsby-config.js
+plugins: [
+  {
+    resolve: `gatsby-transformer-asciidoc`,
+    options: {
+      attributes: {
+        imagesdir: `/images`,
+      },
+    },
+  },
+]
+----
+
+In the asciidoc file you can insert your image just by using:
+`image::myimage.png[]`
+
+[NOTE]
+====
+* If no `imagesdir` is set the default value is `/images@`
+* Don't use relative images paths because the images might not be copied
+  automatically to the location where the converted asciidoc html file will to located.
+* In case a `pathPrefix` is set it will altered the images location.
+* In case you want to be able to override the defined imagesdir inside of your
+  asciidoc file you have to end the path with a `@` (e.g. `/images@`).
+====
+
+== How to query
+
+A sample GraphQL query to get AsciiDoc nodes:
+
+[source, GraphQL]
+----
+{
+  allAsciidoc {
+    edges {
+      node {
+        html
+        document {
+          title
+          subtitle
+          main
+        }
+        author {
+          fullName
+          firstName
+          lastName
+          middleName
+          authorInitials
+          email
+        }
+        revision {
+          date
+          number
+          remark
+        }
+      }
+    }
+  }
+}
+----
+
+== Add new node attributes in the asciidoc file
+
+You can define in the asciidoc file your own data that will be automatically
+be attached to the node attributes.
+
+.Example
+[source, AsciiDoc]
+----
+= AsciiDoc Article Title
+Firstname Lastname <author@example.org>
+1.0, July 29, 2018, Asciidoctor article template
+
+:page-title: Article
+:page-path: /my-blog-entry
+:page-category: My Category
+----
+
+Each attribute with the prefix page- will be automatically added under
+`pageAttributes` so it can be used with GraphQL.
+
+[source, GraphQL]
+----
+{
+  allAsciidoc {
+    edges {
+      node {
+        pageAttributes {
+          title
+          path
+          category
+        }
+      }
+    }
+  }
+}
+----
+
+== Define a custom converter
+
+You can define a custom converter by adding the `converterFactory` option.
+
+[source, JavaScript]
+----
+// In your gatsby-config.js, make sure to import or declare TemplateConverter
+plugins: [
+  {
+    resolve: `gatsby-transformer-asciidoc`,
+    options: {
+      converterFactory: TemplateConverter,
+    },
+  },
+]
+----
+
+`TemplateConverter` is a custom javascript class you'll need to create.
+Information on how to write a custom `TemplateConverter` can be found at the
+link:{{asciidoctor-js-docs-antora-url}/extend/converter/custom-converter}/[
+asciidoctor docs].
+
+In the example below, we will use a custom converter to convert paragraphs but the other nodes will be converted using the built-in HTML5 converter:
+
+[source, JavaScript]
+----
+const asciidoc = require(`asciidoctor.js`)()
+
+class TemplateConverter {
+  constructor() {
+    this.baseConverter = asciidoc.Html5Converter.$new()
+  }
+
+  convert(node, transform) {
+    if (node.getNodeName() === "paragraph") {
+      return `<p>${node.getContent()}</p>`
+    }
+
+    return this.baseConverter.convert(node, transform)
+  }
+}
+----

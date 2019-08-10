@@ -1,0 +1,42 @@
+= Change Log
+:author-name: hitsuji no shippo
+:!author-email:
+:author: {author-name}
+:!email: {author-email}
+:revnumber: v1.0.0
+:revdate: 2019-08-13T15:53:20+0900
+:revmark: Add v0.0.0
+:doctype: article
+:title-separtor: :
+:sectids:
+:toc: auto
+:sectlinks:
+:sectanchors:
+:idprefix:
+:idseparator: -
+:xrefstyle: full
+:!example-caption:
+:!figure-caption:
+:!table-caption:
+:!listing-caption:
+// Page Attributes
+:page-create-date: 2019-08-13T15:53:20+0900
+// Variables
+:author-link-url: https://github.com/hitsuji-no-shippo
+:gatsby-github-url: https://github.com/gatsbyjs/gatsby
+:repository-issues-url: https://github.com/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
+
+== 0.0.0 (2019-08-12)
+
+* Clone
+  link:{gatsby-github-url}/tree/master/packages/gatsby-transformer-asciidoc[
+  gatsby-transformer-asciidoc].
+  (close link:{repository-issues-url}/2[#2])
++
+--
+[horizontal]
+clone repository url:: \https://github.com/gatsbyjs/gatsby.git
+commit id           :: link:{gatsby-github-url}/commit/89c29f895c379f6a0e14fb620b9b70d9e8b325a0[
+                       89c29f895c379f6a0e14fb620b9b70d9e8b325a0]
+path                :: packages/gatsby-transformer-asciidoc
+--
