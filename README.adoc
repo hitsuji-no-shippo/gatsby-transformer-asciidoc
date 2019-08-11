@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.0.0
-:revdate: 2019-08-12T22:56:08+0900
-:revmark: Convert markdown to asciidoc
+:revnumber: v1.1.0
+:revdate: 2019-08-13T17:31:35+0900
+:revmark: Add description to process pageAttributes value with toml
 :doctype: article
 :title-separtor: :
 :!showtitle:
@@ -22,11 +22,12 @@
 :!table-caption:
 :!listing-caption:
 // Page Attributes
-:page-create-date: 2019-08-12T22:56:08+0900
+:page-create-date: 2019-08-13T16:41:20+0900
 // Variables
 :author-link-url: https://github.com/hitsuji-no-shippo
 :asciidoctor-official-docs-url: https://asciidoctor.org/docs
 :asciidoctor-js-docs-antora-url: https://asciidoctor-docs.netlify.com/asciidoctor.js
+:yaml-example-url: https://en.wikipedia.org/wiki/YAML#Example
 
 Parses AsciiDoc files using
 link:{asciidoctor-official-docs-url}/asciidoctor.js/[Asciidoctor.js].
@@ -181,7 +182,8 @@ Firstname Lastname <author@example.org>
 ----
 
 Each attribute with the prefix page- will be automatically added under
-`pageAttributes` so it can be used with GraphQL.
+`pageAttributes` so it can be used with GraphQL. Attribute value is processed as
+link:{yaml-example-url}[YAML] data.
 
 [source, GraphQL]
 ----

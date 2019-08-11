@@ -1,14 +1,15 @@
 {
   "name": "@hitsuji_no_shippo/gatsby-transformer-asciidoc",
   "description": "Gatsby transformer plugin for Asciidocs using the Asciidoctor.js library",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "author": "hitsuji no shippo",
   "bugs": {
     "url": "https://github.com/hitsuji_no_shippo/gatsby-transformer-asciidoc/issues"
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
-    "asciidoctor": "^2.0.0"
+    "asciidoctor": "^2.0.0",
+    "js-yaml": "^3.13.1"
   },
   "devDependencies": {
     "@babel/cli": "^7.0.0",

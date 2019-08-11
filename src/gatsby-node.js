@@ -137,7 +137,7 @@ const withPathPrefix = (pathPrefix, url) =>
 const extractPageAttributes = allAttributes =>
   Object.entries(allAttributes).reduce((pageAttributes, [key, value]) => {
     if (key.startsWith(`page-`)) {
-      pageAttributes[key.replace(/^page-/, ``)] = value
+      pageAttributes[key.replace(/^page-/, ``)] = yaml.safeLoad(value)
     }
     return pageAttributes
   }, {})
