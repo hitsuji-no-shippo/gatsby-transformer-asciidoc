@@ -1,5 +1,7 @@
 const asciidoc = require(`asciidoctor`)()
 const _ = require(`lodash`)
+const matter = require(`gray-matter`)
+const yaml = require('js-yaml')
 
 async function onCreateNode(
   {
@@ -74,12 +76,15 @@ async function onCreateNode(
 
     let pageAttributes = extractPageAttributes(doc.getAttributes())
 
+    const frontmatterData = matter(content)
+
     const asciiNode = {
       id: createNodeId(`${node.id} >>> ASCIIDOC`),
       parent: node.id,
       internal: {
         type: `Asciidoc`,
         mediaType: `text/html`,
+        content: frontmatterData.content
       },
       children: [],
       html,
@@ -92,6 +97,7 @@ async function onCreateNode(
       revision,
       author,
       pageAttributes,
+      frontmatter: frontmatterData.data
     }
 
     asciiNode.internal.contentDigest = createContentDigest(asciiNode)
@@ -112,6 +118,7 @@ const processPluginOptions = _.memoize((pluginOptions, pathPrefix) => {
   const processAsciidoctorAttributes = attributes => {
     const defaultImagesDir = `/images@`
     const currentPathPrefix = pathPrefix || ``
+    const defaultSkipFrontMatter = true
 
     if (attributes === undefined) {
       attributes = {}
@@ -121,6 +128,10 @@ const processPluginOptions = _.memoize((pluginOptions, pathPrefix) => {
       currentPathPrefix,
       attributes.imagesdir || defaultImagesDir
     )
+
+    if (attributes['skip-front-matter'] === undefined) {
+      attributes['skip-front-matter'] = defaultSkipFrontMatter
+    }
 
     return attributes
   }
