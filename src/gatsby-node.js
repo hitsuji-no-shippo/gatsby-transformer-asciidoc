@@ -107,19 +107,26 @@ async function onCreateNode(
 }
 
 const processPluginOptions = _.memoize((pluginOptions, pathPrefix) => {
-  const defaultImagesDir = `/images@`
-  const currentPathPrefix = pathPrefix || ``
+  const processAsciidoctorAttributes = attributes => {
+    const defaultImagesDir = `/images@`
+    const currentPathPrefix = pathPrefix || ``
+
+    if (attributes === undefined) {
+      attributes = {}
+    }
+
+    attributes.imagesdir = withPathPrefix(
+      currentPathPrefix,
+      attributes.imagesdir || defaultImagesDir
+    )
+
+    return attributes
+  }
 
   const clonedPluginOptions = _.cloneDeep(pluginOptions)
 
-  if (clonedPluginOptions.attributes === undefined) {
-    clonedPluginOptions.attributes = {}
-  }
-
-  clonedPluginOptions.attributes.imagesdir = withPathPrefix(
-    currentPathPrefix,
-    clonedPluginOptions.attributes.imagesdir || defaultImagesDir
-  )
+  clonedPluginOptions.attributes =
+    processAsciidoctorAttributes(clonedPluginOptions.attributes)
 
   return clonedPluginOptions
 })
