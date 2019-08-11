@@ -48,6 +48,7 @@ async function onCreateNode(
     const html = doc.convert()
     // Use "partition" option to be able to get title, subtitle, combined
     const title = doc.getDocumentTitle({ partition: true })
+    const description =  doc.getAttribute('description')
 
     let revision = null
     let author = null
@@ -86,6 +87,7 @@ async function onCreateNode(
         title: title.getCombined(),
         subtitle: title.getSubtitle(),
         main: title.getMain(),
+        description,
       },
       revision,
       author,

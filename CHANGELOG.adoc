@@ -4,10 +4,12 @@
 :author: {author-name}
 :!email: {author-email}
 :revnumber: v1.3.0
-:revdate: 2019-08-13T17:32:15+0900
-:revmark: Add v0.2.0
+:revdate: 2019-08-13T21:23:01+0900
+:revmark: Add v0.3.0
 :doctype: article
 :title-separtor: :
+:!showtitle:
+:!sectnums:
 :sectids:
 :toc: auto
 :sectlinks:
@@ -25,6 +27,14 @@
 :author-link-url: https://github.com/hitsuji-no-shippo
 :gatsby-github-url: https://github.com/gatsbyjs/gatsby
 :repository-issues-url: https://github.com/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
+
+== 0.3.0 (2019-08-13)
+
+=== Features
+
+* Add description attribute to GraphQL field.
+  (close link:{repository-issues-url}/8[#8])
+
 
 == 0.2.0 (2019-08-13)
 

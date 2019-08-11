@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.1.0
-:revdate: 2019-08-13T17:31:35+0900
-:revmark: Add description to process pageAttributes value with toml
+:revnumber: v1.2.0
+:revdate: 2019-08-13T17:33:04+0900
+:revmark: Add description field in document fields.
 :doctype: article
 :title-separtor: :
 :!showtitle:
@@ -144,6 +144,7 @@ A sample GraphQL query to get AsciiDoc nodes:
           title
           subtitle
           main
+          description
         }
         author {
           fullName
