@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.4.0
-:revdate: 2019-08-13T22:18:02+0900
-:revmark: Add v0.4.0
+:revnumber: v1.5.1
+:revdate: 2019-08-13T23:42:09+0900
+:revmark: Typo v0.4.1
 :doctype: article
 :title-separtor: :
 :!showtitle:
@@ -32,7 +32,7 @@
 
 === Style
 
-* Unify to to be enclosed in apostophe.
+* Unify to be enclosed in apostophe.
   (close link:{repository-issues-url}/10[#10])
 
 
