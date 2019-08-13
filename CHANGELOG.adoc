@@ -4,7 +4,7 @@
 :author: {author-name}
 :!email: {author-email}
 :revnumber: v1.4.0
-:revdate: 2019-08-13T21:24:20+0900
+:revdate: 2019-08-13T22:18:02+0900
 :revmark: Add v0.4.0
 :doctype: article
 :title-separtor: :
@@ -27,6 +27,14 @@
 :author-link-url: https://github.com/hitsuji-no-shippo
 :gatsby-github-url: https://github.com/gatsbyjs/gatsby
 :repository-issues-url: https://github.com/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
+
+== 0.4.1 (2019-08-13)
+
+=== Style
+
+* Unify to to be enclosed in apostophe.
+  (close link:{repository-issues-url}/10[#10])
+
 
 == 0.4.0 (2019-08-13)
 

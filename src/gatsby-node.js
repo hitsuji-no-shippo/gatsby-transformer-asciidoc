@@ -1,7 +1,7 @@
 const asciidoc = require(`asciidoctor`)()
 const _ = require(`lodash`)
 const matter = require(`gray-matter`)
-const yaml = require('js-yaml')
+const yaml = require(`js-yaml`)
 
 async function onCreateNode(
   {
@@ -50,7 +50,7 @@ async function onCreateNode(
     const html = doc.convert()
     // Use "partition" option to be able to get title, subtitle, combined
     const title = doc.getDocumentTitle({ partition: true })
-    const description =  doc.getAttribute('description')
+    const description =  doc.getAttribute(`description`)
 
     let revision = null
     let author = null
@@ -129,8 +129,8 @@ const processPluginOptions = _.memoize((pluginOptions, pathPrefix) => {
       attributes.imagesdir || defaultImagesDir
     )
 
-    if (attributes['skip-front-matter'] === undefined) {
-      attributes['skip-front-matter'] = defaultSkipFrontMatter
+    if (attributes[`skip-front-matter`] === undefined) {
+      attributes[`skip-front-matter`] = defaultSkipFrontMatter
     }
 
     return attributes
