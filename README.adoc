@@ -3,10 +3,11 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.3.0
-:revdate: 2019-08-13T21:17:48+0900
-:revmark: Add front matter support
+:revnumber: v1.4.0
+:revdate: 2019-08-15T22:46:34+0900
+:revmark: Add copyright attribute
 :doctype: article
+:copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
 :!showtitle:
 :!sectnums:

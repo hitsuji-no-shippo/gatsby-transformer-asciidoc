@@ -3,10 +3,11 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.5.1
-:revdate: 2019-08-13T23:42:09+0900
-:revmark: Typo v0.4.1
+:revnumber: v1.6.0
+:revdate: 2019-08-15T22:46:26+0900
+:revmark: Add copyright attributes
 :doctype: article
+:copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
 :!showtitle:
 :!sectnums:
