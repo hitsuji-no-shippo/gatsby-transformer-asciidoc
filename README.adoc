@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.4.0
-:revdate: 2019-08-15T22:46:34+0900
-:revmark: Add copyright attribute
+:revnumber: v1.4.1
+:revdate: 2019-08-15T23:10:43+0900
+:revmark: A line breaks over 80 characters
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -125,7 +125,8 @@ In the asciidoc file you can insert your image just by using:
 ====
 * If no `imagesdir` is set the default value is `/images@`
 * Don't use relative images paths because the images might not be copied
-  automatically to the location where the converted asciidoc html file will to located.
+  automatically to the location where the converted asciidoc html file will to
+  located.
 * In case a `pathPrefix` is set it will altered the images location.
 * In case you want to be able to override the defined imagesdir inside of your
   asciidoc file you have to end the path with a `@` (e.g. `/images@`).
@@ -274,7 +275,8 @@ Information on how to write a custom `TemplateConverter` can be found at the
 link:{{asciidoctor-js-docs-antora-url}/extend/converter/custom-converter}/[
 asciidoctor docs].
 
-In the example below, we will use a custom converter to convert paragraphs but the other nodes will be converted using the built-in HTML5 converter:
+In the example below, we will use a custom converter to convert paragraphs but
+the other nodes will be converted using the built-in HTML5 converter:
 
 [source, JavaScript]
 ----
