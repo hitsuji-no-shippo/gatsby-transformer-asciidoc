@@ -2,6 +2,7 @@ const asciidoc = require(`asciidoctor`)()
 const _ = require(`lodash`)
 const matter = require(`gray-matter`)
 const yaml = require(`js-yaml`)
+const { GraphQLBoolean } = require(`gatsby/graphql`)
 
 async function onCreateNode(
   {
@@ -74,7 +75,9 @@ async function onCreateNode(
       }
     }
 
-    let pageAttributes = extractPageAttributes(doc.getAttributes())
+    let pageAttributes = extractPageAttributes(
+      doc.getAttributes(), pluginOptions.definesEmptyAttributes
+    )
 
     const frontmatterData = matter(content)
 
@@ -147,12 +150,69 @@ const processPluginOptions = _.memoize((pluginOptions, pathPrefix) => {
 const withPathPrefix = (pathPrefix, url) =>
   (pathPrefix + url).replace(/\/\//, `/`)
 
-const extractPageAttributes = allAttributes =>
+// There is no way to preserve empty  attribute names other than global
+// variables. (refactor #13)
+let emptyAttributeNamesInPageAttributes = new Set([])
+const EMPTY_ATTRIBUTE_VALUE = ''
+const extractPageAttributes = (allAttributes, definesEmptyAttributes = true) =>
   Object.entries(allAttributes).reduce((pageAttributes, [key, value]) => {
     if (key.startsWith(`page-`)) {
-      pageAttributes[key.replace(/^page-/, ``)] = yaml.safeLoad(value)
+      const fieldName = key.replace(/^page-/, ``)
+      let fieldvalue
+
+      if (value === EMPTY_ATTRIBUTE_VALUE && definesEmptyAttributes) {
+        fieldvalue = EMPTY_ATTRIBUTE_VALUE
+        emptyAttributeNamesInPageAttributes.add(fieldName)
+      } else {
+        fieldvalue = yaml.safeLoad(value)
+      }
+      pageAttributes[fieldName] = fieldvalue
     }
+
     return pageAttributes
   }, {})
 
+async function setFieldsOnGraphQLNodeType({ type }) {
+  if (type.name !== `Asciidoc`) {
+    return {}
+  }
+
+  // I don't know the official name of the author part of graphql below.
+  // Therefore, here it is objectTypeName. (refactor #12)
+  // author {
+  //  fullName
+  // }
+  const defineEmptyAttributefields = (attributeNames, objectTypeName) => {
+    const fields = {}
+
+    attributeNames.forEach(name => {
+      // GraphQL filed Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ ,
+      // so replace `-` with `_` .
+      const fieldName = (
+        objectTypeName === undefined ? name : objectTypeName + `.` + name
+      ).replace(`-`, `_`)
+
+      fields[fieldName] = {
+        type: GraphQLBoolean,
+        resolve: (source) => {
+          const value = source[name]
+
+          if (typeof value === `boolean`) {
+            return value
+          }
+
+          return value === EMPTY_ATTRIBUTE_VALUE
+        }
+      }
+    })
+
+    return fields
+  }
+
+  return defineEmptyAttributefields(
+    emptyAttributeNamesInPageAttributes, `pageAttributes`
+  )
+}
+
 exports.onCreateNode = onCreateNode
+exports.setFieldsOnGraphQLNodeType = setFieldsOnGraphQLNodeType

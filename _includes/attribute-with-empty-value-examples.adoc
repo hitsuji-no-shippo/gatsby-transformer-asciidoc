@@ -1,0 +1,163 @@
+= Attribute with Empty Value Easmples
+:author-name: hitsuji no shippo
+:!author-email:
+:author: {author-name}
+:!email: {author-email}
+:revnumber: v1.0.0
+:revdate: 2019-08-17T13:21:33+0900
+:revremark: First Edition
+:doctype: article
+:copyright: Copyright (c) 2019 {author-name}
+// Page Attributes
+:page-create-date: 2019-08-17T13:21:33+0900
+// Variables
+:author-link-url: https://github.com/hitsuji-no-shippo
+
+// tag::body[]
+// tag::main[]
+.empty.adoc
+[source, Asciidoc]
+----
+= Empty
+:page-empty:
+:page-set:
+:page-true:
+:page-false:
+:page-number:
+:page-string:
+:page-time
+:page-array:
+:page-object:
+----
+
+.not-empty.adoc
+[source, Asciidoc]
+----
+= Not Empty
+:!page-set:
+:page-true: true
+:page-false: false
+:page-number: 1
+:page-string: asciidoc
+:page-time: 2019-08-15T20:51:43+0900
+:page-array: [1, 2, 3]
+:page-object: { name: hitsuji no shippo, email: xxx@gmail.com }
+:!page-only-unset:
+----
+
+.`definesEmptyAttributes: true`
+[%collapsible%open]
+======
+[source, GraphQL]
+----
+{
+  "data": {
+    "allAsciidoc": {
+      "edges": [
+        {
+          "node": {
+            "document": {
+              "title": "Empty"
+            }
+            "pageAttributes": {
+              "empty": true,
+              "set": true,
+              "true": true
+              "false": true,  # Because it's empty
+              "number": true,
+              "string": true,
+              "time": null,
+              "array": true,
+              "object": true,
+              "only_unset": "GraphQLError: Cannot query field \"only_unset\""
+            },
+          }
+        },
+        {
+          "node": {
+            "document": {
+              "title": "Not Empty"
+            }
+            "pageAttributes": {
+              "empty": false,
+              "set": false,
+              "array": false,
+              "true": true
+              "false": false,
+              "number": false,
+              "string": false,
+              "object": false,
+              "time": "2019-08-15T20:51:43+0900",
+              "only_unset": "GraphQLError: Cannot query field \"only_unset\""
+            },
+          }
+        }
+      ]
+    }
+  }
+}
+----
+======
+
+.`definesEmptyAttributes: false`
+[%collapsible%open]
+======
+[source, GraphQL]
+----
+{
+  "data": {
+    "allAsciidoc": {
+      "edges": [
+        {
+          "document": {
+            "title": "Empty"
+          }
+          "node": {
+            "pageAttributes": {
+              "empty": "GraphQLError: Cannot query field \"empty\" on type",
+              "set": "GraphQLError: Cannot query field \"set\" on type",
+              "true": null
+              "false": null,
+              "number": null,
+              "string": null,
+              "time": null,
+              "array": null,
+              "object": null,
+              "only_unset": "GraphQLError: Cannot query field \"only_unset\""
+            },
+          }
+        },
+        {
+          "node": {
+            "document": {
+              "title": "Not Empty"
+            }
+            "pageAttributes": {
+              "empty": "GraphQLError: Cannot query field \"empty\" on type",
+              "set": "GraphQLError: Cannot query field \"set\" on type",
+              "true": true
+              "false": false,
+              "number": 1,
+              "string": "asciidoc",
+              "time": "2019-08-15T20:51:43+0900",
+              "array": [
+                1,
+                2,
+                3
+              ],
+              "object": {
+                "name": "hitsuji no shippo",
+                "email": "xxx@gmail.com"
+              },
+              "only_unset": "GraphQLError: Cannot query field \"only_unset\""
+            },
+          }
+        }
+      ]
+    }
+  }
+}
+----
+======
+// end::main[]
+// end::body[]

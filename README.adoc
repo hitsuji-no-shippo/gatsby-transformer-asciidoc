@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.4.1
-:revdate: 2019-08-15T23:10:43+0900
-:revmark: A line breaks over 80 characters
+:revnumber: v1.5.0
+:revdate: 2019-08-17T13:18:08+0900
+:revmark: Add support for attribute with empty value in pageAttributes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -205,6 +205,43 @@ link:{yaml-example-url}[YAML] data.
   }
 }
 ----
+
+=== Empty Value
+
+Attribute with empty value (`:page-draft:`) is convert `true`. If attributes is
+not set for page, returns `false` instead of `null`.
+
+If even one Attribute value is empty, all attributes with the same name will
+return Boolean. So non-boolean values other than date are converted to `false`.
+`true` and `false` are not convert.
+
+If Attribute is not set and only unset, the attribute is not defined in
+GraphQL field.
+
+[NOTE]
+====
+This process is not executed when `definesEmptyAttributes` option is `false`.
+The empty attribute is not defined in GraphQL field.
+
+.gatsby-config.js
+[source, JavaScript]
+----
+plugins: [
+  {
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
+    options: {
+      definesEmptyAttributes: false,
+    }
+  },
+]
+----
+====
+
+.Examples
+[%collapsible]
+====
+include::./_includes/attribute-with-empty-value-examples.adoc[tag=main]
+====
 
 == Front Matter support
 
