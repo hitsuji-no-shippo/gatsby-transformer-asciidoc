@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.7.0
-:revdate: 2019-08-17T13:10:39+0900
-:revmark: Add v0.5.0
+:revnumber: v1.7.1
+:revdate: 2019-08-17T13:36:48+0900
+:revmark: typo of v0.5.0 date
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -29,7 +29,7 @@
 :gatsby-github-url: https://github.com/gatsbyjs/gatsby
 :repository-issues-url: https://github.com/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
 
-== 0.5.0 (2019-08-13)
+== 0.5.0 (2019-08-17)
 
 === Features
 
