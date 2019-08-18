@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.7.1
-:revdate: 2019-08-17T13:36:48+0900
-:revmark: typo of v0.5.0 date
+:revnumber: v1.8.0
+:revdate: 2019-08-19T11:28:27+0900
+:revmark: Add change variable preserving empty value attributes to const
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -28,6 +28,14 @@
 :author-link-url: https://github.com/hitsuji-no-shippo
 :gatsby-github-url: https://github.com/gatsbyjs/gatsby
 :repository-issues-url: https://github.com/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
+
+== 0.6.0 (2019-08-19)
+
+=== Refactor
+
+* Change the variable preserving empty value attributes in PageAttributes to
+  const. (close link:{repository-issues-url}/16[#16])
+
 
 == 0.5.0 (2019-08-17)
 

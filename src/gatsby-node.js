@@ -152,7 +152,7 @@ const withPathPrefix = (pathPrefix, url) =>
 
 // There is no way to preserve empty  attribute names other than global
 // variables. (refactor #13)
-let emptyAttributeNamesInPageAttributes = new Set([])
+const emptyAttributeNamesInPageAttributes = new Set([])
 const EMPTY_ATTRIBUTE_VALUE = ''
 const extractPageAttributes = (allAttributes, definesEmptyAttributes = true) =>
   Object.entries(allAttributes).reduce((pageAttributes, [key, value]) => {
