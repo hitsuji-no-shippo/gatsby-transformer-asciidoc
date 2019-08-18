@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.8.0
-:revdate: 2019-08-19T11:28:27+0900
-:revmark: Add change variable preserving empty value attributes to const
+:revnumber: v1.9.0
+:revdate: 2019-08-19T11:31:00+0900
+:revmark: Add separate Gatsby Node APIs processing for each file
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -35,6 +35,8 @@
 
 * Change the variable preserving empty value attributes in PageAttributes to
   const. (close link:{repository-issues-url}/16[#16])
+* Separate onCreateNode and setFieldsOnGraphQLNodeType processing of
+  Gatsby Node APIs for each file. (close link:{repository-issues-url}/17[#17])
 
 
 == 0.5.0 (2019-08-17)
