@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.5.0
-:revdate: 2019-08-17T13:18:08+0900
-:revmark: Add support for attribute with empty value in pageAttributes
+:revnumber: v1.6.0
+:revdate: 2019-08-19T20:34:02+0900
+:revmark: Change `@` position in "software setting" to end of attribute name
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -111,7 +111,7 @@ plugins: [
     resolve: `gatsby-transformer-asciidoc`,
     options: {
       attributes: {
-        imagesdir: `/images`,
+        'imagesdir@': `/images`,
       },
     },
   },
@@ -123,13 +123,14 @@ In the asciidoc file you can insert your image just by using:
 
 [NOTE]
 ====
-* If no `imagesdir` is set the default value is `/images@`
+* If no `imagesdir@` is set the default value is `/images`
 * Don't use relative images paths because the images might not be copied
   automatically to the location where the converted asciidoc html file will to
   located.
 * In case a `pathPrefix` is set it will altered the images location.
 * In case you want to be able to override the defined imagesdir inside of your
-  asciidoc file you have to end the path with a `@` (e.g. `/images@`).
+  asciidoc file you have to end the attribute name with a `@`
+  (e.g. `imagesdir@`).
 ====
 
 == How to query

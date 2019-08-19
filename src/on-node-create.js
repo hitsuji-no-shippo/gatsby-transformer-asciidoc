@@ -123,7 +123,7 @@ async function onCreateNode(
 
 const processPluginOptions = _.memoize((pluginOptions, pathPrefix) => {
   const processAsciidoctorAttributes = attributes => {
-    const defaultImagesDir = `/images@`
+    const defaultImagesDir = `/images`
     const currentPathPrefix = pathPrefix || ``
     const defaultSkipFrontMatter = true
 
@@ -131,9 +131,9 @@ const processPluginOptions = _.memoize((pluginOptions, pathPrefix) => {
       attributes = {}
     }
 
-    attributes.imagesdir = withPathPrefix(
+    attributes[`imagesdir@`] = withPathPrefix(
       currentPathPrefix,
-      attributes.imagesdir || defaultImagesDir
+      attributes[`imagesdir@`] || defaultImagesDir
     )
 
     if (attributes[`skip-front-matter`] === undefined) {

@@ -3,10 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.11.0
-:revdate: 2019-08-22T14:24:33+0900
-:revmark: Add change the definition position of \
-          createNode and createParentChildLink function
+:revnumber: v1.12.0
+:revdate: 2019-08-22T14:25:36+0900
+:revmark: Add change `@` position in "software setting" to end of attribute name
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -29,8 +28,18 @@
 :author-link-url: https://github.com/hitsuji-no-shippo
 :gatsby-github-url: https://github.com/gatsbyjs/gatsby
 :repository-issues-url: https://github.com/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
+:asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 
 == 0.6.0 (2019-08-22)
+
+=== Features
+
+==== Change
+
+* link:{asciidoctor-official-user-manual-url}/#altering-the-attribute-assignment-precedence[
+  `@` position of "software setting"] to end of attribute name.
+  (close link:{repository-issues-url}/18[#18])
+
 
 === Perf
 
@@ -53,7 +62,7 @@
 === Features
 
 * Support for attribute with
-  link:https://asciidoctor.org/docs/user-manual/#using-attributes-set-assign-and-reference[
+  link:{asciidoctor-official-user-manual-url}/#using-attributes-set-assign-and-reference[
   empty value] in pageAttributes.
   (close link:{repository-issues-url}/11[#11])
 
