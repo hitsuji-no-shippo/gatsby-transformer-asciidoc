@@ -1,4 +1,4 @@
-const asciidoc = require(`asciidoctor`)()
+const asciidoctor = require(`asciidoctor`)()
 const _ = require(`lodash`)
 const matter = require(`gray-matter`)
 const yaml = require(`js-yaml`)
@@ -33,14 +33,14 @@ async function onCreateNode(
 
   // register custom converter if given
   if (pluginOptions.converterFactory) {
-    asciidoc.ConverterFactory.register(
-      new pluginOptions.converterFactory(asciidoc),
+    asciidoctor.ConverterFactory.register(
+      new pluginOptions.converterFactory(asciidoctor),
       [`html5`]
     )
   }
 
   // changes the incoming imagesdir option to take the
-  const asciidocOptions = processPluginOptions(pluginOptions, pathPrefix)
+  const asciidoctorOptions = processPluginOptions(pluginOptions, pathPrefix)
 
   const { createNode, createParentChildLink } = actions
   // Load Asciidoc contents
@@ -48,7 +48,7 @@ async function onCreateNode(
   // Load Asciidoc file for extracting
   // https://asciidoctor-docs.netlify.com/asciidoctor.js/processor/extract-api/
   // We use a `let` here as a warning: some operations, like .convert() mutate the document
-  let doc = await asciidoc.load(content, asciidocOptions)
+  let doc = await asciidoctor.load(content, asciidoctorOptions)
 
   try {
     const html = doc.convert()

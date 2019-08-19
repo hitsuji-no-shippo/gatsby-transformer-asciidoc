@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.9.0
-:revdate: 2019-08-19T11:31:00+0900
-:revmark: Add separate Gatsby Node APIs processing for each file
+:revnumber: v1.10.0
+:revdate: 2019-08-19T16:11:08+0900
+:revmark: Add rename asciidoctor variable
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -37,6 +37,8 @@
   const. (close link:{repository-issues-url}/16[#16])
 * Separate onCreateNode and setFieldsOnGraphQLNodeType processing of
   Gatsby Node APIs for each file. (close link:{repository-issues-url}/17[#17])
+* Rename asciidoctor variable. `asciidoc` => `asciidoctor`
+  (close link:{repository-issues-url}/21[#21])
 
 
 == 0.5.0 (2019-08-17)
