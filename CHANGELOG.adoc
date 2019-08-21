@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.13.0
-:revdate: 2019-08-25T18:47:24+0900
-:revmark: Add set Airbnb JavaScript Style Guide
+:revnumber: v1.14.0
+:revdate: 2019-08-25T23:01:27+0900
+:revmark: Add move plugin options processing and \
+          collect plugin options processing, collect asciidoctor processing
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -29,6 +30,7 @@
 :gatsby-github-url: https://github.com/gatsbyjs/gatsby
 :repository-issues-url: https://github.com/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
+:gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
 == 0.6.0 (2019-08-25)
 
@@ -39,6 +41,13 @@
 * link:{asciidoctor-official-user-manual-url}/#altering-the-attribute-assignment-precedence[
   `@` position of "software setting"] to end of attribute name.
   (close link:{repository-issues-url}/18[#18])
+
+===== For developers (Consumer don't have to reade)
+
+* Move plugin options processing from
+  link:{gatsby-official-docs-node-apis-url}/#onNodeCreate[onNodeCreate] to
+  link:{gatsby-official-docs-node-apis-url}/#onPreBootstrap[onPreBootstrap].
+  (close link:{repository-issues-url}/19[#19])
 
 
 === Perf
@@ -57,6 +66,10 @@
   (close link:{repository-issues-url}/21[#21])
 * Set link:{github-url}/airbnb/javascript[Airbnb JavaScript Style Guide]
   (close link:{repository-issues-url}/27[#27])
+* Collect plugin options processing in one file.
+  (close link:{repository-issues-url}/20[#20])
+* Collect asciidoctor processing in one file.
+  (close link:{repository-issues-url}/22[#22])
 
 === Style
 

@@ -16,15 +16,15 @@ async function setFieldsOnGraphQLNodeType({ type }) {
   //  fullName
   // }
   const defineEmptyAttributefields = (attributeNames, objectTypeName) => {
-    const fields = {};
-
-    attributeNames.forEach(name => {
+    return Array.from(attributeNames).reduce((attributesFields, name) => {
       // GraphQL filed Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ ,
       // so replace `-` with `_` .
       const fieldName = (objectTypeName === undefined
         ? name
         : `${objectTypeName}.${name}`
       ).replace(`-`, `_`);
+
+      const fields = attributesFields;
 
       fields[fieldName] = {
         type: GraphQLBoolean,
@@ -38,9 +38,9 @@ async function setFieldsOnGraphQLNodeType({ type }) {
           return value === EMPTY_ATTRIBUTE_VALUE;
         },
       };
-    });
 
-    return fields;
+      return fields;
+    }, {});
   };
 
   return defineEmptyAttributefields(
