@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.10.0
-:revdate: 2019-08-19T16:11:08+0900
-:revmark: Add rename asciidoctor variable
+:revnumber: v1.11.0
+:revdate: 2019-08-22T14:24:33+0900
+:revmark: Add change the definition position of \
+          createNode and createParentChildLink function
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -29,7 +30,13 @@
 :gatsby-github-url: https://github.com/gatsbyjs/gatsby
 :repository-issues-url: https://github.com/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
 
-== 0.6.0 (2019-08-19)
+== 0.6.0 (2019-08-22)
+
+=== Perf
+
+* Change the definition position of `createNode` and `createParentChildLink`
+  function.
+  (close link:{repository-issues-url}/23[#23])
 
 === Refactor
 

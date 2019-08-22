@@ -42,7 +42,6 @@ async function onCreateNode(
   // changes the incoming imagesdir option to take the
   const asciidoctorOptions = processPluginOptions(pluginOptions, pathPrefix)
 
-  const { createNode, createParentChildLink } = actions
   // Load Asciidoc contents
   const content = await loadNodeContent(node)
   // Load Asciidoc file for extracting
@@ -107,6 +106,8 @@ async function onCreateNode(
     }
 
     asciiNode.internal.contentDigest = createContentDigest(asciiNode)
+
+    const { createNode, createParentChildLink } = actions
 
     createNode(asciiNode)
     createParentChildLink({ parent: node, child: asciiNode })
