@@ -3,10 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.15.0
-:revdate: 2019-08-25T23:02:06+0900
-:revmark: Add fix description of processing of date value \
-          in empty value processing of pageAttirubtes
+:revnumber: v1.16.0
+:revdate: 2019-08-25T23:02:25+0900
+:revmark: Add fix link of custome convert document in README
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -80,6 +79,8 @@
 
 * Fix description of processing of date value in empty value processing of
   pageAttirubtes in README. (close link:{repository-issues-url}/25[#25])
+* Fix link of custome convert document in README.
+  (close link:{repository-issues-url}/26[#26])
 
 
 == 0.5.0 (2019-08-17)

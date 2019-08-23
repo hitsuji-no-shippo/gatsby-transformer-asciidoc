@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.7.0
-:revmark: Fix description of processing of date value \
-          in empty value processing of pageAttributes
+:revnumber: v1.7.1
+:revdate: 2019-08-23T23:56:31+0900
+:revmark: Fix link of custome convert document
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -310,7 +310,7 @@ plugins: [
 
 `TemplateConverter` is a custom javascript class you'll need to create.
 Information on how to write a custom `TemplateConverter` can be found at the
-link:{{asciidoctor-js-docs-antora-url}/extend/converter/custom-converter}/[
+link:{asciidoctor-js-docs-antora-url}/extend/converter/custom-converter/[
 asciidoctor docs].
 
 In the example below, we will use a custom converter to convert paragraphs but
