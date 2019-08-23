@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.6.0
-:revdate: 2019-08-19T20:34:02+0900
-:revmark: Change `@` position in "software setting" to end of attribute name
+:revnumber: v1.7.0
+:revmark: Fix description of processing of date value \
+          in empty value processing of pageAttributes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -213,7 +213,7 @@ Attribute with empty value (`:page-draft:`) is convert `true`. If attributes is
 not set for page, returns `false` instead of `null`.
 
 If even one Attribute value is empty, all attributes with the same name will
-return Boolean. So non-boolean values other than date are converted to `false`.
+return Boolean. So non-boolean values are converted to `false`.
 `true` and `false` are not convert.
 
 If Attribute is not set and only unset, the attribute is not defined in

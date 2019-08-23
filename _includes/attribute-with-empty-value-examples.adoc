@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.0.0
-:revdate: 2019-08-17T13:21:33+0900
-:revremark: First Edition
+:revnumber: v1.0.1
+:revdate: 2019-08-23T19:34:12+0900
+:revremark: fix page-time attribute part
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 // Page Attributes
@@ -25,7 +25,7 @@
 :page-false:
 :page-number:
 :page-string:
-:page-time
+:page-time:
 :page-array:
 :page-object:
 ----
@@ -66,7 +66,7 @@
               "false": true,  # Because it's empty
               "number": true,
               "string": true,
-              "time": null,
+              "time": true,
               "array": true,
               "object": true,
               "only_unset": "GraphQLError: Cannot query field \"only_unset\""
@@ -87,7 +87,7 @@
               "number": false,
               "string": false,
               "object": false,
-              "time": "2019-08-15T20:51:43+0900",
+              "time": false,
               "only_unset": "GraphQLError: Cannot query field \"only_unset\""
             },
           }

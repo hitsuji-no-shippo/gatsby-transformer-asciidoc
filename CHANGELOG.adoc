@@ -3,10 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.14.0
-:revdate: 2019-08-25T23:01:27+0900
-:revmark: Add move plugin options processing and \
-          collect plugin options processing, collect asciidoctor processing
+:revnumber: v1.15.0
+:revdate: 2019-08-25T23:02:06+0900
+:revmark: Add fix description of processing of date value \
+          in empty value processing of pageAttirubtes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -75,6 +75,11 @@
 
 * Set link:{github-url}/airbnb/javascript[Airbnb JavaScript Style Guide]
   (close link:{repository-issues-url}/27[#27])
+
+=== Docs
+
+* Fix description of processing of date value in empty value processing of
+  pageAttirubtes in README. (close link:{repository-issues-url}/25[#25])
 
 
 == 0.5.0 (2019-08-17)
