@@ -1,13 +1,13 @@
-const { GraphQLBoolean } = require(`gatsby/graphql`)
+const { GraphQLBoolean } = require(`gatsby/graphql`);
 
 const {
-  emptyAttributeNamesInPageAttributes, EMPTY_ATTRIBUTE_VALUE
-} = require(`./empty-value-with-attribute`)
-
+  emptyAttributeNamesInPageAttributes,
+  EMPTY_ATTRIBUTE_VALUE,
+} = require(`./empty-value-with-attribute`);
 
 async function setFieldsOnGraphQLNodeType({ type }) {
   if (type.name !== `Asciidoc`) {
-    return {}
+    return {};
   }
 
   // I don't know the official name of the author part of graphql below.
@@ -16,35 +16,37 @@ async function setFieldsOnGraphQLNodeType({ type }) {
   //  fullName
   // }
   const defineEmptyAttributefields = (attributeNames, objectTypeName) => {
-    const fields = {}
+    const fields = {};
 
     attributeNames.forEach(name => {
       // GraphQL filed Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ ,
       // so replace `-` with `_` .
-      const fieldName = (
-        objectTypeName === undefined ? name : objectTypeName + `.` + name
-      ).replace(`-`, `_`)
+      const fieldName = (objectTypeName === undefined
+        ? name
+        : `${objectTypeName}.${name}`
+      ).replace(`-`, `_`);
 
       fields[fieldName] = {
         type: GraphQLBoolean,
-        resolve: (source) => {
-          const value = source[name]
+        resolve: source => {
+          const value = source[name];
 
           if (typeof value === `boolean`) {
-            return value
+            return value;
           }
 
-          return value === EMPTY_ATTRIBUTE_VALUE
-        }
-      }
-    })
+          return value === EMPTY_ATTRIBUTE_VALUE;
+        },
+      };
+    });
 
-    return fields
-  }
+    return fields;
+  };
 
   return defineEmptyAttributefields(
-    emptyAttributeNamesInPageAttributes, `pageAttributes`
-  )
+    emptyAttributeNamesInPageAttributes,
+    `pageAttributes`
+  );
 }
 
-module.exports = setFieldsOnGraphQLNodeType
+module.exports = setFieldsOnGraphQLNodeType;
