@@ -1,7 +1,7 @@
 const { GraphQLBoolean } = require(`gatsby/graphql`);
 
 const {
-  emptyAttributeNamesInPageAttributes,
+  emptyAttributeFieldNamesWithinAllNodesPageAttributes,
   EMPTY_ATTRIBUTE_VALUE,
 } = require(`./empty-value-with-attribute`);
 
@@ -17,12 +17,8 @@ async function setFieldsOnGraphQLNodeType({ type }) {
   // }
   const defineEmptyAttributefields = (attributeNames, objectTypeName) => {
     return Array.from(attributeNames).reduce((attributesFields, name) => {
-      // GraphQL filed Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ ,
-      // so replace `-` with `_` .
-      const fieldName = (objectTypeName === undefined
-        ? name
-        : `${objectTypeName}.${name}`
-      ).replace(`-`, `_`);
+      const fieldName =
+        objectTypeName === undefined ? name : `${objectTypeName}.${name}`;
 
       const fields = attributesFields;
 
@@ -44,7 +40,7 @@ async function setFieldsOnGraphQLNodeType({ type }) {
   };
 
   return defineEmptyAttributefields(
-    emptyAttributeNamesInPageAttributes,
+    emptyAttributeFieldNamesWithinAllNodesPageAttributes,
     `pageAttributes`
   );
 }

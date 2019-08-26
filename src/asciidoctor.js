@@ -3,7 +3,7 @@ const matter = require(`gray-matter`);
 const yaml = require(`js-yaml`);
 
 const {
-  emptyAttributeNamesInPageAttributes,
+  emptyAttributeFieldNamesWithinAllNodesPageAttributes,
   EMPTY_ATTRIBUTE_VALUE,
 } = require(`./empty-value-with-attribute`);
 
@@ -67,13 +67,9 @@ const createInternalField = (content, contentDigest) => {
   };
 };
 
-const loadPageAttributeValue = (
-  attributeName,
-  value,
-  enablesEmptyAttribute
-) => {
+const loadPageAttributeValue = (fieldName, value, enablesEmptyAttribute) => {
   if (value === EMPTY_ATTRIBUTE_VALUE && enablesEmptyAttribute) {
-    emptyAttributeNamesInPageAttributes.add(attributeName);
+    emptyAttributeFieldNamesWithinAllNodesPageAttributes.add(fieldName);
     return EMPTY_ATTRIBUTE_VALUE;
   }
   return yaml.safeLoad(value);
@@ -89,8 +85,12 @@ const extractPageAttributes = (attributes, enablesEmptyAttribute) => {
       return;
     }
 
-    pageAttributes[attributeName] = loadPageAttributeValue(
-      attributeName,
+    // GraphQL field Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ ,
+    // so replace `-` with `_` .
+    const fieldName = attributeName.replace(/-/g, `_`);
+
+    pageAttributes[fieldName] = loadPageAttributeValue(
+      fieldName,
       value,
       enablesEmptyAttribute
     );
