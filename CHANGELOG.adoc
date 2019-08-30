@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.17.0
-:revdate: 2019-08-26T13:01:01+0900
-:revmark: Add fix invalid attribute fine name for empty value in pageAttributes
+:revnumber: v1.18.0
+:revdate: 2019-08-30T11:06:37+0900
+:revmark: Add add `namePattern` argument to `extractPageAttributes` function
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -31,9 +31,17 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
-== 0.6.0 (2019-08-26)
+== 0.6.0 (2019-08-30)
 
 === Features
+
+==== Add
+
+===== For developers (Consumer don't have to reade)
+
+* `namePattern` argument to `extractPageAttributes` function.
+  (close link:{repository-issues-url}/29[#29])
+
 
 ==== Change
 

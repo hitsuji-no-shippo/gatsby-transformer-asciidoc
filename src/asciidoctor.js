@@ -67,19 +67,15 @@ const createInternalField = (content, contentDigest) => {
   };
 };
 
-const loadPageAttributeValue = (fieldName, value, enablesEmptyAttribute) => {
-  if (value === EMPTY_ATTRIBUTE_VALUE && enablesEmptyAttribute) {
-    emptyAttributeFieldNamesWithinAllNodesPageAttributes.add(fieldName);
-    return EMPTY_ATTRIBUTE_VALUE;
-  }
-  return yaml.safeLoad(value);
-};
-
-const extractPageAttributes = (attributes, enablesEmptyAttribute) => {
-  const pageAttributes = {};
+const extractPageAttributes = (
+  attributes,
+  enablesEmptyAttribute,
+  namePattern
+) => {
+  const fields = {};
 
   Object.entries(attributes).forEach(([key, value]) => {
-    const attributeName = key.replace(/^page-/, ``);
+    const attributeName = key.replace(namePattern, ``);
 
     if (attributeName === key) {
       return;
@@ -88,15 +84,18 @@ const extractPageAttributes = (attributes, enablesEmptyAttribute) => {
     // GraphQL field Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ ,
     // so replace `-` with `_` .
     const fieldName = attributeName.replace(/-/g, `_`);
+    const loadPageAttributeValue = () => {
+      if (value === EMPTY_ATTRIBUTE_VALUE && enablesEmptyAttribute) {
+        emptyAttributeFieldNamesWithinAllNodesPageAttributes.add(fieldName);
+        return EMPTY_ATTRIBUTE_VALUE;
+      }
+      return yaml.safeLoad(value);
+    };
 
-    pageAttributes[fieldName] = loadPageAttributeValue(
-      fieldName,
-      value,
-      enablesEmptyAttribute
-    );
+    fields[fieldName] = loadPageAttributeValue();
   });
 
-  return pageAttributes;
+  return fields;
 };
 
 const createAsciidocFields = (doc, definesEmptyAttributes) => {
@@ -129,7 +128,8 @@ const createAsciidocFields = (doc, definesEmptyAttributes) => {
 
   const pageAttributes = extractPageAttributes(
     doc.getAttributes(),
-    definesEmptyAttributes
+    definesEmptyAttributes,
+    new RegExp(`^page-`)
   );
 
   return {
