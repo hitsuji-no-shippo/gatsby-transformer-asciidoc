@@ -1,6 +1,6 @@
 /gatsby-node.js
 /index.js
-/empty-value-with-attribute.js
+/page-attributes-field.js
 /extend-node-type.js
 /on-node-create.js
 /on-pre-bootstrap.js

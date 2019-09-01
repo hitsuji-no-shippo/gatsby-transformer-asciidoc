@@ -1,18 +1,9 @@
 const asciidoctor = require(`asciidoctor`)();
 const matter = require(`gray-matter`);
-const yaml = require(`js-yaml`);
 
-const {
-  emptyAttributeFieldNamesWithinAllNodesPageAttributes,
-  EMPTY_ATTRIBUTE_VALUE,
-} = require(`./empty-value-with-attribute`);
+const { loadPageAttributesField } = require(`./page-attributes-field`);
 
-let pageAttributePrefix;
 const convertOptions = {};
-
-const setPageAttributePrefix = prefix => {
-  pageAttributePrefix = prefix;
-};
 
 const loadAsciidoctorOptions = (options, pathPrefix) => {
   // register custom converter if given
@@ -72,50 +63,6 @@ const createInternalField = (content, contentDigest) => {
   };
 };
 
-const extractPageAttributes = (
-  attributes,
-  enablesEmptyAttribute,
-  namePattern
-) => {
-  const fields = {};
-  const extractsAttribute = namePattern instanceof RegExp;
-
-  Object.entries(attributes).forEach(([key, value]) => {
-    let attributeName = key;
-
-    if (extractsAttribute) {
-      attributeName = attributeName.replace(namePattern, ``);
-
-      if (attributeName === key) {
-        return;
-      }
-    }
-
-    // GraphQL field Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ ,
-    // so replace `-` with `_` .
-    const fieldName = attributeName.replace(/-/g, `_`);
-    const loadPageAttributeValue = () => {
-      if (value === EMPTY_ATTRIBUTE_VALUE && enablesEmptyAttribute) {
-        emptyAttributeFieldNamesWithinAllNodesPageAttributes.add(fieldName);
-        return EMPTY_ATTRIBUTE_VALUE;
-      }
-      return yaml.safeLoad(value);
-    };
-
-    fields[fieldName] = loadPageAttributeValue();
-  });
-
-  return fields;
-};
-
-const loadPageAttributesField = (attributes, enablesEmptyAttribute) => {
-  return extractPageAttributes(
-    attributes,
-    enablesEmptyAttribute,
-    pageAttributePrefix
-  );
-};
-
 const createAsciidocFields = (doc, definesEmptyAttributes) => {
   const html = doc.convert();
   // Use "partition" option to be able to get title, subtitle, combined
@@ -144,11 +91,6 @@ const createAsciidocFields = (doc, definesEmptyAttributes) => {
     };
   }
 
-  const pageAttributes = loadPageAttributesField(
-    doc.getAttributes(),
-    definesEmptyAttributes
-  );
-
   return {
     html,
     document: {
@@ -159,7 +101,10 @@ const createAsciidocFields = (doc, definesEmptyAttributes) => {
     },
     revision,
     author,
-    pageAttributes,
+    pageAttributes: loadPageAttributesField(
+      doc.getAttributes(),
+      definesEmptyAttributes
+    ),
   };
 };
 
@@ -187,7 +132,6 @@ const createNode = (
 };
 
 module.exports = {
-  setPageAttributePrefix,
   loadAsciidoctorOptions,
   loadAsciidoc,
   createAsciidocNode: createNode,

@@ -3,7 +3,7 @@ const { GraphQLBoolean } = require(`gatsby/graphql`);
 const {
   emptyAttributeFieldNamesWithinAllNodesPageAttributes,
   EMPTY_ATTRIBUTE_VALUE,
-} = require(`./empty-value-with-attribute`);
+} = require(`./page-attributes-field`);
 
 async function setFieldsOnGraphQLNodeType({ type }) {
   if (type.name !== `Asciidoc`) {

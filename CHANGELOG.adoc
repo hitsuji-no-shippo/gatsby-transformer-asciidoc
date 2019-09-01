@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.19.0
-:revdate: 2019-09-01T12:57:21+0900
-:revmark: Add add option of the prefix of pageAttribute
+:revnumber: v1.20.0
+:revdate: 2019-09-01T21:20:20+0900
+:revmark: Add collect page attirubtes field processing in one file
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -85,6 +85,8 @@
   (close link:{repository-issues-url}/20[#20])
 * Collect asciidoctor processing in one file.
   (close link:{repository-issues-url}/22[#22])
+* Collect page attirubtes field processing in one file.
+  (close link:{repository-issues-url}/31[#31])
 
 === Style
 

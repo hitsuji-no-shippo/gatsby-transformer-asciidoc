@@ -1,7 +1,5 @@
-const {
-  loadAsciidoctorOptions,
-  setPageAttributePrefix,
-} = require(`./asciidoctor`);
+const { loadAsciidoctorOptions } = require(`./asciidoctor`);
+const { setPageAttributePrefix } = require(`./page-attributes-field`);
 
 const pluginOptions = {};
 
