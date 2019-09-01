@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.18.0
-:revdate: 2019-08-30T11:06:37+0900
-:revmark: Add add `namePattern` argument to `extractPageAttributes` function
+:revnumber: v1.19.0
+:revdate: 2019-09-01T12:57:21+0900
+:revmark: Add add option of the prefix of pageAttribute
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -31,11 +31,14 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
-== 0.6.0 (2019-08-30)
+== 0.6.0 (2019-09-01)
 
 === Features
 
 ==== Add
+
+* Option of the prefix of pageAttribute (`pageAttributePrefix`).
+  (close link:{repository-issues-url}/30[#30])
 
 ===== For developers (Consumer don't have to reade)
 

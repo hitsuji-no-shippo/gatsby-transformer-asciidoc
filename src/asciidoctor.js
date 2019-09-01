@@ -7,7 +7,12 @@ const {
   EMPTY_ATTRIBUTE_VALUE,
 } = require(`./empty-value-with-attribute`);
 
+let pageAttributePrefix;
 const convertOptions = {};
+
+const setPageAttributePrefix = prefix => {
+  pageAttributePrefix = prefix;
+};
 
 const loadAsciidoctorOptions = (options, pathPrefix) => {
   // register custom converter if given
@@ -73,12 +78,17 @@ const extractPageAttributes = (
   namePattern
 ) => {
   const fields = {};
+  const extractsAttribute = namePattern instanceof RegExp;
 
   Object.entries(attributes).forEach(([key, value]) => {
-    const attributeName = key.replace(namePattern, ``);
+    let attributeName = key;
 
-    if (attributeName === key) {
-      return;
+    if (extractsAttribute) {
+      attributeName = attributeName.replace(namePattern, ``);
+
+      if (attributeName === key) {
+        return;
+      }
     }
 
     // GraphQL field Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ ,
@@ -96,6 +106,14 @@ const extractPageAttributes = (
   });
 
   return fields;
+};
+
+const loadPageAttributesField = (attributes, enablesEmptyAttribute) => {
+  return extractPageAttributes(
+    attributes,
+    enablesEmptyAttribute,
+    pageAttributePrefix
+  );
 };
 
 const createAsciidocFields = (doc, definesEmptyAttributes) => {
@@ -126,10 +144,9 @@ const createAsciidocFields = (doc, definesEmptyAttributes) => {
     };
   }
 
-  const pageAttributes = extractPageAttributes(
+  const pageAttributes = loadPageAttributesField(
     doc.getAttributes(),
-    definesEmptyAttributes,
-    new RegExp(`^page-`)
+    definesEmptyAttributes
   );
 
   return {
@@ -170,6 +187,7 @@ const createNode = (
 };
 
 module.exports = {
+  setPageAttributePrefix,
   loadAsciidoctorOptions,
   loadAsciidoc,
   createAsciidocNode: createNode,

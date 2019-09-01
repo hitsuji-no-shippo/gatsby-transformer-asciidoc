@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.7.1
-:revdate: 2019-08-23T23:56:31+0900
-:revmark: Fix link of custome convert document
+:revnumber: v1.8.0
+:revdate: 2019-08-31T19:51:58+0900
+:revmark: Add pageAttributePrefix section
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -186,9 +186,10 @@ Firstname Lastname <author@example.org>
 :page-category: My Category
 ----
 
-Each attribute with the prefix page- will be automatically added under
-`pageAttributes` so it can be used with GraphQL. Attribute value is processed as
-link:{yaml-example-url}[YAML] data.
+Each attribute with the prefix xref:pageAttributePrefix[] option value
+(default: `page-`) will be automatically added under `pageAttributes` so it can
+be used with GraphQL. Name is the attribute name with the prefix removed.
+Attribute value is processed as link:{yaml-example-url}[YAML] data.
 
 [source, GraphQL]
 ----
@@ -206,6 +207,25 @@ link:{yaml-example-url}[YAML] data.
   }
 }
 ----
+
+=== pageAttributePrefix
+
+The value specifies the prefix of attribute to be added to the `pageAttributes`
+field. Default is `page-`.
+
+[source, JavaScript]
+----
+plugins: [
+  {
+    resolve: `gatsby-transformer-asciidoc`,
+    options: {
+      pageAttributePrefix: `gatsby-`,
+    },
+  },
+]
+----
+
+All attribute Add under `pageAttributes` when the value is `''`.
 
 === Empty Value
 

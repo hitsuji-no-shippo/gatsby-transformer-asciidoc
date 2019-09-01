@@ -1,9 +1,18 @@
-const { loadAsciidoctorOptions } = require(`./asciidoctor`);
+const {
+  loadAsciidoctorOptions,
+  setPageAttributePrefix,
+} = require(`./asciidoctor`);
 
 const pluginOptions = {};
 
 const loadOptions = (configOptions, pathPrefix) => {
   const loadOwnOptions = options => {
+    const loadPageAttributePrefix = pageAttributePrefix => {
+      const prefix =
+        pageAttributePrefix === undefined ? `page-` : pageAttributePrefix;
+
+      setPageAttributePrefix(prefix === `` ? `` : new RegExp(`^${prefix}`));
+    };
     const loadExtensions = extensions => {
       // make extensions configurable and use adoc and asciidoc as default
       return typeof extensions !== `undefined` && extensions instanceof Array
@@ -17,7 +26,9 @@ const loadOptions = (configOptions, pathPrefix) => {
       return definesEmptyAttributes;
     };
 
-    const { extensions, definesEmptyAttributes } = options;
+    const { pageAttributePrefix, extensions, definesEmptyAttributes } = options;
+
+    loadPageAttributePrefix(pageAttributePrefix);
 
     return {
       supportedExtensions: loadExtensions(extensions),
@@ -30,6 +41,7 @@ const loadOptions = (configOptions, pathPrefix) => {
     const asciidoctorOptions = options;
 
     delete asciidoctorOptions.extensions;
+    delete asciidoctorOptions.pageAttributePrefix;
     delete asciidoctorOptions.definesEmptyAttributes;
     delete asciidoctorOptions.plugins;
 
