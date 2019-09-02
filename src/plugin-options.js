@@ -17,22 +17,20 @@ const loadOptions = (configOptions, pathPrefix) => {
         ? extensions
         : [`adoc`, `asciidoc`];
     };
-    const loadDefinesEmptyAttributes = definesEmptyAttributes => {
-      if (definesEmptyAttributes === undefined) {
+    const loadDefinesEmptyAttributes = enablesEmptyAttribute => {
+      if (enablesEmptyAttribute === undefined) {
         return true;
       }
-      return definesEmptyAttributes;
+      return enablesEmptyAttribute;
     };
 
-    const { pageAttributePrefix, extensions, definesEmptyAttributes } = options;
+    const { pageAttributePrefix, extensions, enablesEmptyAttribute } = options;
 
     loadPageAttributePrefix(pageAttributePrefix);
 
     return {
       supportedExtensions: loadExtensions(extensions),
-      definesEmptyAttributes: loadDefinesEmptyAttributes(
-        definesEmptyAttributes
-      ),
+      enablesEmptyAttribute: loadDefinesEmptyAttributes(enablesEmptyAttribute),
     };
   };
   const deletePluginOptions = options => {
@@ -40,7 +38,7 @@ const loadOptions = (configOptions, pathPrefix) => {
 
     delete asciidoctorOptions.extensions;
     delete asciidoctorOptions.pageAttributePrefix;
-    delete asciidoctorOptions.definesEmptyAttributes;
+    delete asciidoctorOptions.enablesEmptyAttribute;
     delete asciidoctorOptions.plugins;
 
     return asciidoctorOptions;

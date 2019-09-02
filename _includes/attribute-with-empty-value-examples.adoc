@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.0.1
-:revdate: 2019-08-23T19:34:12+0900
-:revremark: fix page-time attribute part
+:revnumber: v1.1.0
+:revdate: 2019-09-02T14:40:16+0900
+:revmark: Rename option definesEmptyAttributes to enablesEmptyAttribute
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 // Page Attributes
@@ -45,7 +45,7 @@
 :!page-only-unset:
 ----
 
-.`definesEmptyAttributes: true`
+.`enablesEmptyAttribute: true`
 [%collapsible%open]
 ======
 [source, GraphQL]
@@ -99,7 +99,7 @@
 ----
 ======
 
-.`definesEmptyAttributes: false`
+.`enablesEmptyAttribute: false`
 [%collapsible%open]
 ======
 [source, GraphQL]

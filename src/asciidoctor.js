@@ -63,7 +63,7 @@ const createInternalField = (content, contentDigest) => {
   };
 };
 
-const createAsciidocFields = (doc, definesEmptyAttributes) => {
+const createAsciidocFields = (doc, enablesEmptyAttribute) => {
   const html = doc.convert();
   // Use "partition" option to be able to get title, subtitle, combined
   const title = doc.getDocumentTitle({ partition: true });
@@ -103,7 +103,7 @@ const createAsciidocFields = (doc, definesEmptyAttributes) => {
     author,
     pageAttributes: loadPageAttributesField(
       doc.getAttributes(),
-      definesEmptyAttributes
+      enablesEmptyAttribute
     ),
   };
 };
@@ -111,13 +111,13 @@ const createAsciidocFields = (doc, definesEmptyAttributes) => {
 const createNode = (
   asciidoc,
   doc,
-  { definesEmptyAttributes },
+  { enablesEmptyAttribute },
   sourceNodeId,
   createNodeId,
   createContentDigest
 ) => {
   const frontmatter = matter(asciidoc);
-  const node = createAsciidocFields(doc, definesEmptyAttributes);
+  const node = createAsciidocFields(doc, enablesEmptyAttribute);
 
   node.frontmatter = frontmatter.data;
   node.id = createNodeId(`${sourceNodeId} >>> ASCIIDOC`);
