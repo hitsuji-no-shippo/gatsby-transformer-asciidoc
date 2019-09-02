@@ -2,11 +2,12 @@ const { GraphQLBoolean } = require(`gatsby/graphql`);
 
 const {
   emptyAttributeFieldNamesWithinAllNodesPageAttributes,
-  EMPTY_ATTRIBUTE_VALUE,
+  EMPTY_ATTRIBUTE_FIELD_VALUE,
 } = require(`./page-attributes-field`);
+const { pluginOptions } = require(`./plugin-options`);
 
 async function setFieldsOnGraphQLNodeType({ type }) {
-  if (type.name !== `Asciidoc`) {
+  if (type.name !== `Asciidoc` || !pluginOptions.enablesEmptyAttribute) {
     return {};
   }
 
@@ -30,8 +31,7 @@ async function setFieldsOnGraphQLNodeType({ type }) {
           if (typeof value === `boolean`) {
             return value;
           }
-
-          return value === EMPTY_ATTRIBUTE_VALUE;
+          return value === EMPTY_ATTRIBUTE_FIELD_VALUE;
         },
       };
 

@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.21.0
-:revdate: 2019-09-02T14:42:12+0900
-:revmark: Add rename option definesEmptyAttributes to enablesEmptyAttribute
+:revnumber: v1.22.0
+:revdate: 2019-09-02T15:19:37+0900
+:revmark: Add change empty attribute field value `''` to `null`
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -60,6 +60,8 @@
   link:{gatsby-official-docs-node-apis-url}/#onNodeCreate[onNodeCreate] to
   link:{gatsby-official-docs-node-apis-url}/#onPreBootstrap[onPreBootstrap].
   (close link:{repository-issues-url}/19[#19])
+* Empty attribute field value `''` to `null`.
+  (close link:{repository-issues-url}/33[#33])
 
 
 === Fix

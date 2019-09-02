@@ -1,4 +1,7 @@
 const { loadAsciidoc, createAsciidocNode } = require(`./asciidoctor`);
+const {
+  registerEmptyAttributeFieldNamesInPageAttributes,
+} = require(`./page-attributes-field`);
 const { pluginOptions } = require(`./plugin-options`);
 
 async function onCreateNode({
@@ -18,12 +21,12 @@ async function onCreateNode({
   // We use a `let` here as a warning: some operations,
   // like .convert() mutate the document
   const doc = await loadAsciidoc(content);
+  let asciidocNode;
 
   try {
-    const asciidocNode = createAsciidocNode(
+    asciidocNode = createAsciidocNode(
       content,
       doc,
-      pluginOptions,
       node.id,
       createNodeId,
       createContentDigest
@@ -40,6 +43,10 @@ async function onCreateNode({
       }:\n
       ${err.message}`
     );
+  }
+
+  if (pluginOptions.enablesEmptyAttribute) {
+    registerEmptyAttributeFieldNamesInPageAttributes(asciidocNode);
   }
 }
 

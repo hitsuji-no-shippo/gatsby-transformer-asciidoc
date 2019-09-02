@@ -3,7 +3,7 @@ const yaml = require(`js-yaml`);
 // There is no way to preserve empty attribute names other than global
 // variables. (refactor #13)
 const emptyAttributeFieldNamesWithinAllNodesPageAttributes = new Set([]);
-const EMPTY_ATTRIBUTE_VALUE = '';
+const EMPTY_ATTRIBUTE_FIELD_VALUE = null;
 
 let pageAttributePrefix;
 
@@ -11,17 +11,14 @@ const setPageAttributePrefix = prefix => {
   pageAttributePrefix = prefix;
 };
 
-const extractPageAttributes = (
-  attributes,
-  enablesEmptyAttribute,
-  namePattern
-) => {
+const extractPageAttributes = (attributes, namePattern) => {
   const convertNameFromAttributeToFiled = attribute => {
     // GraphQL field Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ ,
     // so replace `-` with `_` .
     return attribute.replace(/-/g, `_`);
   };
   const extractsAttribute = namePattern instanceof RegExp;
+  const emptyAttributeValue = '';
 
   return Object.entries(attributes).reduce((attributeFields, [key, value]) => {
     let attributeName = key;
@@ -34,35 +31,36 @@ const extractPageAttributes = (
       }
     }
 
-    const fieldName = convertNameFromAttributeToFiled(attributeName);
-    const loadPageAttributeValue = () => {
-      if (value === EMPTY_ATTRIBUTE_VALUE && enablesEmptyAttribute) {
-        emptyAttributeFieldNamesWithinAllNodesPageAttributes.add(fieldName);
-        return EMPTY_ATTRIBUTE_VALUE;
-      }
-      return yaml.safeLoad(value);
-    };
     const fields = attributeFields;
 
-    fields[
-      convertNameFromAttributeToFiled(attributeName)
-    ] = loadPageAttributeValue();
+    // If the value uses {} or [], the following error will occur,
+    // so enclose the safeLoad() argument in quotation.
+    // YAMLException: end of the stream or a document separator is expected ...
+    fields[convertNameFromAttributeToFiled(attributeName)] =
+      value === emptyAttributeValue
+        ? EMPTY_ATTRIBUTE_FIELD_VALUE
+        : yaml.safeLoad(`'${value}'`);
 
     return fields;
   }, {});
 };
 
-const loadPageAttributesField = (attributes, enablesEmptyAttribute) => {
-  return extractPageAttributes(
-    attributes,
-    enablesEmptyAttribute,
-    pageAttributePrefix
-  );
+const loadPageAttributesField = attributes => {
+  return extractPageAttributes(attributes, pageAttributePrefix);
+};
+
+const registerEmptyAttributeFieldNamesInPageAttributes = node => {
+  Object.entries(node.pageAttributes).forEach(([name, value]) => {
+    if (value === EMPTY_ATTRIBUTE_FIELD_VALUE) {
+      emptyAttributeFieldNamesWithinAllNodesPageAttributes.add(name);
+    }
+  });
 };
 
 module.exports = {
   emptyAttributeFieldNamesWithinAllNodesPageAttributes,
-  EMPTY_ATTRIBUTE_VALUE,
+  EMPTY_ATTRIBUTE_FIELD_VALUE,
   setPageAttributePrefix,
   loadPageAttributesField,
+  registerEmptyAttributeFieldNamesInPageAttributes,
 };
