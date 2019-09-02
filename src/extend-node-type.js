@@ -1,7 +1,7 @@
 const { GraphQLBoolean } = require(`gatsby/graphql`);
 
+const { EMPTY_ATTRIBUTE_FIELD_VALUE } = require(`./asciidoc-attributes`);
 const {
-  EMPTY_ATTRIBUTE_FIELD_VALUE,
   safeLoadEmptyAttributeFieldNamesWithinPageAttributesCache,
 } = require(`./page-attributes-field`);
 const { pluginOptions } = require(`./plugin-options`);

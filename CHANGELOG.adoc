@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.23.0
-:revdate: 2019-09-02T23:55:40+0900
-:revmark: Add fix empty attribute field is not defined when there is a cache
+:revnumber: v1.24.0
+:revdate: 2019-09-02T23:58:08+0900
+:revmark: Add collect asciidoc attirubtes processing in one file
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -93,6 +93,8 @@
   (close link:{repository-issues-url}/22[#22])
 * Collect page attirubtes field processing in one file.
   (close link:{repository-issues-url}/31[#31])
+* Collect asciidoc attirubtes processing in one file.
+  (close link:{repository-issues-url}/35[#35])
 
 === Style
 

@@ -1,6 +1,11 @@
 const asciidoctor = require(`asciidoctor`)();
 const matter = require(`gray-matter`);
 
+const {
+  loadDocument,
+  loadAuthor,
+  loadRevision,
+} = require(`./asciidoc-attributes`);
 const { loadPageAttributesField } = require(`./page-attributes-field`);
 
 const convertOptions = {};
@@ -64,45 +69,14 @@ const createInternalField = (content, contentDigest) => {
 };
 
 const createAsciidocFields = doc => {
-  const html = doc.convert();
-  // Use "partition" option to be able to get title, subtitle, combined
-  const title = doc.getDocumentTitle({ partition: true });
-  const description = doc.getAttribute(`description`);
-
-  let revision = null;
-  let author = null;
-
-  if (doc.hasRevisionInfo()) {
-    revision = {
-      date: doc.getRevisionDate(),
-      number: doc.getRevisionNumber(),
-      remark: doc.getRevisionRemark(),
-    };
-  }
-
-  if (doc.getAuthor()) {
-    author = {
-      fullName: doc.getAttribute(`author`),
-      firstName: doc.getAttribute(`firstname`),
-      lastName: doc.getAttribute(`lastname`),
-      middleName: doc.getAttribute(`middlename`),
-      authorInitials: doc.getAttribute(`authorinitials`),
-      email: doc.getAttribute(`email`),
-    };
-  }
-
-  return {
-    html,
-    document: {
-      title: title.getCombined(),
-      subtitle: title.getSubtitle(),
-      main: title.getMain(),
-      description,
-    },
-    revision,
-    author,
+  const attributesFields = {
+    document: loadDocument(doc),
+    author: loadAuthor(doc),
+    revision: loadRevision(doc),
     pageAttributes: loadPageAttributesField(doc.getAttributes()),
   };
+
+  return { ...{ html: doc.convert() }, ...attributesFields };
 };
 
 const createNode = (

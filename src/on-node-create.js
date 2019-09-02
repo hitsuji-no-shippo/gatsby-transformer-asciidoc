@@ -1,6 +1,6 @@
 const { loadAsciidoc, createAsciidocNode } = require(`./asciidoctor`);
+const { loadEmptyAttributeFieldNames } = require(`./asciidoc-attributes`);
 const {
-  loadEmptyAttributeFieldNames,
   setEmptyAttributeFieldNamesWithinPageAttributesCache,
 } = require(`./page-attributes-field`);
 const { pluginOptions } = require(`./plugin-options`);
