@@ -6,6 +6,7 @@
 /on-pre-bootstrap.js
 /plugin-options.js
 /asciidoctor.js
+/cache.js
 
 ### https://raw.github.com/github/gitignore/e92f8db7a027af8cc25da2dc0758317e39697684/Global/Vim.gitignore
 

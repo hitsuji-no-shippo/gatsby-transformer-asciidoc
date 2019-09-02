@@ -1,16 +1,39 @@
 const { GraphQLBoolean } = require(`gatsby/graphql`);
 
 const {
-  emptyAttributeFieldNamesWithinAllNodesPageAttributes,
   EMPTY_ATTRIBUTE_FIELD_VALUE,
+  safeLoadEmptyAttributeFieldNamesWithinPageAttributesCache,
 } = require(`./page-attributes-field`);
 const { pluginOptions } = require(`./plugin-options`);
 
-async function setFieldsOnGraphQLNodeType({ type }) {
+async function setFieldsOnGraphQLNodeType({ type, getNodesByType, cache }) {
   if (type.name !== `Asciidoc` || !pluginOptions.enablesEmptyAttribute) {
     return {};
   }
 
+  const emptyAttributeFieldNamesAllNodesPageAttributes = await (async () => {
+    const registerEmptyAttributeFieldNames = new Set();
+    let names = [];
+
+    getNodesByType(`Asciidoc`).forEach(node => {
+      registerEmptyAttributeFieldNames.add(
+        new Promise(resolve => {
+          safeLoadEmptyAttributeFieldNamesWithinPageAttributesCache(
+            node,
+            cache
+          ).then(emptyAttributeFieldNames => {
+            names = [...names, ...emptyAttributeFieldNames];
+
+            resolve();
+          });
+        })
+      );
+    });
+
+    return Promise.all(registerEmptyAttributeFieldNames).then(
+      () => new Set(names)
+    );
+  })();
   // I don't know the official name of the author part of graphql below.
   // Therefore, here it is objectTypeName. (refactor #12)
   // author {
@@ -40,7 +63,7 @@ async function setFieldsOnGraphQLNodeType({ type }) {
   };
 
   return defineEmptyAttributefields(
-    emptyAttributeFieldNamesWithinAllNodesPageAttributes,
+    emptyAttributeFieldNamesAllNodesPageAttributes,
     `pageAttributes`
   );
 }

@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.22.0
-:revdate: 2019-09-02T15:19:37+0900
-:revmark: Add change empty attribute field value `''` to `null`
+:revnumber: v1.23.0
+:revdate: 2019-09-02T23:55:40+0900
+:revmark: Add fix empty attribute field is not defined when there is a cache
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -68,6 +68,8 @@
 
 * Invalid attribute field name for empty value in pageAttributes.
   (close link:{repository-issues-url}/28[#28])
+* Empty Attribute field is not defined when there is a cache.
+  (close link:{repository-issues-url}/34[#34])
 
 === Perf
 

@@ -1,6 +1,7 @@
 const { loadAsciidoc, createAsciidocNode } = require(`./asciidoctor`);
 const {
-  registerEmptyAttributeFieldNamesInPageAttributes,
+  loadEmptyAttributeFieldNames,
+  setEmptyAttributeFieldNamesWithinPageAttributesCache,
 } = require(`./page-attributes-field`);
 const { pluginOptions } = require(`./plugin-options`);
 
@@ -11,6 +12,7 @@ async function onCreateNode({
   createNodeId,
   reporter,
   createContentDigest,
+  cache,
 }) {
   if (!pluginOptions.supportedExtensions.includes(node.extension)) {
     return;
@@ -45,9 +47,11 @@ async function onCreateNode({
     );
   }
 
-  if (pluginOptions.enablesEmptyAttribute) {
-    registerEmptyAttributeFieldNamesInPageAttributes(asciidocNode);
-  }
+  setEmptyAttributeFieldNamesWithinPageAttributesCache(
+    loadEmptyAttributeFieldNames(asciidocNode.pageAttributes),
+    asciidocNode.id,
+    cache
+  );
 }
 
 module.exports = onCreateNode;

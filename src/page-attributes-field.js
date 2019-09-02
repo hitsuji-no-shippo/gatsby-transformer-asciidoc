@@ -1,8 +1,7 @@
 const yaml = require(`js-yaml`);
 
-// There is no way to preserve empty attribute names other than global
-// variables. (refactor #13)
-const emptyAttributeFieldNamesWithinAllNodesPageAttributes = new Set([]);
+const { safeLoadCache } = require(`./cache`);
+
 const EMPTY_ATTRIBUTE_FIELD_VALUE = null;
 
 let pageAttributePrefix;
@@ -49,18 +48,46 @@ const loadPageAttributesField = attributes => {
   return extractPageAttributes(attributes, pageAttributePrefix);
 };
 
-const registerEmptyAttributeFieldNamesInPageAttributes = node => {
-  Object.entries(node.pageAttributes).forEach(([name, value]) => {
+const loadEmptyAttributeFieldNames = attributeFields => {
+  return Object.entries(attributeFields).reduce((names, [name, value]) => {
     if (value === EMPTY_ATTRIBUTE_FIELD_VALUE) {
-      emptyAttributeFieldNamesWithinAllNodesPageAttributes.add(name);
+      names.push(name);
     }
-  });
+
+    return names;
+  }, []);
+};
+
+const getEmptyAttributeFieldNamesWithinPageAttributesCacheKey = nodeId =>
+  `asciidoc-node-empty-attribute-field-names-within-page-attributes-${nodeId}`;
+
+const setEmptyAttributeFieldNamesWithinPageAttributesCache = (
+  emptyAttributeFieldNames,
+  nodeId,
+  cache
+) => {
+  cache.set(
+    getEmptyAttributeFieldNamesWithinPageAttributesCacheKey(nodeId),
+    emptyAttributeFieldNames
+  );
+};
+
+const safeLoadEmptyAttributeFieldNamesWithinPageAttributesCache = (
+  node,
+  cache
+) => {
+  return safeLoadCache(
+    getEmptyAttributeFieldNamesWithinPageAttributesCacheKey(node.id),
+    cache,
+    () => loadEmptyAttributeFieldNames(node.pageAttributes)
+  );
 };
 
 module.exports = {
-  emptyAttributeFieldNamesWithinAllNodesPageAttributes,
   EMPTY_ATTRIBUTE_FIELD_VALUE,
   setPageAttributePrefix,
   loadPageAttributesField,
-  registerEmptyAttributeFieldNamesInPageAttributes,
+  loadEmptyAttributeFieldNames,
+  setEmptyAttributeFieldNamesWithinPageAttributesCache,
+  safeLoadEmptyAttributeFieldNamesWithinPageAttributesCache,
 };
