@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.9.0
-:revdate: 2019-09-02T14:42:33+0900
-:revmark: Rename option definesEmptyAttributes to enablesEmptyAttribute
+:revnumber: v1.10.0
+:revdate: 2019-09-03T16:22:59+0900
+:revmark: Change if no `skip-front-matter` is set the default value is `true` \
+          to asciidoctor attribute `skip-front-matter` is always `true`
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -308,7 +309,7 @@ tags: [gatsby, asciidoc]
 
 [NOTE]
 ====
-If no `skip-front-matter` is set the default value is `true`
+Asciidoctor attribute `skip-front-matter` is always `true`.
 ====
 
 == Define a custom converter

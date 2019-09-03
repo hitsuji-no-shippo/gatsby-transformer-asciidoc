@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.25.0
-:revdate: 2019-09-03T15:28:12+0900
-:revmark: Add change `node.internal.content` to asciidoc
+:revnumber: v1.26.0
+:revdate: 2019-09-03T16:22:47+0900
+:revmark: Add asciidoctor attribute `skip-front-matter` is always `true`
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -55,6 +55,10 @@
   (close link:{repository-issues-url}/32[#32])
 * `node.internal.content` to asciidoc.
   (close link:{repository-issues-url}/36[#36])
+* Asciidoctor attribute
+  link:{asciidoctor-official-user-manual-url}/#front-matter-added-for-static-site-generators[
+  `skip-front-matter`] is always `true`.
+  (close link:{repository-issues-url}/37[#37])
 
 ===== For developers (Consumer don't have to reade)
 

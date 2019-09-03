@@ -25,7 +25,6 @@ const loadAsciidoctorOptions = (options, pathPrefix) => {
       const addAutoValues = () => {
         const defaultImagesDir = `/images`;
         const currentPathPrefix = pathPrefix || ``;
-        const defaultSkipFrontMatter = true;
         const withPathPrefix = (prefix, url) =>
           (prefix + url).replace(/\/\//, `/`);
         const target = attributes || {};
@@ -34,9 +33,7 @@ const loadAsciidoctorOptions = (options, pathPrefix) => {
           currentPathPrefix,
           target[`imagesdir@`] || defaultImagesDir
         );
-        if (!Object.hasOwnProperty.call(target, `skip-front-matter`)) {
-          target[`skip-front-matter`] = defaultSkipFrontMatter;
-        }
+        target[`skip-front-matter`] = true;
 
         return target;
       };
