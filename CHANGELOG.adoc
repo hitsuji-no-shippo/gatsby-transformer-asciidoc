@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.26.0
-:revdate: 2019-09-03T16:22:47+0900
-:revmark: Add asciidoctor attribute `skip-front-matter` is always `true`
+:revnumber: v1.27.0
+:revdate: 2019-09-03T16:42:39+0900
+:revmark: Add change frontmatter generation method from `gray-matter` to \
+          Asciidoctor attribute `front-matter`
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -32,6 +33,7 @@
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
 == 0.6.0 (2019-09-03)
+:asciidoctor-docs-frontmatter-url: {asciidoctor-official-user-manual-url}/#front-matter-added-for-static-site-generators
 
 === Features
 
@@ -68,6 +70,9 @@
   (close link:{repository-issues-url}/19[#19])
 * Empty attribute field value `''` to `null`.
   (close link:{repository-issues-url}/33[#33])
+* Frontmatter generation method from `gray-matter` to
+  Asciidoctor attribute link:{asciidoctor-docs-frontmatter-url}[`front-matter`].
+  (close link:{repository-issues-url}/38[#38])
 
 
 === Fix

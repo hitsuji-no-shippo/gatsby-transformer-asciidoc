@@ -1,7 +1,6 @@
 dependencies:
   '@babel/runtime': 7.5.5
   asciidoctor: 2.0.3
-  gray-matter: 4.0.2
   js-yaml: 3.13.1
 devDependencies:
   '@babel/cli': 7.5.5_@babel+core@7.5.5
@@ -1939,8 +1938,10 @@ packages:
   /extend-shallow/2.0.1:
     dependencies:
       is-extendable: 0.1.1
+    dev: true
     engines:
       node: '>=0.10.0'
+    optional: true
     resolution:
       integrity: sha1-Ua99YUrZqfYQ6huvu5idaxxWiQ8=
   /extend-shallow/3.0.2:
@@ -2252,17 +2253,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-IItsdsea19BoLC7ELy13q1iJFNmd7ofZH5+X/pJr90/nRoPEX0DJo1dHDbgtYWOhJhcCgMDTOw84RZ72q6lB+Q==
-  /gray-matter/4.0.2:
-    dependencies:
-      js-yaml: 3.13.1
-      kind-of: 6.0.2
-      section-matter: 1.0.0
-      strip-bom-string: 1.0.0
-    dev: false
-    engines:
-      node: '>=6.0'
-    resolution:
-      integrity: sha512-7hB/+LxrOjq/dd8APlK0r24uL/67w7SkYnfwhNFwg/VDIGWGmduTDYf3WNstLW2fbbmRwrDGCVSJ2isuf2+4Hw==
   /has-ansi/2.0.0:
     dependencies:
       ansi-regex: 2.1.1
@@ -2547,8 +2537,10 @@ packages:
     resolution:
       integrity: sha1-YTObbyR1/Hcv2cnYP1yFddwVSuE=
   /is-extendable/0.1.1:
+    dev: true
     engines:
       node: '>=0.10.0'
+    optional: true
     resolution:
       integrity: sha1-YrEQ4omkcUGOPsNqYX1HLjAd/Ik=
   /is-extendable/1.0.1:
@@ -2793,8 +2785,10 @@ packages:
     resolution:
       integrity: sha512-NGEErnH6F2vUuXDh+OlbcKW7/wOcfdRHaZ7VWtqCztfHri/++YKmP51OdWeGPuqCOba6kk2OTe5d02VmTB80Pw==
   /kind-of/6.0.2:
+    dev: true
     engines:
       node: '>=0.10.0'
+    optional: true
     resolution:
       integrity: sha512-s5kLOcnH0XqDO+FvuaLX8DDjZ18CGFk7VygH40QoKPUQhW4e2rvM0rwUq0t8IQDOwYSeLK01U90OjzBTme2QqA==
   /lcid/2.0.0:
@@ -3842,15 +3836,6 @@ packages:
     dev: true
     resolution:
       integrity: sha512-YZo3K82SD7Riyi0E1EQPojLz7kpepnSQI9IyPbHHg1XXXevb5dJI7tpyN2ADxGcQbHG7vcyRHk0cbwqcQriUtg==
-  /section-matter/1.0.0:
-    dependencies:
-      extend-shallow: 2.0.1
-      kind-of: 6.0.2
-    dev: false
-    engines:
-      node: '>=4'
-    resolution:
-      integrity: sha512-vfD3pmTzGpufjScBh50YHKzEu2lxBWhVEHsNGoEXmCmn2hKGfeNLYMzCJpe8cD7gqX7TJluOVpBkAequ6dgMmA==
   /semver-compare/1.0.0:
     dev: true
     resolution:
@@ -4100,12 +4085,6 @@ packages:
       node: '>=6'
     resolution:
       integrity: sha512-DuRs1gKbBqsMKIZlrffwlug8MHkcnpjs5VPmL1PAh+mA30U0DTotfDZ0d2UUsXpPmPmMMJ6W773MaA3J+lbiWA==
-  /strip-bom-string/1.0.0:
-    dev: false
-    engines:
-      node: '>=0.10.0'
-    resolution:
-      integrity: sha1-5SEekiQ2n7uB1jOi8ABE3IztrZI=
   /strip-bom/3.0.0:
     dev: true
     engines:
@@ -4424,7 +4403,6 @@ specifiers:
   eslint-config-prettier: ^6.1.0
   eslint-plugin-import: ^2.18.2
   eslint-plugin-prettier: ^3.1.0
-  gray-matter: ^4.0.2
   husky: ^3.0.4
   js-yaml: ^3.13.1
   lint-staged: ^9.2.3

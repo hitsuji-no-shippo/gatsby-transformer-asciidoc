@@ -1,11 +1,6 @@
 const asciidoctor = require(`asciidoctor`)();
-const matter = require(`gray-matter`);
 
-const {
-  loadDocument,
-  loadAuthor,
-  loadRevision,
-} = require(`./asciidoc-attributes`);
+const { createHeaderAndMetadataAttributes } = require(`./asciidoc-attributes`);
 const { loadPageAttributesField } = require(`./page-attributes-field`);
 
 const convertOptions = {};
@@ -67,10 +62,8 @@ const createInternalField = (asciidoc, contentDigest) => {
 
 const createAsciidocFields = doc => {
   const attributesFields = {
-    document: loadDocument(doc),
-    author: loadAuthor(doc),
-    revision: loadRevision(doc),
-    pageAttributes: loadPageAttributesField(doc.getAttributes()),
+    ...createHeaderAndMetadataAttributes(doc),
+    ...{ pageAttributes: loadPageAttributesField(doc.getAttributes()) },
   };
 
   return { ...{ html: doc.convert() }, ...attributesFields };
@@ -85,7 +78,6 @@ const createNode = (
 ) => {
   const node = createAsciidocFields(doc);
 
-  node.frontmatter = matter(asciidoc).data;
   node.id = createNodeId(`${sourceNodeId} >>> ASCIIDOC`);
   node.parent = sourceNodeId;
   node.children = [];

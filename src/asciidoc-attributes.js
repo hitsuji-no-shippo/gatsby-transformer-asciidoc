@@ -2,44 +2,59 @@ const yaml = require(`js-yaml`);
 
 const EMPTY_ATTRIBUTE_FIELD_VALUE = null;
 
-const loadDocument = doc => {
-  const title = (() => {
-    // Use "partition" option to be able to get title, subtitle, combined
-    const docTitle = doc.getDocumentTitle({ partition: true });
+// The attribute to create is only in "Header and metadata" of the
+// following url link destination table.
+// https://asciidoctor.org/docs/user-manual/#builtin-attributes-table
+const createHeaderAndMetadataAttributes = doc => {
+  const document = (() => {
+    const title = (() => {
+      // Use "partition" option to be able to get title, subtitle, combined
+      const docTitle = doc.getDocumentTitle({ partition: true });
+      return {
+        title: docTitle.getCombined(),
+        main: docTitle.getMain(),
+        subtitle: docTitle.getSubtitle(),
+      };
+    })();
+
     return {
-      title: docTitle.getCombined(),
-      main: docTitle.getMain(),
-      subtitle: docTitle.getSubtitle(),
+      ...title,
+      ...{ description: doc.getAttribute(`description`) },
     };
+  })();
+  const author = (() => {
+    return doc.getAuthor()
+      ? {
+          fullName: doc.getAttribute(`author`),
+          firstName: doc.getAttribute(`firstname`),
+          lastName: doc.getAttribute(`lastname`),
+          middleName: doc.getAttribute(`middlename`),
+          authorInitials: doc.getAttribute(`authorinitials`),
+          email: doc.getAttribute(`email`),
+        }
+      : null;
+  })();
+  const revision = (() => {
+    return doc.hasRevisionInfo()
+      ? {
+          date: doc.getRevisionDate(),
+          number: doc.getRevisionNumber(),
+          remark: doc.getRevisionRemark(),
+        }
+      : null;
+  })();
+  const frontmatter = (() => {
+    const frontmatterAttribute = doc.getAttribute(`front-matter`);
+
+    return frontmatterAttribute ? yaml.safeLoad(frontmatterAttribute) : null;
   })();
 
   return {
-    ...title,
-    ...{ description: doc.getAttribute(`description`) },
+    document,
+    author,
+    revision,
+    frontmatter,
   };
-};
-
-const loadAuthor = doc => {
-  return doc.getAuthor()
-    ? {
-        fullName: doc.getAttribute(`author`),
-        firstName: doc.getAttribute(`firstname`),
-        lastName: doc.getAttribute(`lastname`),
-        middleName: doc.getAttribute(`middlename`),
-        authorInitials: doc.getAttribute(`authorinitials`),
-        email: doc.getAttribute(`email`),
-      }
-    : null;
-};
-
-const loadRevision = doc => {
-  return doc.hasRevisionInfo()
-    ? {
-        date: doc.getRevisionDate(),
-        number: doc.getRevisionNumber(),
-        remark: doc.getRevisionRemark(),
-      }
-    : null;
 };
 
 const extractPageAttributes = (attributes, namePattern) => {
@@ -88,9 +103,7 @@ const loadEmptyAttributeFieldNames = attributeFields => {
 
 module.exports = {
   EMPTY_ATTRIBUTE_FIELD_VALUE,
-  loadDocument,
-  loadAuthor,
-  loadRevision,
+  createHeaderAndMetadataAttributes,
   extractPageAttributes,
   loadEmptyAttributeFieldNames,
 };

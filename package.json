@@ -9,7 +9,6 @@
   "dependencies": {
     "@babel/runtime": "^7.0.0",
     "asciidoctor": "^2.0.0",
-    "gray-matter": "^4.0.2",
     "js-yaml": "^3.13.1"
   },
   "devDependencies": {
