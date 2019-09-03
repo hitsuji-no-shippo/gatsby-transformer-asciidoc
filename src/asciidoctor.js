@@ -59,11 +59,11 @@ const loadAsciidoc = asciidoc => {
   return asciidoctor.load(asciidoc, convertOptions);
 };
 
-const createInternalField = (content, contentDigest) => {
+const createInternalField = (asciidoc, contentDigest) => {
   return {
     type: `Asciidoc`,
     mediaType: `text/html`,
-    content,
+    content: asciidoc,
     contentDigest,
   };
 };
@@ -86,17 +86,13 @@ const createNode = (
   createNodeId,
   createContentDigest
 ) => {
-  const frontmatter = matter(asciidoc);
   const node = createAsciidocFields(doc);
 
-  node.frontmatter = frontmatter.data;
+  node.frontmatter = matter(asciidoc).data;
   node.id = createNodeId(`${sourceNodeId} >>> ASCIIDOC`);
   node.parent = sourceNodeId;
   node.children = [];
-  node.internal = createInternalField(
-    frontmatter.content,
-    createContentDigest(node)
-  );
+  node.internal = createInternalField(asciidoc, createContentDigest(node));
 
   return node;
 };

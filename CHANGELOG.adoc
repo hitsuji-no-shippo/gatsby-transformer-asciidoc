@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.24.0
-:revdate: 2019-09-02T23:58:08+0900
-:revmark: Add collect asciidoc attirubtes processing in one file
+:revnumber: v1.25.0
+:revdate: 2019-09-03T15:28:12+0900
+:revmark: Add change `node.internal.content` to asciidoc
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -31,7 +31,7 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
-== 0.6.0 (2019-09-02)
+== 0.6.0 (2019-09-03)
 
 === Features
 
@@ -53,6 +53,8 @@
   (close link:{repository-issues-url}/18[#18])
 * Rename option `definesEmptyAttributes` to `enablesEmptyAttribute`.
   (close link:{repository-issues-url}/32[#32])
+* `node.internal.content` to asciidoc.
+  (close link:{repository-issues-url}/36[#36])
 
 ===== For developers (Consumer don't have to reade)
 
