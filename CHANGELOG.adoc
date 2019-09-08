@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.28.0
-:revdate: 2019-09-08T11:45:44+0900
-:revmark: Add collect asciidoc node processing in one file
+:revnumber: v1.29.0
+:revdate: 2019-09-08T15:18:03+0900
+:revmark: Add auto update of pageAttribute field when change \
+          `pageAttributePrefix` option value
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -40,6 +41,10 @@
 
 * Option of the prefix of pageAttribute (`pageAttributePrefix`).
   (close link:{repository-issues-url}/30[#30])
+* Auto update of pageAttribute field when change `pageAttributePrefix` option
+  value. (close link:{repository-issues-url}/40[#40]) +
+  It works only when the value of `pageAttributePrefix` option is read from
+  another file other than `gatsby-cofing.js`.
 
 ===== For developers (Consumer don't have to reade)
 

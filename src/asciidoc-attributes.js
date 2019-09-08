@@ -1,5 +1,8 @@
 const yaml = require(`js-yaml`);
 
+const { loadAsciidoc } = require(`./asciidoctor`);
+const { safeLoadCache } = require(`./cache`);
+
 const EMPTY_ATTRIBUTE_FIELD_VALUE = null;
 
 // The attribute to create is only in "Header and metadata" of the
@@ -101,9 +104,26 @@ const loadEmptyAttributeFieldNames = attributeFields => {
   }, []);
 };
 
+const getAllAttributesCacheKey = nodeId =>
+  `asciidoc-node-all-attributes-${nodeId}`;
+
+const setAllAttributesCache = (doc, nodeId, cache) => {
+  cache.set(getAllAttributesCacheKey(nodeId), doc.getAttributes());
+};
+
+const safeLoadAllAttributesCache = (node, cache) => {
+  return safeLoadCache(getAllAttributesCacheKey(node.id), cache, async () => {
+    const doc = await loadAsciidoc(node.internal.content);
+
+    return doc.getAttributes();
+  });
+};
+
 module.exports = {
   EMPTY_ATTRIBUTE_FIELD_VALUE,
   createHeaderAndMetadataAttributes,
   extractPageAttributes,
   loadEmptyAttributeFieldNames,
+  setAllAttributesCache,
+  safeLoadAllAttributesCache,
 };

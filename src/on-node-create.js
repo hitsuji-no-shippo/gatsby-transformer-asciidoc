@@ -1,6 +1,9 @@
 const { loadAsciidoc } = require(`./asciidoctor`);
 const { createAsciidocNode } = require(`./asciidoc-node`);
-const { loadEmptyAttributeFieldNames } = require(`./asciidoc-attributes`);
+const {
+  loadEmptyAttributeFieldNames,
+  setAllAttributesCache,
+} = require(`./asciidoc-attributes`);
 const {
   setEmptyAttributeFieldNamesWithinPageAttributesCache,
 } = require(`./page-attributes-field`);
@@ -48,11 +51,16 @@ async function onCreateNode({
     );
   }
 
-  setEmptyAttributeFieldNamesWithinPageAttributesCache(
-    loadEmptyAttributeFieldNames(asciidocNode.pageAttributes),
-    asciidocNode.id,
-    cache
-  );
+  const setCaches = () => {
+    setEmptyAttributeFieldNamesWithinPageAttributesCache(
+      loadEmptyAttributeFieldNames(asciidocNode.pageAttributes),
+      asciidocNode.id,
+      cache
+    );
+    setAllAttributesCache(doc, asciidocNode.id, cache);
+  };
+
+  setCaches();
 }
 
 module.exports = onCreateNode;

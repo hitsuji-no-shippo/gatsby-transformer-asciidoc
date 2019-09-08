@@ -1,3 +1,5 @@
+const _ = require(`lodash`);
+
 async function safeLoadCache(cacheKey, cache, proxy) {
   const cacheValue = await cache.get(cacheKey);
 
@@ -5,11 +7,25 @@ async function safeLoadCache(cacheKey, cache, proxy) {
     return cacheValue;
   }
 
-  const value = proxy();
+  const value = await proxy();
 
   cache.set(cacheKey, value);
 
   return value;
 }
 
-module.exports = { safeLoadCache };
+async function updateCache(value, cacheKey, cache) {
+  async function isDiffrentCache() {
+    return !_.isEqual(value, await cache.get(cacheKey));
+  }
+
+  const isDiffrentValue = await isDiffrentCache();
+
+  if (isDiffrentValue) {
+    cache.set(cacheKey, value);
+  }
+
+  return isDiffrentValue;
+}
+
+module.exports = { safeLoadCache, updateCache };

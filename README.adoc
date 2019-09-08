@@ -3,10 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.10.0
-:revdate: 2019-09-03T16:22:59+0900
-:revmark: Change if no `skip-front-matter` is set the default value is `true` \
-          to asciidoctor attribute `skip-front-matter` is always `true`
+:revnumber: v1.11.0
+:revdate: 2019-09-03T19:01:59+0900
+:revmark: Add auto update for pageAttributes field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -355,3 +354,33 @@ class TemplateConverter {
   }
 }
 ----
+
+== Auto update for pageAttributes field
+
+If xref:pageAttributePrefix[`pageAttributePrefix`] is different from cache,
+the `pageAttributes` field is automatically updated.
+
+[NOTE]
+====
+.Cache does not store default
+Cache stores input values every time. Default value is not included.
+Therefore, the update process is run in the following cases, although the
+result is the same.
+
+.options of last time
+[source, JavaScript]
+----
+{
+  enablesEmptyAttribute: true,
+}
+----
+
+.options of this time
+[source, JavaScript]
+----
+{
+  enablesEmptyAttribute: true,
+  pageAttributePrefix: `page-`,
+}
+----
+====

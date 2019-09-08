@@ -10,6 +10,8 @@ const loadOptions = (configOptions, pathPrefix) => {
         pageAttributePrefix === undefined ? `page-` : pageAttributePrefix;
 
       setPageAttributePrefix(prefix === `` ? `` : new RegExp(`^${prefix}`));
+
+      return prefix;
     };
     const loadExtensions = extensions => {
       // make extensions configurable and use adoc and asciidoc as default
@@ -26,9 +28,8 @@ const loadOptions = (configOptions, pathPrefix) => {
 
     const { pageAttributePrefix, extensions, enablesEmptyAttribute } = options;
 
-    loadPageAttributePrefix(pageAttributePrefix);
-
     return {
+      pageAttributePrefix: loadPageAttributePrefix(pageAttributePrefix),
       supportedExtensions: loadExtensions(extensions),
       enablesEmptyAttribute: loadDefinesEmptyAttributes(enablesEmptyAttribute),
     };
@@ -44,9 +45,16 @@ const loadOptions = (configOptions, pathPrefix) => {
     return asciidoctorOptions;
   };
 
-  Object.assign(pluginOptions, loadOwnOptions(configOptions));
+  const { pageAttributePrefix, ...options } = loadOwnOptions(configOptions);
+
+  Object.assign(pluginOptions, options);
 
   loadAsciidoctorOptions(deletePluginOptions(configOptions), pathPrefix);
+
+  return pageAttributePrefix;
 };
 
-module.exports = { loadOptions, pluginOptions };
+module.exports = {
+  loadOptions,
+  pluginOptions,
+};
