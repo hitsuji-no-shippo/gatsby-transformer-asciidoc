@@ -1,9 +1,8 @@
-const { safeLoadCache } = require(`./cache`);
-
 const {
   extractPageAttributes,
   loadEmptyAttributeFieldNames,
 } = require(`./asciidoc-attributes`);
+const { safeLoadCache } = require(`./cache`);
 
 let pageAttributePrefix;
 

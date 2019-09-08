@@ -3,10 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.27.0
-:revdate: 2019-09-03T16:42:39+0900
-:revmark: Add change frontmatter generation method from `gray-matter` to \
-          Asciidoctor attribute `front-matter`
+:revnumber: v1.28.0
+:revdate: 2019-09-08T11:45:44+0900
+:revmark: Add collect asciidoc node processing in one file
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -32,7 +31,7 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
-== 0.6.0 (2019-09-03)
+== 0.6.0 (2019-09-08)
 :asciidoctor-docs-frontmatter-url: {asciidoctor-official-user-manual-url}/#front-matter-added-for-static-site-generators
 
 === Features
@@ -106,6 +105,8 @@
   (close link:{repository-issues-url}/31[#31])
 * Collect asciidoc attirubtes processing in one file.
   (close link:{repository-issues-url}/35[#35])
+* Collect asciidoc node processing in one file.
+  (close link:{repository-issues-url}/39[#39])
 
 === Style
 

@@ -1,4 +1,5 @@
-const { loadAsciidoc, createAsciidocNode } = require(`./asciidoctor`);
+const { loadAsciidoc } = require(`./asciidoctor`);
+const { createAsciidocNode } = require(`./asciidoc-node`);
 const { loadEmptyAttributeFieldNames } = require(`./asciidoc-attributes`);
 const {
   setEmptyAttributeFieldNamesWithinPageAttributesCache,
