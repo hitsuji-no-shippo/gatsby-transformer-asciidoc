@@ -1,16 +1,20 @@
 const asciidoctor = require(`asciidoctor`)();
 
+const { updateCache } = require(`./cache`);
+
 const convertOptions = {};
 
 const loadAsciidoctorOptions = (options, pathPrefix) => {
   // register custom converter if given
   const registerConverterFactory = converterFactory => {
+    let customConverter;
+
     if (converterFactory !== undefined) {
-      asciidoctor.ConverterFactory.register(
-        new converterFactory(asciidoctor), // eslint-disable-line new-cap
-        [`html5`]
-      );
+      customConverter = new converterFactory(asciidoctor); // eslint-disable-line new-cap
+      asciidoctor.ConverterFactory.register(customConverter, [`html5`]);
     }
+
+    return customConverter;
   };
   const setConvertOptions = asciidoctorOptions => {
     const loadAttributes = attributes => {
@@ -38,17 +42,31 @@ const loadAsciidoctorOptions = (options, pathPrefix) => {
   };
   const asciidoctorOptions = options;
 
-  registerConverterFactory(asciidoctorOptions.converterFactory);
+  const customConverter = registerConverterFactory(
+    asciidoctorOptions.converterFactory
+  );
   delete asciidoctorOptions.converterFactory;
 
   setConvertOptions(asciidoctorOptions);
+
+  if (customConverter !== undefined) {
+    asciidoctorOptions.customConverter = customConverter;
+  }
+  asciidoctorOptions.pathPrefix = pathPrefix;
+
+  return asciidoctorOptions;
 };
 
 const loadAsciidoc = asciidoc => {
   return asciidoctor.load(asciidoc, convertOptions);
 };
 
+async function hasUpdatedAsciidocFields(asciidoctorOptions, cache) {
+  return updateCache(asciidoctorOptions, `asciidoctor-options`, cache);
+}
+
 module.exports = {
   loadAsciidoctorOptions,
   loadAsciidoc,
+  hasUpdatedAsciidocFields,
 };

@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.11.0
-:revdate: 2019-09-03T19:01:59+0900
-:revmark: Add auto update for pageAttributes field
+:revnumber: v1.12.0
+:revdate: 2019-09-03T19:24:15+0900
+:revmark: Add auto update attributes in auto update section
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -355,10 +355,14 @@ class TemplateConverter {
 }
 ----
 
-== Auto update for pageAttributes field
+== Auto update for attributes
 
 If xref:pageAttributePrefix[`pageAttributePrefix`] is different from cache,
 the `pageAttributes` field is automatically updated.
+
+[horizontal]
+attributs:: Reload asciidoc using new attributes and update asciidoc fields
+pageAttributePrefix:: Update `pageAttributePrefix` field
 
 [NOTE]
 ====

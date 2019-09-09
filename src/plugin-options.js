@@ -45,13 +45,16 @@ const loadOptions = (configOptions, pathPrefix) => {
     return asciidoctorOptions;
   };
 
-  const { pageAttributePrefix, ...options } = loadOwnOptions(configOptions);
+  const { pageAttributePrefix, ...ownOptions } = loadOwnOptions(configOptions);
 
-  Object.assign(pluginOptions, options);
+  Object.assign(pluginOptions, ownOptions);
 
-  loadAsciidoctorOptions(deletePluginOptions(configOptions), pathPrefix);
+  const asciidoctorOptions = loadAsciidoctorOptions(
+    deletePluginOptions(configOptions),
+    pathPrefix
+  );
 
-  return pageAttributePrefix;
+  return { pageAttributePrefix, asciidoctorOptions };
 };
 
 module.exports = {

@@ -1,9 +1,12 @@
 const _ = require(`lodash`);
 
+const { hasUpdatedAsciidocFields } = require(`./asciidoctor`);
+const { updateAsciidocFields } = require(`./asciidoc-node`);
 const { safeLoadAllAttributesCache } = require(`./asciidoc-attributes`);
 const {
   updatePageAttributesField,
   hasUpdatedPageAttributePrefix,
+  setPageAttributePrefixCache,
 } = require(`./page-attributes-field`);
 const { loadOptions } = require(`./plugin-options`);
 
@@ -11,12 +14,19 @@ async function onPreBootstrap(
   { pathPrefix, getNodesByType, cache, createContentDigest },
   configOptions
 ) {
-  const pageAttributePrefix = loadOptions(
+  const { pageAttributePrefix, asciidoctorOptions } = loadOptions(
     _.cloneDeep(configOptions),
     pathPrefix
   );
 
   const updateNode = await (async () => {
+    if (await hasUpdatedAsciidocFields(asciidoctorOptions, cache)) {
+      setPageAttributePrefixCache(pageAttributePrefix, cache);
+
+      return async node => {
+        updateAsciidocFields(node, cache);
+      };
+    }
     if (await hasUpdatedPageAttributePrefix(pageAttributePrefix, cache)) {
       return async node => {
         const allAttributes = await safeLoadAllAttributesCache(node, cache);

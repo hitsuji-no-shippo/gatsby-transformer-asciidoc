@@ -3,10 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.29.0
-:revdate: 2019-09-08T15:18:03+0900
-:revmark: Add auto update of pageAttribute field when change \
-          `pageAttributePrefix` option value
+:revnumber: v1.30.0
+:revdate: 2019-09-09T23:44:06+0900
+:revmark: Add auto update of asciidoc fields when \
+          change asciidoctor option value
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -32,7 +32,7 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
-== 0.6.0 (2019-09-08)
+== 0.6.0 (2019-09-09)
 :asciidoctor-docs-frontmatter-url: {asciidoctor-official-user-manual-url}/#front-matter-added-for-static-site-generators
 
 === Features
@@ -44,6 +44,10 @@
 * Auto update of pageAttribute field when change `pageAttributePrefix` option
   value. (close link:{repository-issues-url}/40[#40]) +
   It works only when the value of `pageAttributePrefix` option is read from
+  another file other than `gatsby-cofing.js`.
+* Auto update of asciidoc fields when change asciidoctor option value.
+  (close link:{repository-issues-url}/41[#41]) +
+  It works only when the value of asciidcotr option is read from
   another file other than `gatsby-cofing.js`.
 
 ===== For developers (Consumer don't have to reade)

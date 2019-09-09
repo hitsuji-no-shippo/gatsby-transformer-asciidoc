@@ -10,9 +10,15 @@ const setPageAttributePrefix = prefix => {
   pageAttributePrefix = prefix;
 };
 
+const pageAttributePrefixCacheKey = `page-attribute-prefix`;
+
 async function hasUpdatedPageAttributePrefix(prefix, cache) {
-  return updateCache(prefix, `page-attribute-prefix`, cache);
+  return updateCache(prefix, pageAttributePrefixCacheKey, cache);
 }
+
+const setPageAttributePrefixCache = (prefix, cache) => {
+  cache.set(pageAttributePrefixCacheKey, prefix);
+};
 
 const loadPageAttributesField = attributes => {
   return extractPageAttributes(attributes, pageAttributePrefix);
@@ -56,6 +62,7 @@ const updatePageAttributesField = (node, attributes, cache) => {
 module.exports = {
   setPageAttributePrefix,
   hasUpdatedPageAttributePrefix,
+  setPageAttributePrefixCache,
   loadPageAttributesField,
   setEmptyAttributeFieldNamesWithinPageAttributesCache,
   safeLoadEmptyAttributeFieldNamesWithinPageAttributesCache,
