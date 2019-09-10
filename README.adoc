@@ -3,7 +3,7 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.13.0
+:revnumber: v1.13.1
 :revdate: 2019-09-10T14:37:18+0900
 :revmark: Add option file section
 :doctype: article
@@ -40,9 +40,9 @@ link:{asciidoctor-official-docs-url}/asciidoctor.js/[Asciidoctor.js].
 
 == How to use
 
+.gatsby-config.js
 [source, JavaScript]
 ----
-// In your gatsby-config.js
 plugins: [`gatsby-transformer-asciidoc`]
 ----
 
@@ -53,9 +53,9 @@ You can also pass all
 link:{asciidoctor-js-docs-antora-url}/processor/convert-options/[
 Asciidoctor's convert options] to the transformer. An example would be:
 
+.gatsby-config.js
 [source, JavaScript]
 ----
-// In your gatsby-config.js
 plugins: [
   {
     resolve: `gatsby-transformer-asciidoc`,
@@ -79,10 +79,9 @@ extensions] as AsciiDoc:
 
 Additional extensions can be configured via the fileExtensions option:
 
+.gatsby-config.js
 [source, JavaScript]
 ----
-// In your gatsby-config.js
-// In your gatsby-config.js
 plugins: [
   {
     resolve: `gatsby-transformer-asciidoc`,
@@ -103,9 +102,9 @@ Each AsciiDoc file is parsed into a node of type `asciidoc`.
 You also can define where the asciidoc file can find the images by setting the
 imagesdir attribute.
 
+.gatsby-config.js
 [source, JavaScript]
 ----
-// In your gatsby-config.js
 plugins: [
   {
     resolve: `gatsby-transformer-asciidoc`,
@@ -213,6 +212,7 @@ Attribute value is processed as link:{yaml-example-url}[YAML] data.
 The value specifies the prefix of attribute to be added to the `pageAttributes`
 field. Default is `page-`.
 
+.gatsby-config.js
 [source, JavaScript]
 ----
 plugins: [
@@ -315,9 +315,10 @@ Asciidoctor attribute `skip-front-matter` is always `true`.
 
 You can define a custom converter by adding the `converterFactory` option.
 
+.gatsby-config.js
 [source, JavaScript]
 ----
-// In your gatsby-config.js, make sure to import or declare TemplateConverter
+// Make sure to import or declare TemplateConverter
 plugins: [
   {
     resolve: `gatsby-transformer-asciidoc`,
