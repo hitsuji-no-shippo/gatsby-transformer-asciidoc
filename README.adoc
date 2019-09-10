@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.12.0
-:revdate: 2019-09-03T19:24:15+0900
-:revmark: Add auto update attributes in auto update section
+:revnumber: v1.13.0
+:revdate: 2019-09-10T14:37:18+0900
+:revmark: Add option file section
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -354,6 +354,52 @@ class TemplateConverter {
   }
 }
 ----
+
+== Option File
+
+link:{yaml-example-url}[YAML] file can be load. Default option file path is
+`./asciidoctor-option.yaml`.  The value of *`gatsby-config.js` takes precedence
+over YAML file*.
+
+.Example
+[source, YAML]
+----
+attributes:
+  gatsby-url: https://www.gatsbyjs.org
+  asciidoctor-url: https://asciidoctor
+
+pageAttributePrefix: gatsby-
+enablesEmptyAttribute: true
+----
+
+JSON is hard to write, so I chose yaml.
+
+=== OptionFile
+
+You can change the option file with the `OptionFile` option.
+
+.gatsby-config.js
+[source, JavaScript]
+----
+plugins: [
+  {
+    resolve: `gatsby-transformer-asciidoc`,
+    options: {
+      OptionFile: {
+        path: `file-path` <1>
+        encoding: `file-encoding` <2>
+      }
+    },
+  },
+]
+----
+<1> Default `./asciidoctor-option.yaml`
+<2> Default `utf8`
+
+[IMPORTANT]
+====
+When reading, the attributes option must be of type object.
+====
 
 == Auto update for attributes
 

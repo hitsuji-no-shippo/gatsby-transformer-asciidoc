@@ -3,10 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.30.0
-:revdate: 2019-09-09T23:44:06+0900
-:revmark: Add auto update of asciidoc fields when \
-          change asciidoctor option value
+:revnumber: v1.31.0
+:revdate: 2019-09-10T14:38:03+0900
+:revmark: Add add load option file.
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -32,7 +31,7 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
-== 0.6.0 (2019-09-09)
+== 0.6.0 (2019-09-10)
 :asciidoctor-docs-frontmatter-url: {asciidoctor-official-user-manual-url}/#front-matter-added-for-static-site-generators
 
 === Features
@@ -49,6 +48,9 @@
   (close link:{repository-issues-url}/41[#41]) +
   It works only when the value of asciidcotr option is read from
   another file other than `gatsby-cofing.js`.
+* Load option file.
+  (close link:{repository-issues-url}/24[#24],
+         link:{repository-issues-url}/42[#42])
 
 ===== For developers (Consumer don't have to reade)
 
