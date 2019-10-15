@@ -1,6 +1,15 @@
 const { loadAsciidoc } = require(`./asciidoctor`);
 const { createAsciidocNode, setAsciidocCaches } = require(`./asciidoc-node`);
-const { pluginOptions } = require(`./plugin-options`);
+
+let supportExtensions = new Set([`adoc`, `asciidoc`]);
+
+const setSupportExtensions = extensions => {
+  if (Object.prototype.toString.call(extensions) === `[object Set]`) {
+    supportExtensions = extensions;
+  } else if (Array.isArray(extensions)) {
+    supportExtensions = new Set(extensions);
+  }
+};
 
 async function onCreateNode({
   node,
@@ -11,10 +20,9 @@ async function onCreateNode({
   createContentDigest,
   cache,
 }) {
-  if (!pluginOptions.supportedExtensions.includes(node.extension)) {
+  if (!supportExtensions.has(node.extension)) {
     return;
   }
-
   // Load Asciidoc contents
   const content = await loadNodeContent(node);
   // We use a `let` here as a warning: some operations,
@@ -47,4 +55,7 @@ async function onCreateNode({
   setAsciidocCaches(doc, asciidocNode.pageAttributes, asciidocNode.id, cache);
 }
 
-module.exports = onCreateNode;
+module.exports = {
+  setSupportExtensions,
+  onCreateNode,
+};

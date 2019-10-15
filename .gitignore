@@ -4,7 +4,7 @@
 /extend-node-type.js
 /on-node-create.js
 /on-pre-bootstrap.js
-/plugin-options.js
+/options.js
 /asciidoctor.js
 /cache.js
 /asciidoc-attributes.js

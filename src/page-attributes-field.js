@@ -2,22 +2,14 @@ const {
   extractPageAttributes,
   loadEmptyAttributeFieldNames,
 } = require(`./asciidoc-attributes`);
-const { safeLoadCache, updateCache } = require(`./cache`);
+const { safeLoadCache } = require(`./cache`);
 
-let pageAttributePrefix;
+let pageAttributePrefix = /^page-/;
 
 const setPageAttributePrefix = prefix => {
-  pageAttributePrefix = prefix;
-};
-
-const pageAttributePrefixCacheKey = `page-attribute-prefix`;
-
-async function hasUpdatedPageAttributePrefix(prefix, cache) {
-  return updateCache(prefix, pageAttributePrefixCacheKey, cache);
-}
-
-const setPageAttributePrefixCache = (prefix, cache) => {
-  cache.set(pageAttributePrefixCacheKey, prefix);
+  if (typeof prefix === `string`) {
+    pageAttributePrefix = prefix === `` ? `` : new RegExp(`^${prefix}`);
+  }
 };
 
 const loadPageAttributesField = attributes => {
@@ -61,8 +53,6 @@ const updatePageAttributesField = (node, attributes, cache) => {
 
 module.exports = {
   setPageAttributePrefix,
-  hasUpdatedPageAttributePrefix,
-  setPageAttributePrefixCache,
   loadPageAttributesField,
   setEmptyAttributeFieldNamesWithinPageAttributesCache,
   safeLoadEmptyAttributeFieldNamesWithinPageAttributesCache,

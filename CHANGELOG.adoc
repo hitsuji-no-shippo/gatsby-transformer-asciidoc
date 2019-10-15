@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.33.0
-:revdate: 2019-11-24T19:43:19+0900
-:revmark: Add typo package name
+:revnumber: v1.34.0
+:revdate: 2019-11-24T19:45:05+0900
+:revmark: Add Collect option processing in one file.
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -31,7 +31,7 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
-== 0.6.0 (2019-09-10)
+== 0.6.0 (2019-11-24)
 :asciidoctor-docs-frontmatter-url: {asciidoctor-official-user-manual-url}/#front-matter-added-for-static-site-generators
 
 === Features
@@ -118,6 +118,8 @@
   (close link:{repository-issues-url}/35[#35])
 * Collect asciidoc node processing in one file.
   (close link:{repository-issues-url}/39[#39])
+* Collect option processing in one file.
+  (close link:{repository-issues-url}/44[#44])
 
 === Style
 

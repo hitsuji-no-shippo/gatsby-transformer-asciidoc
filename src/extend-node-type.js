@@ -4,10 +4,17 @@ const { EMPTY_ATTRIBUTE_FIELD_VALUE } = require(`./asciidoc-attributes`);
 const {
   safeLoadEmptyAttributeFieldNamesWithinPageAttributesCache,
 } = require(`./page-attributes-field`);
-const { pluginOptions } = require(`./plugin-options`);
+
+let enablesEmptyAttribute = true;
+
+const setEnablesEmptyAttribute = enables => {
+  if (typeof enables === `boolean`) {
+    enablesEmptyAttribute = enables;
+  }
+};
 
 async function setFieldsOnGraphQLNodeType({ type, getNodesByType, cache }) {
-  if (type.name !== `Asciidoc` || !pluginOptions.enablesEmptyAttribute) {
+  if (type.name !== `Asciidoc` || !enablesEmptyAttribute) {
     return {};
   }
 
@@ -68,4 +75,7 @@ async function setFieldsOnGraphQLNodeType({ type, getNodesByType, cache }) {
   );
 }
 
-module.exports = setFieldsOnGraphQLNodeType;
+module.exports = {
+  setEnablesEmptyAttribute,
+  setFieldsOnGraphQLNodeType,
+};
