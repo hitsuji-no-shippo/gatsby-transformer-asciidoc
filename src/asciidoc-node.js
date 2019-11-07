@@ -1,3 +1,6 @@
+const sanitizeHTML = require(`sanitize-html`);
+const _ = require(`lodash`);
+
 const { loadAsciidoc } = require(`./asciidoctor`);
 const {
   createHeaderAndMetadataAttributes,
@@ -19,12 +22,31 @@ const createInternalField = (asciidoc, contentDigest) => {
 };
 
 const createAsciidocFields = doc => {
+  const html = doc.convert();
+  /*
+   * Calculate time to read
+   * @returns {number} time to read
+   */
+  const timeToRead = (() => {
+    const pureText = sanitizeHTML(html, { allowTags: [] });
+    const wordCount =
+      _.words(pureText).length +
+      _.words(pureText, /[\p{sc=Katakana}\p{sc=Hiragana}\p{sc=Han}]/gu).length;
+    const avgWPM = 265;
+    const time = Math.round(wordCount / avgWPM);
+
+    if (time === 0) {
+      return 1;
+    }
+
+    return time;
+  })();
   const attributesFields = {
     ...createHeaderAndMetadataAttributes(doc),
     ...{ pageAttributes: loadPageAttributesField(doc.getAttributes()) },
   };
 
-  return { ...{ html: doc.convert() }, ...attributesFields };
+  return { ...{ html, timeToRead }, ...attributesFields };
 };
 
 const createNode = (

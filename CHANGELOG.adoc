@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.34.0
-:revdate: 2019-11-24T19:45:05+0900
-:revmark: Add Collect option processing in one file.
+:revnumber: v1.35.0
+:revdate: 2019-11-24T19:46:22+0900
+:revmark: Add timeToRead field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -51,6 +51,7 @@
 * Load option file.
   (close link:{repository-issues-url}/24[#24],
          link:{repository-issues-url}/42[#42])
+* timeToRead field. (close link:{repository-issues-url}/45[#45])
 
 ===== For developers (Consumer don't have to reade)
 

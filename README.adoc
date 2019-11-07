@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.13.2
-:revdate: 2019-11-24T19:44:10+0900
-:revmark: typo package name
+:revnumber: v1.14.0
+:revdate: 2019-11-24T19:46:07+0900
+:revmark: Add timeToRead field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -143,6 +143,7 @@ A sample GraphQL query to get AsciiDoc nodes:
     edges {
       node {
         html
+        timeToRead
         document {
           title
           subtitle
