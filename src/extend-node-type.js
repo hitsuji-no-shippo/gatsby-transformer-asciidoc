@@ -1,4 +1,4 @@
-const { GraphQLBoolean } = require(`gatsby/graphql`);
+// const { GraphQLBoolean } = require(`gatsby/graphql`);
 
 const { EMPTY_ATTRIBUTE_FIELD_VALUE } = require(`./asciidoc-attributes`);
 const {
@@ -54,7 +54,8 @@ async function setFieldsOnGraphQLNodeType({ type, getNodesByType, cache }) {
       const fields = attributesFields;
 
       fields[fieldName] = {
-        type: GraphQLBoolean,
+        // type: GraphQLBoolean,
+        type: `Boolean`,
         resolve: source => {
           const value = source[name];
 

@@ -1,5 +1,6 @@
 dependencies:
   '@babel/runtime': 7.5.5
+  '@hitsuji_no_shippo/self-referenced-object': 3.0.0
   asciidoctor: 2.0.3
   js-yaml: 3.13.1
   sanitize-html: 1.20.1
@@ -927,6 +928,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-s63F9nJioLqOlW3UkyMd+BYhXt44YuaFm/VV0VwuteqjYwRrObkU7ra9pY4wAJR3oXi8hJrMcrcJdO/HH33vtw==
+  /@hitsuji_no_shippo/self-referenced-object/3.0.0:
+    dev: false
+    resolution:
+      integrity: sha512-ozmyYv5Tn+G8BhBeDCo4NZF+XGiHPavNy3aitC7Wj3yXzkAmQoKjfHHDtZyL4IrOacQoPXWVmnqKaIbqhhxbvg==
   /@nodelib/fs.scandir/2.1.1:
     dependencies:
       '@nodelib/fs.stat': 2.0.1
@@ -4533,6 +4538,7 @@ specifiers:
   '@babel/cli': ^7.0.0
   '@babel/core': ^7.0.0
   '@babel/runtime': ^7.0.0
+  '@hitsuji_no_shippo/self-referenced-object': ^3.0.0
   asciidoctor: ^2.0.0
   babel-eslint: ^10.0.2
   babel-preset-gatsby-package: ^0.2.2

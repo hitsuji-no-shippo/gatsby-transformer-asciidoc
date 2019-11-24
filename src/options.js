@@ -1,6 +1,9 @@
 const _ = require(`lodash`);
 const fs = require(`fs`);
 const yaml = require(`js-yaml`);
+const {
+  selfReferencedObject,
+} = require(`@hitsuji_no_shippo/self-referenced-object`);
 
 const { setAsciidoctorOptions } = require(`./asciidoctor`);
 const { setPageAttributePrefix } = require(`./page-attributes-field`);
@@ -15,36 +18,36 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
     const isObject = value => {
       return Object.prototype.toString.call(value) === `[object Object]`;
     };
+    const hasProperty = (object, key) => {
+      return Object.prototype.hasOwnProperty.call(object, key);
+    };
+    const setDefaultProperties = (object, properties) => {
+      Object.entries(properties).forEach(([key, value]) => {
+        if (hasProperty(object, key)) {
+          if (isObject(value)) {
+            setDefaultProperties(object[key], value);
+          }
+        } else {
+          const obj = object;
+
+          obj[key] = value;
+        }
+      });
+
+      return object;
+    };
     /**
      * Unify options.
      * The target gatsby-config.js (configOptions) and option file.
      * @returns {Object} Unified options
      */
     const unifiedOptions = (() => {
-      const hasProperty = (object, key) => {
-        return Object.prototype.hasOwnProperty.call(object, key);
-      };
       /**
        * Read option file.
        * The file to be read is decided by optionFile of gatsby-config.js.
        * @returns {Object} options in option file
        */
       const optionFile = (() => {
-        const setDefaultProperties = (object, properties) => {
-          Object.entries(properties).forEach(([key, value]) => {
-            if (hasProperty(object, key)) {
-              if (isObject(value)) {
-                setDefaultProperties(object[key], value);
-              }
-            } else {
-              const obj = object;
-
-              obj[key] = value;
-            }
-          });
-
-          return object;
-        };
         const { path, encoding } = setDefaultProperties(
           configOptions.optionFile || {},
           {
@@ -199,35 +202,53 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
          * If equal to cache, assign the cache value to attributes
          * to skip processing.
          */
-        (() => {
-          let { attributes } = convertOptions;
+        convertOptions.attributes = (() => {
+          const { attributes } = convertOptions;
           const attributesCache = asciidoctorConvertCache.tailor.attributes;
 
-          // If does not use `cloneDeep`, `attributes` changes will be reflected
-          // to `attributesCache.input`.
-          if (updateCache(_.cloneDeep(attributes), attributesCache, `input`)) {
-            // If `attributes = ...`, the value of `convertOptions.attributes`
-            // is not changed.
-            convertOptions.attributes = attributesCache.tailored;
+          if (
+            // If does not use `cloneDeep`, `attributes` changes will be
+            // reflected to `attributesCache.input`.
+            updateCache(_.cloneDeep(attributes), attributesCache, `input`) &&
+            updateCache(pathPrefix, optionsCache, `pathPrefix`)
+          ) {
+            return attributesCache.tailored;
+          }
+          isConvertOptionsCacheEqual = false;
 
-            if (updateCache(pathPrefix, optionsCache, `pathPrefix`)) {
-              return;
-            }
+          {
+            setDefaultProperties(attributes, { values: { all: {} } });
 
-            attributes = convertOptions.attributes;
-          } else {
-            attributes[`skip-front-matter`] = true;
+            const { all } = attributes.values;
+
+            all[`skip-front-matter`] = true;
+            all[`imagesdir@`] = (() => {
+              const imagesdir = all[`imagesdir@`] || `/images`;
+              const prefix = pathPrefix || ``;
+
+              return (prefix + imagesdir).replace(/\/\//, `/`);
+            })();
           }
 
-          attributes[`imagesdir@`] = (() => {
-            const imagesdir = attributes[`imagesdir@`] || `/images`;
-            const prefix = pathPrefix || ``;
+          setDefaultProperties(attributes, {
+            options: {
+              selfReferencedObject: { runs: true, shouldConvert: true },
+            },
+          });
 
-            return (prefix + imagesdir).replace(/\/\//, `/`);
-          })();
+          const selfReferencedObjectOptions =
+            attributes.options.selfReferencedObject;
 
-          attributesCache.tailored = attributes;
-          isConvertOptionsCacheEqual = false;
+          if (selfReferencedObjectOptions.runs) {
+            selfReferencedObject(
+              attributes.values.all,
+              selfReferencedObjectOptions.shouldConvert
+            );
+          }
+
+          attributesCache.tailored = attributes.values.all;
+
+          return attributesCache.tailored;
         })();
 
         return {

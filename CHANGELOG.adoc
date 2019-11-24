@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.35.0
-:revdate: 2019-11-24T19:46:22+0900
-:revmark: Add timeToRead field
+:revnumber: v1.36.0
+:revdate: 2019-11-24T19:47:09+0900
+:revmark: Add add refer to self attributes value
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -25,14 +25,22 @@
 // Page Attributes
 :page-create-date: 2019-08-13T15:53:20+0900
 // Variables
-:author-link-url: https://github.com/hitsuji-no-shippo
-:gatsby-github-url: https://github.com/gatsbyjs/gatsby
-:repository-issues-url: https://github.com/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
+:github-url: https://github.com
+:github-account-url: {github-url}/hitsuji-no-shippo
+:author-link-url: {github-account-url}
+:gatsby-github-url: {github-account-url}/gatsbyjs/gatsby
+:repository-issues-url: {github-account-url}/gatsby-transformer-asciidoc/issues
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
 == 0.6.0 (2019-11-24)
 :asciidoctor-docs-frontmatter-url: {asciidoctor-official-user-manual-url}/#front-matter-added-for-static-site-generators
+
+.A breaking change
+* Rename option `definesEmptyAttributes` to `enablesEmptyAttribute`.
+  link:{repository-issues-url}/32[#32]
+* Change the strcuture of `options.attributes`.
+  link:{repository-issues-url}/46[#46]
 
 === Features
 
@@ -52,6 +60,11 @@
   (close link:{repository-issues-url}/24[#24],
          link:{repository-issues-url}/42[#42])
 * timeToRead field. (close link:{repository-issues-url}/45[#45])
+* refer to self attributes value.
+  (close link:{repository-issues-url}/46[#46])
+  The refer process uses
+  link:{github-account-url}/self-referenced-object/tree/v3.0.0[
+  self-referenced-object].
 
 ===== For developers (Consumer don't have to reade)
 

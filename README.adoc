@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.14.0
-:revdate: 2019-11-24T19:46:07+0900
-:revmark: Add timeToRead field
+:revnumber: v1.15.0
+:revdate: 2019-11-24T19:47:19+0900
+:revmark: Add refer to self attributes section
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -61,7 +61,11 @@ plugins: [
     resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
     options: {
       attributes: {
-        showtitle: true,
+        values: {
+          all: {
+            showtitle: true,
+          },
+        },
       },
     },
   },
@@ -87,7 +91,11 @@ plugins: [
     resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
     options: {
       attributes: {
-        showtitle: true,
+        values: {
+          all: {
+            showtitle: true,
+          },
+        },
       },
       fileExtensions: [`ad`, `adoc`],
     },
@@ -110,7 +118,11 @@ plugins: [
     resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
     options: {
       attributes: {
-        'imagesdir@': `/images`,
+        values: {
+          all: {
+            'imagesdir@': `/images`,
+          },
+        },
       },
     },
   },
@@ -131,6 +143,63 @@ In the asciidoc file you can insert your image just by using:
   asciidoc file you have to end the attribute name with a `@`
   (e.g. `imagesdir@`).
 ====
+
+== Refer to self attributes
+
+You can use `attributes.options.selfReferendObject` to refer to the value in
+`options.attributes.values.all`.
+*Please read
+link:{github-url}/hitsuji-no-shippo/self-referenced-object/tree/60f18190c552116aa5a4e30879b7a7d4832b9362[
+self-reference-object] README for details.*
+
+.gatsby-config.js
+[source, JavaScript]
+----
+plugins: [
+  {
+    resolve: `gatsby-transformer-asciidoc`,
+    options: {
+      attributes: {
+        values: {
+          all: {
+            'github-*': {
+              url: 'https://github.com',
+              'my-*': {
+                id: 'hitsuji-no-shippo',
+                'page-url': '${this.(../url)}/${this.(./id)}',
+              }
+            },
+            country: 'Japan',
+            comment: 'Live in ${this.country}. link:${this.github-my-page-url}[My page].'
+          },
+        },
+      },
+      option: {
+        selfReferendObject: {
+          runs: true,  // <1>
+          shouldConvert: true  // <2>
+        }
+      }
+    },
+  },
+]
+----
+<1> Whether to run refer processing. (Default is `true`)
+<2> Whether to convert reference for directory to key
+    (e.g. `this.(./id)` => `this.github-my-id`) processing. (Default is `true`)
+
+.Result
+[source, JavaScript]
+----
+{
+  'github-url': 'https://github.com',
+  'github-my-id': 'hitsuji-no-shippo',
+  'github-my-page-url': 'https://github.com/hitsuji-no-shippo'
+  country: 'Japan',
+  comment:
+   'Live in Japan. link:https://github.com/hitsuji-no-shippo[My page].',
+}
+----
 
 == How to query
 
@@ -367,12 +436,20 @@ over YAML file*.
 [source, YAML]
 ----
 attributes:
-  gatsby-url: https://www.gatsbyjs.org
-  asciidoctor-url: https://asciidoctor
+  values:
+    all:
+      gatsby-url: https://www.gatsbyjs.org
+      asciidoctor-url: https://asciidoctor
 
 pageAttributePrefix: gatsby-
 enablesEmptyAttribute: true
 ----
+
+[TIP]
+====
+You can also xref:refer-to-self-attributes[refer to the attributes value] in
+option file.
+====
 
 JSON is hard to write, so I chose yaml.
 

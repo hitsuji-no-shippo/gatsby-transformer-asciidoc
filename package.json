@@ -8,6 +8,7 @@
   },
   "dependencies": {
     "@babel/runtime": "^7.0.0",
+    "@hitsuji_no_shippo/self-referenced-object": "^3.0.0",
     "asciidoctor": "^2.0.0",
     "js-yaml": "^3.13.1",
     "sanitize-html": "^1.20.1"
