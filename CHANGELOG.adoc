@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.36.0
-:revdate: 2019-11-24T19:47:09+0900
-:revmark: Add add refer to self attributes value
+:revnumber: v1.37.0
+:revdate: 2019-11-24T20:21:09+0900
+:revmark: Add add files key in package.json
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -149,6 +149,10 @@
 * Move display position of file path in README.
   (close link:{repository-issues-url}/43[#43])
 * Typo package name in README. (close link:{repository-issues-url}/47[#47])
+
+=== Chore
+
+* add files in package.json. (close link:{repository-issues-url}/48[#48])
 
 
 == 0.5.0 (2019-08-17)
