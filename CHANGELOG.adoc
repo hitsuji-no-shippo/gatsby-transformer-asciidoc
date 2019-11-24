@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.32.0
-:revdate: 2019-09-10T14:57:06+0900
-:revmark: Add move display position of file path in README
+:revnumber: v1.33.0
+:revdate: 2019-11-24T19:43:19+0900
+:revmark: Add typo package name
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -132,6 +132,7 @@
   (close link:{repository-issues-url}/26[#26])
 * Move display position of file path in README.
   (close link:{repository-issues-url}/43[#43])
+* Typo package name in README. (close link:{repository-issues-url}/47[#47])
 
 
 == 0.5.0 (2019-08-17)

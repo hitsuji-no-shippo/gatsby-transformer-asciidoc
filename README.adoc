@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.13.1
-:revdate: 2019-09-10T14:37:18+0900
-:revmark: Add option file section
+:revnumber: v1.13.2
+:revdate: 2019-11-24T19:44:10+0900
+:revmark: typo package name
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -36,7 +36,7 @@ link:{asciidoctor-official-docs-url}/asciidoctor.js/[Asciidoctor.js].
 
 == Install
 
-`npm install --save gatsby-transformer-asciidoc`
+`npm install --save @hitsuji_no_shippo/gatsby-transformer-asciidoc`
 
 == How to use
 
@@ -58,7 +58,7 @@ Asciidoctor's convert options] to the transformer. An example would be:
 ----
 plugins: [
   {
-    resolve: `gatsby-transformer-asciidoc`,
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
     options: {
       attributes: {
         showtitle: true,
@@ -84,7 +84,7 @@ Additional extensions can be configured via the fileExtensions option:
 ----
 plugins: [
   {
-    resolve: `gatsby-transformer-asciidoc`,
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
     options: {
       attributes: {
         showtitle: true,
@@ -107,7 +107,7 @@ imagesdir attribute.
 ----
 plugins: [
   {
-    resolve: `gatsby-transformer-asciidoc`,
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
     options: {
       attributes: {
         'imagesdir@': `/images`,
@@ -217,7 +217,7 @@ field. Default is `page-`.
 ----
 plugins: [
   {
-    resolve: `gatsby-transformer-asciidoc`,
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
     options: {
       pageAttributePrefix: `gatsby-`,
     },
@@ -321,7 +321,7 @@ You can define a custom converter by adding the `converterFactory` option.
 // Make sure to import or declare TemplateConverter
 plugins: [
   {
-    resolve: `gatsby-transformer-asciidoc`,
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
     options: {
       converterFactory: TemplateConverter,
     },
@@ -384,7 +384,7 @@ You can change the option file with the `OptionFile` option.
 ----
 plugins: [
   {
-    resolve: `gatsby-transformer-asciidoc`,
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
     options: {
       OptionFile: {
         path: `file-path` <1>
