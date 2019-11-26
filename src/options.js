@@ -216,19 +216,15 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
           }
           isConvertOptionsCacheEqual = false;
 
-          {
-            setDefaultProperties(attributes, { values: { all: {} } });
+          setDefaultProperties(attributes, { values: {} });
 
-            const { all } = attributes.values;
+          attributes.values[`skip-front-matter`] = true;
+          attributes.values[`imagesdir@`] = (() => {
+            const imagesdir = attributes.values[`imagesdir@`] || `/images`;
+            const prefix = pathPrefix || ``;
 
-            all[`skip-front-matter`] = true;
-            all[`imagesdir@`] = (() => {
-              const imagesdir = all[`imagesdir@`] || `/images`;
-              const prefix = pathPrefix || ``;
-
-              return (prefix + imagesdir).replace(/\/\//, `/`);
-            })();
-          }
+            return (prefix + imagesdir).replace(/\/\//, `/`);
+          })();
 
           setDefaultProperties(attributes, {
             options: {
@@ -236,17 +232,14 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
             },
           });
 
-          const selfReferencedObjectOptions =
-            attributes.options.selfReferencedObject;
-
-          if (selfReferencedObjectOptions.runs) {
+          if (attributes.options.selfReferencedObject.runs) {
             selfReferencedObject(
-              attributes.values.all,
-              selfReferencedObjectOptions.shouldConvert
+              attributes.values,
+              attributes.options.selfReferencedObject.shouldConvert
             );
           }
 
-          attributesCache.tailored = attributes.values.all;
+          attributesCache.tailored = attributes.values;
 
           return attributesCache.tailored;
         })();

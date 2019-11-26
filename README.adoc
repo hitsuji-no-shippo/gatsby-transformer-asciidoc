@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.17.0
-:revdate: 2019-11-29T15:23:34+0900
-:revmark: Add YAML load error block
+:revnumber: v1.18.0
+:revdate: 2019-11-29T21:42:02+0900
+:revmark: Change strcuture in options.attributes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -63,9 +63,7 @@ plugins: [
     options: {
       attributes: {
         values: {
-          all: {
-            showtitle: true,
-          },
+          showtitle: true,
         },
       },
     },
@@ -93,9 +91,7 @@ plugins: [
     options: {
       attributes: {
         values: {
-          all: {
-            showtitle: true,
-          },
+          showtitle: true,
         },
       },
       fileExtensions: [`ad`, `adoc`],
@@ -120,9 +116,7 @@ plugins: [
     options: {
       attributes: {
         values: {
-          all: {
-            'imagesdir@': `/images`,
-          },
+          'imagesdir@': `/images`,
         },
       },
     },
@@ -162,17 +156,15 @@ plugins: [
     options: {
       attributes: {
         values: {
-          all: {
-            'github-*': {
-              url: 'https://github.com',
-              'my-*': {
-                id: 'hitsuji-no-shippo',
-                'page-url': '${this.(../url)}/${this.(./id)}',
-              }
-            },
-            country: 'Japan',
-            comment: 'Live in ${this.country}. link:${this.github-my-page-url}[My page].'
+          'github-*': {
+            url: 'https://github.com',
+            'my-*': {
+              id: 'hitsuji-no-shippo',
+              'page-url': '${this.(../url)}/${this.(./id)}',
+            }
           },
+          country: 'Japan',
+          comment: 'Live in ${this.country}. link:${this.github-my-page-url}[My page].'
         },
       },
       option: {
@@ -456,9 +448,8 @@ over YAML file*.
 ----
 attributes:
   values:
-    all:
-      gatsby-url: https://www.gatsbyjs.org
-      asciidoctor-url: https://asciidoctor
+    gatsby-url: https://www.gatsbyjs.org
+    asciidoctor-url: https://asciidoctor
 
 pageAttributePrefix: gatsby-
 enablesEmptyAttribute: true

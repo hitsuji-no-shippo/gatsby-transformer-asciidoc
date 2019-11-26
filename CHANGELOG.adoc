@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.41.0
-:revdate: 2019-11-29T15:24:34+0900
-:revmark: Add fix attribute to field value conversion does not work
+:revnumber: v1.42.0
+:revdate: 2019-11-29T21:41:56+0900
+:revmark: Add change strcuture in options.attributes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -32,6 +32,20 @@
 :repository-issues-url: {github-account-url}/gatsby-transformer-asciidoc/issues
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
+
+== 0.7.0 (2019-11-29)
+
+.A breaking change
+* Change strcuture in `options.attributes`.
+  (close link:{repository-issues-url}/50[#50])
+
+=== Features
+
+==== Change
+
+* Strcuture in `options.attributes`.
+  (close link:{repository-issues-url}/50[#50])
+
 
 == 0.6.1 (2019-11-29)
 
