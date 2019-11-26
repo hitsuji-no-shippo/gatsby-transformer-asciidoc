@@ -214,23 +214,20 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
           ) {
             return attributesCache.tailored;
           }
+
           isConvertOptionsCacheEqual = false;
 
-          setDefaultProperties(attributes, { values: {} });
-
-          attributes.values[`skip-front-matter`] = true;
-          attributes.values[`imagesdir@`] = (() => {
-            const imagesdir = attributes.values[`imagesdir@`] || `/images`;
-            const prefix = pathPrefix || ``;
-
-            return (prefix + imagesdir).replace(/\/\//, `/`);
-          })();
-
           setDefaultProperties(attributes, {
+            values: { 'imagesdir@': `/images` },
             options: {
               selfReferencedObject: { runs: true, shouldConvert: true },
             },
           });
+
+          attributes.values[`skip-front-matter`] = true;
+          attributes.values[`imagesdir@`] = (
+            pathPrefix + attributes.values[`imagesdir@`]
+          ).replace(/\/\//, `/`);
 
           if (attributes.options.selfReferencedObject.runs) {
             selfReferencedObject(

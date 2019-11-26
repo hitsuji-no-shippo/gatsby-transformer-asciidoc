@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.42.0
-:revdate: 2019-11-29T21:41:56+0900
-:revmark: Add change strcuture in options.attributes
+:revnumber: v1.43.0
+:revdate: 2019-11-29T21:42:27+0900
+:revmark: Add refactor set default values in options.attributes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -45,6 +45,12 @@
 
 * Strcuture in `options.attributes`.
   (close link:{repository-issues-url}/50[#50])
+
+
+=== Refactor
+
+* Set default values in `options.attributes`.
+  (close link:{repository-issues-url}/51[#51])
 
 
 == 0.6.1 (2019-11-29)
