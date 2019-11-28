@@ -58,9 +58,12 @@ const createNode = (
 ) => {
   const node = createAsciidocFields(doc);
 
-  node.id = createNodeId(`${sourceNodeId} >>> ASCIIDOC`);
-  node.parent = sourceNodeId;
-  node.children = [];
+  Object.assign(node, {
+    id: createNodeId(`${sourceNodeId} >>> ASCIIDOC`),
+    parent: sourceNodeId,
+    children: [],
+  });
+
   node.internal = createInternalField(asciidoc, createContentDigest(node));
 
   return node;

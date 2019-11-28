@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.43.0
-:revdate: 2019-11-29T21:42:27+0900
-:revmark: Add refactor set default values in options.attributes
+:revnumber: v1.44.0
+:revdate: 2019-11-29T21:42:45+0900
+:revmark: Add refactor set asciidoc Node
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -51,6 +51,7 @@
 
 * Set default values in `options.attributes`.
   (close link:{repository-issues-url}/51[#51])
+* Set asciidoc Node. (close link:{repository-issues-url}/57[#57])
 
 
 == 0.6.1 (2019-11-29)
