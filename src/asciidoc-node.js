@@ -52,6 +52,7 @@ const createAsciidocFields = doc => {
 const createNode = (
   asciidoc,
   doc,
+  relativeFullPath,
   sourceNodeId,
   createNodeId,
   createContentDigest
@@ -59,6 +60,7 @@ const createNode = (
   const node = createAsciidocFields(doc);
 
   Object.assign(node, {
+    relativeFullPath,
     id: createNodeId(`${sourceNodeId} >>> ASCIIDOC`),
     parent: sourceNodeId,
     children: [],

@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.18.0
-:revdate: 2019-11-29T21:42:02+0900
-:revmark: Change strcuture in options.attributes
+:revnumber: v1.19.0
+:revdate: 2019-11-29T21:43:13+0900
+:revmark: Add relativeFullPath field description
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -225,11 +225,37 @@ A sample GraphQL query to get AsciiDoc nodes:
           number
           remark
         }
+        relativeFullPath  // <1>
       }
     }
   }
 }
 ----
+<1> Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
++
+--
+[EXAMPLE]
+====
+.gatsby-config.js
+[source, JavaScript]
+----
+{
+  resolve: `gatsby-source-filesystem`,
+  options: {
+    path: `${__dirname}/content/blog`,
+    name: `blog`,
+  },
+},
+----
+
+[cols=2, options="header, autowidth"]
+|========================================================================
+|path                                                | relativeFullPath
+|<gatsby-project-root>/content/blog/about.adoc       | /about
+|<gatsby-project-root>/content/blog/post/gatsby.adoc | /about/gatsby
+|========================================================================
+====
+--
 
 == Add new node attributes in the asciidoc file
 
