@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.16.0
-:revdate: 2019-11-29T14:16:52+0900
-:revmark: Add bug description of auto update for attributes
+:revnumber: v1.17.0
+:revdate: 2019-11-29T15:23:34+0900
+:revmark: Add YAML load error block
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -277,6 +277,24 @@ Attribute value is processed as link:{yaml-example-url}[YAML] data.
   }
 }
 ----
+
+[CAUTION]
+====
+.Error
+
+If the value starts with `{` (e.g. `{github-url}/hitsuji_no_shippo`),
+the following error occurs:
+
+[literal]
+....
+YAMLException: end of the stream or a document separator is expected at line 1, column 13:
+    {github-url}/hitsuji_no_shippo
+                ^
+....
+
+There is a way to avoid the error, but I'm not sure if it should be avoided.
+(link:{issues-url}/56[#56])
+====
 
 === pageAttributePrefix
 

@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.40.0
-:revdate: 2019-11-29T14:40:15+0900
-:revmark: Add rename extractPageAttributes to extractAttributes
+:revnumber: v1.41.0
+:revdate: 2019-11-29T15:24:34+0900
+:revmark: Add fix attribute to field value conversion does not work
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -37,7 +37,11 @@
 
 === Fix
 
-* Empty attribute field type. (close link:{repository-issues-url}/55[#55])
+* Empty attribute field type. (link:{repository-issues-url}/55[#55])
+* Attribute to field value conversion does not work.
+  (close link:{repository-issues-url}/52[#52]) +
+  If the attribute value type is array or object, the attribute value
+  can not be successfully converted to a field.
 
 === Refactor
 

@@ -69,26 +69,34 @@ const extractAttributes = (attributes, namePattern) => {
   const extractsAttribute = namePattern instanceof RegExp;
   const emptyAttributeValue = '';
 
-  return Object.entries(attributes).reduce((attributeFields, [key, value]) => {
+  return Object.entries(attributes).reduce((fields, [key, value]) => {
     let attributeName = key;
 
     if (extractsAttribute) {
       attributeName = attributeName.replace(namePattern, ``);
 
       if (attributeName === key) {
-        return attributeFields;
+        return fields;
       }
     }
 
-    const fields = attributeFields;
+    const field = (() => {
+      const fieldValue = (() => {
+        if (value === emptyAttributeValue) {
+          return EMPTY_ATTRIBUTE_FIELD_VALUE;
+        }
 
-    // If the value uses {} or [], the following error will occur,
-    // so enclose the safeLoad() argument in quotation.
-    // YAMLException: end of the stream or a document separator is expected ...
-    fields[convertNameFromAttributeToFiled(attributeName)] =
-      value === emptyAttributeValue
-        ? EMPTY_ATTRIBUTE_FIELD_VALUE
-        : yaml.safeLoad(`'${value}'`);
+        return yaml.safeLoad(
+          typeof value === `object` ? JSON.stringify(value) : value
+        );
+      })();
+
+      return {
+        [convertNameFromAttributeToFiled(attributeName)]: fieldValue,
+      };
+    })();
+
+    Object.assign(fields, field);
 
     return fields;
   }, {});
