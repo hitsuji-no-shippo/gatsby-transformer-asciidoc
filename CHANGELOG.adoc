@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.37.0
-:revdate: 2019-11-24T20:21:09+0900
-:revmark: Add add files key in package.json
+:revnumber: v1.38.0
+:revdate: 2019-11-29T14:17:03+0900
+:revmark: Add add bug description of auto update for attributes in README
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -33,14 +33,22 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
+== 0.6.1 (2019-11-29)
+
+=== Docs
+
+* Add bug description of auto update for attributes in README.
+  (link:{repository-issues-url}/54[#54])
+
+
 == 0.6.0 (2019-11-24)
 :asciidoctor-docs-frontmatter-url: {asciidoctor-official-user-manual-url}/#front-matter-added-for-static-site-generators
 
 .A breaking change
 * Rename option `definesEmptyAttributes` to `enablesEmptyAttribute`.
-  link:{repository-issues-url}/32[#32]
+  (link:{repository-issues-url}/32[#32])
 * Change the strcuture of `options.attributes`.
-  link:{repository-issues-url}/46[#46]
+  (link:{repository-issues-url}/46[#46])
 
 === Features
 
