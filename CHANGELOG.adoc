@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.38.0
-:revdate: 2019-11-29T14:17:03+0900
-:revmark: Add add bug description of auto update for attributes in README
+:revnumber: v1.39.0
+:revdate: 2019-11-29T14:28:56+0900
+:revmark: Add empty attribute field type
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -34,6 +34,10 @@
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
 == 0.6.1 (2019-11-29)
+
+=== Fix
+
+* Empty attribute field type. (close link:{repository-issues-url}/55[#55])
 
 === Docs
 
