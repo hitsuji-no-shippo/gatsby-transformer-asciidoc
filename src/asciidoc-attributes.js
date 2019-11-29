@@ -60,7 +60,7 @@ const createHeaderAndMetadataAttributes = doc => {
   };
 };
 
-const extractPageAttributes = (attributes, namePattern) => {
+const extractAttributes = (attributes, namePattern) => {
   const convertNameFromAttributeToFiled = attribute => {
     // GraphQL field Names must match /^[_a-zA-Z][_a-zA-Z0-9]*$/ ,
     // so replace `-` with `_` .
@@ -122,7 +122,7 @@ const safeLoadAllAttributesCache = (node, cache) => {
 module.exports = {
   EMPTY_ATTRIBUTE_FIELD_VALUE,
   createHeaderAndMetadataAttributes,
-  extractPageAttributes,
+  extractAttributes,
   loadEmptyAttributeFieldNames,
   setAllAttributesCache,
   safeLoadAllAttributesCache,

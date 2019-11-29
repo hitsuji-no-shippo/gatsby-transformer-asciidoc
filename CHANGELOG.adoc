@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.39.0
-:revdate: 2019-11-29T14:28:56+0900
-:revmark: Add empty attribute field type
+:revnumber: v1.40.0
+:revdate: 2019-11-29T14:40:15+0900
+:revmark: Add rename extractPageAttributes to extractAttributes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -38,6 +38,11 @@
 === Fix
 
 * Empty attribute field type. (close link:{repository-issues-url}/55[#55])
+
+=== Refactor
+
+* Rename extractPageAttributes to extractAttributes.
+  (close link:{repository-issues-url}/53[#53])
 
 === Docs
 

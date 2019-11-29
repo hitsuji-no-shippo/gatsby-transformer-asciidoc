@@ -1,5 +1,5 @@
 const {
-  extractPageAttributes,
+  extractAttributes,
   loadEmptyAttributeFieldNames,
 } = require(`./asciidoc-attributes`);
 const { safeLoadCache } = require(`./cache`);
@@ -13,7 +13,7 @@ const setPageAttributePrefix = prefix => {
 };
 
 const loadPageAttributesField = attributes => {
-  return extractPageAttributes(attributes, pageAttributePrefix);
+  return extractAttributes(attributes, pageAttributePrefix);
 };
 
 const getEmptyAttributeFieldNamesWithinPageAttributesCacheKey = nodeId =>
