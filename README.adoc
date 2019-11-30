@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.19.0
-:revdate: 2019-11-29T21:43:13+0900
-:revmark: Add relativeFullPath field description
+:revnumber: v1.20.0
+:revdate: 2019-11-30T16:31:31+0900
+:revmark: Add a caution block when using boolean for attribute
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -70,6 +70,22 @@ plugins: [
   },
 ]
 ----
+
+[CAUTION]
+====
+.Boolean
+[source, JavaScript]
+----
+attributes: {
+  values: {
+    page-index: true,   // <1>
+    page-draft: false,  // <2>
+  },
+},
+----
+<1> same as `:page-index: true`. *Not the same as `:page-index:`*
+<2> same as `:!page-draft:`
+====
 
 == Parsing algorithm
 

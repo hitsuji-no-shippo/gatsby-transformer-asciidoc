@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.45.0
-:revdate: 2019-11-29T21:43:07+0900
-:revmark: Add add relativeFullPath field
+:revnumber: v1.46.0
+:revdate: 2019-11-30T19:02:03+0900
+:revmark: Add log of add caution block in README
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -33,7 +33,7 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
-== 0.7.0 (2019-11-29)
+== 0.7.0 (2019-11-30)
 
 .A breaking change
 * Change strcuture in `options.attributes`.
@@ -56,6 +56,11 @@
 * Set default values in `options.attributes`.
   (close link:{repository-issues-url}/51[#51])
 * Set asciidoc Node. (close link:{repository-issues-url}/57[#57])
+
+=== Docs
+
+* Add a caution block when using boolean for attribute in README.
+  (close link:{repository-issues-url}/59[#59])
 
 
 == 0.6.1 (2019-11-29)
