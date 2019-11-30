@@ -32,7 +32,7 @@ async function onCreateNode({
   })();
   // We use a `let` here as a warning: some operations,
   // like .convert() mutate the document
-  const doc = await loadAsciidoc(content);
+  const doc = await loadAsciidoc(content, relativeFullPath);
   let asciidocNode;
 
   try {

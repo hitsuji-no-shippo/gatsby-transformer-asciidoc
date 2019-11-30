@@ -81,7 +81,7 @@ const setAsciidocCaches = (doc, pageAttributes, id, cache) => {
 };
 
 async function updateAsciidocFields(node, cache) {
-  const doc = await loadAsciidoc(node.internal.content);
+  const doc = await loadAsciidoc(node.internal.content, node.relativeFullPath);
   const asciidocFields = createAsciidocFields(doc);
 
   Object.assign(node, asciidocFields);

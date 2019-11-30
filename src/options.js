@@ -196,15 +196,15 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
 
           return { ...notTailor, ...tailor };
         })();
+        const attributesCache = asciidoctorConvertCache.tailor.attributes;
 
         /**
          * Tailor attributes.
          * If equal to cache, assign the cache value to attributes
          * to skip processing.
          */
-        convertOptions.attributes = (() => {
+        (() => {
           const { attributes } = convertOptions;
-          const attributesCache = asciidoctorConvertCache.tailor.attributes;
 
           if (
             // If does not use `cloneDeep`, `attributes` changes will be
@@ -212,7 +212,7 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
             updateCache(_.cloneDeep(attributes), attributesCache, `input`) &&
             updateCache(pathPrefix, optionsCache, `pathPrefix`)
           ) {
-            return attributesCache.tailored;
+            return;
           }
 
           isConvertOptionsCacheEqual = false;
@@ -221,6 +221,14 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
             values: { 'imagesdir@': `/images` },
             options: {
               selfReferencedObject: { runs: true, shouldConvert: true },
+              partials: {
+                attributes: {},
+                references: {
+                  shouldReferSelf: true,
+                  shouldConvert: true,
+                  shouldReferToAttributesToAddToAll: true,
+                },
+              },
             },
           });
 
@@ -229,22 +237,52 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
             pathPrefix + attributes.values[`imagesdir@`]
           ).replace(/\/\//, `/`);
 
-          if (attributes.options.selfReferencedObject.runs) {
-            selfReferencedObject(
-              attributes.values,
-              attributes.options.selfReferencedObject.shouldConvert
-            );
+          {
+            const { options } = attributes;
+            const attributesValues = {};
+
+            if (options.selfReferencedObject.runs) {
+              selfReferencedObject(
+                attributes.values,
+                options.selfReferencedObject.shouldConvert,
+                { allKeyValues: attributesValues }
+              );
+            }
+
+            attributesCache.tailored.addToAll = attributes.values;
+
+            attributesCache.tailored.partials = (() => {
+              if (
+                !isObject(options.partials.attributes) &&
+                Object.keys(options.partials.attributes).length < 1
+              ) {
+                return null;
+              }
+
+              if (options.partials.references.shouldReferSelf) {
+                selfReferencedObject(
+                  options.partials.attributes,
+                  options.partials.references.shouldConvert,
+                  options.partials.references.shouldReferToAttributesToAddToAll
+                    ? { anotherObjectKeyValues: attributesValues }
+                    : {}
+                );
+              }
+
+              return options.partials.attributes;
+            })();
           }
-
-          attributesCache.tailored = attributes.values;
-
-          return attributesCache.tailored;
         })();
+
+        const { tailored } = attributesCache;
+
+        convertOptions.attributes = tailored.addToAll;
 
         return {
           asciidoctor: {
             converterFactory: unifiedOptions.converterFactory,
             convertOptions,
+            partialsAttributes: attributesCache.tailored.partials,
           },
           isConvertOptionsCacheEqual,
         };

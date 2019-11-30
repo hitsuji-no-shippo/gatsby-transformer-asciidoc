@@ -1,5 +1,6 @@
 dependencies:
   '@babel/runtime': 7.5.5
+  '@hitsuji_no_shippo/extract-matching-values-in-patterns': 0.1.0
   '@hitsuji_no_shippo/self-referenced-object': 3.0.0
   asciidoctor: 2.0.3
   js-yaml: 3.13.1
@@ -928,6 +929,10 @@ packages:
     dev: true
     resolution:
       integrity: sha512-s63F9nJioLqOlW3UkyMd+BYhXt44YuaFm/VV0VwuteqjYwRrObkU7ra9pY4wAJR3oXi8hJrMcrcJdO/HH33vtw==
+  /@hitsuji_no_shippo/extract-matching-values-in-patterns/0.1.0:
+    dev: false
+    resolution:
+      integrity: sha512-XC9SF0ZJsQoMPD9nAKzm2t3BppcnNJhq6rLmO15TV0/unCp+sa2LiydYXiWdy5IvaQG0iZffH10oCVfMLwVFnA==
   /@hitsuji_no_shippo/self-referenced-object/3.0.0:
     dev: false
     resolution:
@@ -4538,6 +4543,7 @@ specifiers:
   '@babel/cli': ^7.0.0
   '@babel/core': ^7.0.0
   '@babel/runtime': ^7.0.0
+  '@hitsuji_no_shippo/extract-matching-values-in-patterns': ^0.1.0
   '@hitsuji_no_shippo/self-referenced-object': ^3.0.0
   asciidoctor: ^2.0.0
   babel-eslint: ^10.0.2

@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.46.0
-:revdate: 2019-11-30T19:02:03+0900
-:revmark: Add log of add caution block in README
+:revnumber: v1.47.0
+:revdate: 2019-11-30T19:06:01+0900
+:revmark: Add log of implement partial attribute addition
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -44,6 +44,8 @@
 ==== Add
 
 * relativeFullPath field. (close link:{repository-issues-url}/58[#58])
+* Implement partial attribute addition.
+  (close link:{repository-issues-url}/49[#49])
 
 ==== Change
 

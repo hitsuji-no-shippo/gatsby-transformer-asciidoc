@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.20.0
-:revdate: 2019-11-30T16:31:31+0900
-:revmark: Add a caution block when using boolean for attribute
+:revnumber: v1.21.0
+:revdate: 2019-11-30T19:05:37+0900
+:revmark: Add section of add partials attributes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -29,7 +29,8 @@
 :asciidoctor-official-docs-url: https://asciidoctor.org/docs
 :asciidoctor-js-docs-antora-url: https://asciidoctor-docs.netlify.com/asciidoctor.js
 :github-url: https://github.com
-:issues-url: {github-url}/hitsuji-no-shippo/gatsby-transformer-asciidoc/issues
+:github-account-url: {github-url}/hitsuji-no-shippo
+:issues-url: {github-account-url}/gatsby-transformer-asciidoc/issues
 :yaml-example-url: https://en.wikipedia.org/wiki/YAML#Example
 
 Parses AsciiDoc files using
@@ -71,6 +72,7 @@ plugins: [
 ]
 ----
 
+[[use-boolean-to-value]]
 [CAUTION]
 ====
 .Boolean
@@ -155,12 +157,13 @@ In the asciidoc file you can insert your image just by using:
   (e.g. `imagesdir@`).
 ====
 
+:self-reference-object-url: {github-account-url}/self-referenced-object/tree/60f18190c552116aa5a4e30879b7a7d4832b9362
 == Refer to self attributes
 
 You can use `attributes.options.selfReferendObject` to refer to the value in
 `options.attributes.values.all`.
 *Please read
-link:{github-url}/hitsuji-no-shippo/self-referenced-object/tree/60f18190c552116aa5a4e30879b7a7d4832b9362[
+link:{self-reference-object-url}[
 self-reference-object] README for details.*
 
 .gatsby-config.js
@@ -193,8 +196,10 @@ plugins: [
   },
 ]
 ----
-<1> Whether to run refer processing. (Default is `true`)
-<2> Whether to convert reference from directory to key
+<1> [[self-referenced-object-runs]] Whether to run refer processing.
+    (Default is `true`)
+<2> [[self-referenced-should-convert]] Whether to convert reference from
+    directory to key
     (e.g. `this.(./id)` => `this.github-my-id`) processing. (Default is `true`)
 
 .Result
@@ -209,6 +214,125 @@ plugins: [
    'Live in Japan. link:https://github.com/hitsuji-no-shippo[My page].',
 }
 ----
+
+== Add partials attributes
+
+Use `attributes.options.partials` to add attributes to files with specific path.
+Used path value is xref:relative-full-path-field[relativeFullPath field] value.
+*Please read
+link:{github-account-url}/extract-matching-values-in-patterns/tree/c8f32e9528a74d8be9c041c1d21c735393d63663[
+README] for details.*
+
+.Example
+[%collapsible]
+====
+.gatsby-config.js
+[source, JavaScript]
+----
+plugins: [
+  {
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
+    options: {
+      enablesEmptyAttribute: true,  // <5>
+      pageAttributePrefix: `page-`,
+      attributes: {
+        values: {
+          ...
+        },
+      },
+      option: {
+        selfReferendObject: {
+          ...
+        },
+        partials: {
+          shouldReferSelf: true,  // <1>
+          shouldConvert: true,    // <2>
+          shouldReferToAttributesToAddToAll: true,  // <3>
+          attributes: {  // <4>
+            posts: {
+              values: {
+                page-posts: '',  // <5>
+                page-index: '',
+                page-disqus: '',
+              },
+            }
+            pages: {
+              values: {
+                page-pages: '',
+              },
+            },
+          },
+        },
+      },
+    },
+  },
+]
+----
+<1> Same xref:self-referenced-object-runs[selfReferendObject.runs].
+    The target is `attributes.partials.attributes`. (Default is `true`)
+<2> Same xref:self-referenced-should-convert[selfReferendObject.shouldConvert].
+    The target is `attributes.partials.attributes`. (Default is `true`)
+<3> link:{self-reference-object-url}#refer-another-object-key-values[
+    Whether to refer to `attributes.values`]. (Default is `true`)
+<4> An object that holds path and attributes to add.
+    If the value is undefined, the process is not run.
+<5> xref:empty-value[`enablesEmptyAttribute`] useing to convert `''` to `true`
+    and `null` to `false`. If xref:use-boolean-to-value[use `true` and `false`],
+    the value of field using `false` is `null`.
+
+[cols=3*a, options="header, autowidth"]
+|===
+|relativeFullPath
+|Additional attributes
+|GraphQL
+
+|`/posts/gatsby`
+|
+
+[source, JavaScript]
+----
+{
+  page-posts: '',  <1>
+  page-index: '',
+  page-disqus:''
+}
+----
+<1> same as `:page-posts:`
+|
+
+[source, GraphQL]
+----
+"pageAttributes": {
+  "disqus": true,
+  "pages": false,  // <1>
+  "index": true,
+  "posts": true
+}
+----
+<1> If input `page-pages: false`, the value is `null`.
+
+|`/pages/profile`
+|
+
+[source, JavaScript]
+----
+{
+  page-pages: ''
+}
+----
+|
+
+[source, GraphQL]
+----
+"pageAttributes": {
+  "disqus": false,
+  "pages": true,
+  "index": false,
+  "posts": false
+}
+----
+|===
+====
 
 == How to query
 
@@ -247,7 +371,8 @@ A sample GraphQL query to get AsciiDoc nodes:
   }
 }
 ----
-<1> Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
+<1> [[relative-full-path-field]]
+    Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
 +
 --
 [EXAMPLE]
