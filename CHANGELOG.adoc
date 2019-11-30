@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.47.0
-:revdate: 2019-11-30T19:06:01+0900
-:revmark: Add log of implement partial attribute addition
+:revnumber: v1.48.0
+:revdate: 2019-11-30T20:00:50+0900
+:revmark: Add log of can refer to reassignable attribute
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -52,6 +52,13 @@
 * Strcuture in `options.attributes`.
   (close link:{repository-issues-url}/50[#50])
 
+=== Fix
+
+* Can refer to reassignable attribute.
+  (close link:{repository-issues-url}/60[#60],
+   link:{github-account-url}/self-referenced-object/issues/21[#21]) +
+   Reassignable attributes is `@` for end of value.
+   (e.g. `images@`, `toc@`)
 
 === Refactor
 
