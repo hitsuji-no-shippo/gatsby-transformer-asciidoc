@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.48.0
-:revdate: 2019-11-30T20:00:50+0900
-:revmark: Add log of can refer to reassignable attribute
+:revnumber: v1.49.0
+:revdate: 2019-12-05T14:02:33+0900
+:revmark: Add log of add fileAbsolutePath field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -32,6 +32,18 @@
 :repository-issues-url: {github-account-url}/gatsby-transformer-asciidoc/issues
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
+
+== 0.8.0 (2019-12-05)
+
+=== Features
+
+==== Add
+
+* fileAbsolutePath field. (close link:{repository-issues-url}/61[#61] +
+  This change is used for
+  link:{github-account-url}/gatsby-plugin-i18n/commit/5371f3fcf7bd0f73ec3d4a92e7bf369aa81ca222[
+        hitsuji-no-shippo/gatsby-plugin-i18n@5371f3f]
+
 
 == 0.7.0 (2019-11-30)
 

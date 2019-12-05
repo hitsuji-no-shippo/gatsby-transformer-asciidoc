@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.21.0
-:revdate: 2019-11-30T19:05:37+0900
-:revmark: Add section of add partials attributes
+:revnumber: v1.22.0
+:revdate: 2019-12-05T13:58:20+0900
+:revmark: Add fileAbsolutePath field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -365,6 +365,7 @@ A sample GraphQL query to get AsciiDoc nodes:
           number
           remark
         }
+        fileAbsolutePath
         relativeFullPath  // <1>
       }
     }

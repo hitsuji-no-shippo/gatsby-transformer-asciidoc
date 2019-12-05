@@ -39,6 +39,7 @@ async function onCreateNode({
     asciidocNode = createAsciidocNode(
       content,
       doc,
+      node.absolutePath,
       relativeFullPath,
       node.id,
       createNodeId,
