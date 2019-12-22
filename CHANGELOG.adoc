@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.50.0
-:revdate: 2019-12-24T17:18:45+0900
-:revmark: Add log that add ignore opton
+:revnumber: v1.51.0
+:revdate: 2019-12-24T17:25:01+0900
+:revmark: Add log that change arguments in crateAsciidocNode
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -40,6 +40,12 @@
 ==== Add
 
 * Ignore option. (close link:{repository-issues-url}/64[#64])
+
+
+=== Refactor
+
+* Change arguments in `crateAsciidocNode`.
+  (close link:{repository-issues-url}/66[#66])
 
 
 == 0.8.0 (2019-12-05)

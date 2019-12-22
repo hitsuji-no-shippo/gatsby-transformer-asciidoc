@@ -37,11 +37,10 @@ async function onCreateNode({
 
   try {
     asciidocNode = createAsciidocNode(
+      node,
       content,
       doc,
-      node.absolutePath,
       relativeFullPath,
-      node.id,
       createNodeId,
       createContentDigest
     );

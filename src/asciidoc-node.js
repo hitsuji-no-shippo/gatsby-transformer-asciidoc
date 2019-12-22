@@ -57,11 +57,10 @@ const createAsciidocFields = doc => {
 };
 
 const createNode = (
+  sourceNode,
   asciidoc,
   doc,
-  fileAbsolutePath,
   relativeFullPath,
-  sourceNodeId,
   createNodeId,
   createContentDigest
 ) => {
@@ -72,10 +71,10 @@ const createNode = (
   }
 
   Object.assign(node, {
-    fileAbsolutePath,
     relativeFullPath,
-    id: createNodeId(`${sourceNodeId} >>> ASCIIDOC`),
-    parent: sourceNodeId,
+    fileAbsolutePath: sourceNode.absolutePath,
+    id: createNodeId(`${sourceNode.id} >>> ASCIIDOC`),
+    parent: sourceNode.id,
     children: [],
   });
 
