@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.51.0
-:revdate: 2019-12-24T17:25:01+0900
-:revmark: Add log that change arguments in crateAsciidocNode
+:revnumber: v1.52.0
+:revdate: 2019-12-24T17:26:52+0900
+:revmark: Add log that rename variable from `relativeFullPath` to \
+          `fuilePathFromSource`
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -46,6 +47,8 @@
 
 * Change arguments in `crateAsciidocNode`.
   (close link:{repository-issues-url}/66[#66])
+* Rename variable from `relativeFullPath` to `fuilePathFromSource`.
+  (close link:{repository-issues-url}/65[#65])
 
 
 == 0.8.0 (2019-12-05)

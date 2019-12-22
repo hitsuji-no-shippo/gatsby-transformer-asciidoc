@@ -60,7 +60,7 @@ const createNode = (
   sourceNode,
   asciidoc,
   doc,
-  relativeFullPath,
+  filePathFromSource,
   createNodeId,
   createContentDigest
 ) => {
@@ -71,7 +71,7 @@ const createNode = (
   }
 
   Object.assign(node, {
-    relativeFullPath,
+    relativeFullPath: filePathFromSource,
     fileAbsolutePath: sourceNode.absolutePath,
     id: createNodeId(`${sourceNode.id} >>> ASCIIDOC`),
     parent: sourceNode.id,

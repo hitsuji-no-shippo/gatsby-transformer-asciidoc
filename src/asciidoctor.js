@@ -28,11 +28,14 @@ const setAsciidoctorOptions = ({
     attributes.addToAll = _.cloneDeep(convertOptions.attributes);
   }
 };
-const loadAsciidoc = (asciidoc, relativeFullPath) => {
+const loadAsciidoc = (asciidoc, filePathFromSource) => {
   if (attributes.shouldAddPartials) {
     convertOptions.attributes = {
       ...attributes.addToAll,
-      ...extractMatchingValuesInPatterns(relativeFullPath, attributes.partials),
+      ...extractMatchingValuesInPatterns(
+        filePathFromSource,
+        attributes.partials
+      ),
     };
   }
 

@@ -25,14 +25,14 @@ async function onCreateNode({
   }
   // Load Asciidoc contents
   const content = await loadNodeContent(node);
-  const relativeFullPath = (() => {
+  const filePathFromSource = (() => {
     const path = `/${node.name}`;
 
     return node.relativeDirectory ? `/${node.relativeDirectory}${path}` : path;
   })();
   // We use a `let` here as a warning: some operations,
   // like .convert() mutate the document
-  const doc = await loadAsciidoc(content, relativeFullPath);
+  const doc = await loadAsciidoc(content, filePathFromSource);
   let asciidocNode;
 
   try {
@@ -40,7 +40,7 @@ async function onCreateNode({
       node,
       content,
       doc,
-      relativeFullPath,
+      filePathFromSource,
       createNodeId,
       createContentDigest
     );
