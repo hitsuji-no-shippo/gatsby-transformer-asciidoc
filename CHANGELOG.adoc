@@ -3,10 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.52.0
-:revdate: 2019-12-24T17:26:52+0900
-:revmark: Add log that rename variable from `relativeFullPath` to \
-          `fuilePathFromSource`
+:revnumber: v1.53.0
+:revdate: 2019-12-24T17:37:51+0900
+:revmark: Add log that change paths field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -35,6 +34,10 @@
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
 == 0.9.0 (2019-12-24)
+
+=== Breaking changes
+
+* Change paths filed. (close link:{repository-issues-url}/67[#67])
 
 === Features
 

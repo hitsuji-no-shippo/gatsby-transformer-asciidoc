@@ -22,6 +22,15 @@ const createInternalField = (asciidoc, contentDigest) => {
   };
 };
 
+const createPathsField = (absoluteFile, pathsFrom) => {
+  return {
+    absolute: {
+      file: absoluteFile,
+    },
+    from: pathsFrom,
+  };
+};
+
 const createAsciidocFields = doc => {
   const html = doc.convert();
   const allAttributes = doc.getAttributes();
@@ -60,7 +69,7 @@ const createNode = (
   sourceNode,
   asciidoc,
   doc,
-  filePathFromSource,
+  pathsFrom,
   createNodeId,
   createContentDigest
 ) => {
@@ -71,8 +80,7 @@ const createNode = (
   }
 
   Object.assign(node, {
-    relativeFullPath: filePathFromSource,
-    fileAbsolutePath: sourceNode.absolutePath,
+    paths: createPathsField(sourceNode.absolutePath, pathsFrom),
     id: createNodeId(`${sourceNode.id} >>> ASCIIDOC`),
     parent: sourceNode.id,
     children: [],
@@ -93,7 +101,7 @@ const setAsciidocCaches = (doc, pageAttributes, id, cache) => {
 };
 
 async function updateAsciidocFields(node, cache) {
-  const doc = await loadAsciidoc(node.internal.content, node.relativeFullPath);
+  const doc = await loadAsciidoc(node.internal.content, node.paths.from);
   const asciidocFields = createAsciidocFields(doc);
 
   Object.assign(node, asciidocFields);

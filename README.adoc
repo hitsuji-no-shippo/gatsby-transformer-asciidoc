@@ -4,8 +4,8 @@
 :author: {author-name}
 :!email: {author-email}
 :revnumber: v1.23.0
-:revdate: 2019-12-24T17:19:10+0900
-:revmark: Add fileAbsolutePath field
+:revdate: 2019-12-24T18:01:31+0900
+:revmark: Change paths field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -218,7 +218,9 @@ plugins: [
 == Add partials attributes
 
 Use `attributes.options.partials` to add attributes to files with specific path.
-Used path value is xref:relative-full-path-field[relativeFullPath field] value.
+Used path value is xref:path-file-from-source-dir-field[
+`paths.from.source.file` field] value.
+
 *Please read
 link:{github-account-url}/extract-matching-values-in-patterns/tree/c8f32e9528a74d8be9c041c1d21c735393d63663[
 README] for details.*
@@ -282,7 +284,7 @@ plugins: [
 
 [cols=3*a, options="header, autowidth"]
 |===
-|relativeFullPath
+|`paths.from.source.file`
 |Additional attributes
 |GraphQL
 
@@ -365,14 +367,23 @@ A sample GraphQL query to get AsciiDoc nodes:
           number
           remark
         }
-        fileAbsolutePath
-        relativeFullPath  // <1>
+        paths {
+          absolute {
+            file  // <1>
+          }
+          from {
+            source {
+              file  // <2>
+            }
+          }
+        }
       }
     }
   }
 }
 ----
-<1> [[relative-full-path-field]]
+<1> `node.absolutePath`
+<2> [[path-file-from-source-dir-field]]
     Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
 +
 --
@@ -391,11 +402,11 @@ A sample GraphQL query to get AsciiDoc nodes:
 ----
 
 [cols=2, options="header, autowidth"]
-|========================================================================
-|path                                                | relativeFullPath
+|==============================================================================
+|path                                                | `paths.from.source.file`
 |<gatsby-project-root>/content/blog/about.adoc       | /about
 |<gatsby-project-root>/content/blog/post/gatsby.adoc | /about/gatsby
-|========================================================================
+|==============================================================================
 ====
 --
 
