@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.24.0
-:revdate: 2019-12-24T18:54:07+0900
-:revmark: Add `paths.from.project.dir` field
+:revnumber: v1.25.0
+:revdate: 2019-12-24T22:17:49+0900
+:revmark: Add ignore description
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -538,6 +538,7 @@ include::./_includes/attribute-with-empty-value-examples.adoc[tag=main]
 == Ignore
 
 If the attribute matches the value, no Ascidoc node is created.
+Default is `null`.
 
 .gatsby-config.js
 [source, JavaScript]
@@ -553,7 +554,7 @@ plugins: [
   },
 ]
 ----
-<1> `''` is `:unpublish:`, `'true'` is `:unpublish: true`.
+<1> `''` is `:unpublish:`, `'true'` is `:unpublish: true`, not 'true'.
 
 == Front Matter support
 
