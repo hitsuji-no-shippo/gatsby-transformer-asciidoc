@@ -3,8 +3,8 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.22.0
-:revdate: 2019-12-05T13:58:20+0900
+:revnumber: v1.23.0
+:revdate: 2019-12-24T17:19:10+0900
 :revmark: Add fileAbsolutePath field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
@@ -512,6 +512,26 @@ plugins: [
 ====
 include::./_includes/attribute-with-empty-value-examples.adoc[tag=main]
 ====
+
+== Ignore
+
+If the attribute matches the value, no Ascidoc node is created.
+
+.gatsby-config.js
+[source, JavaScript]
+----
+plugins: [
+  {
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
+    options: {
+      ignore: {
+        unpublish: ['', 'true']  // <1>
+      }
+    }
+  },
+]
+----
+<1> `''` is `:unpublish:`, `'true'` is `:unpublish: true`.
 
 == Front Matter support
 

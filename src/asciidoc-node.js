@@ -3,6 +3,7 @@ const _ = require(`lodash`);
 
 const { loadAsciidoc } = require(`./asciidoctor`);
 const {
+  hasAttributesOfIgnoreAsciidoc,
   createHeaderAndMetadataAttributes,
   loadEmptyAttributeFieldNames,
   setAllAttributesCache,
@@ -23,6 +24,12 @@ const createInternalField = (asciidoc, contentDigest) => {
 
 const createAsciidocFields = doc => {
   const html = doc.convert();
+  const allAttributes = doc.getAttributes();
+
+  if (hasAttributesOfIgnoreAsciidoc(allAttributes)) {
+    return null;
+  }
+
   /*
    * Calculate time to read
    * @returns {number} time to read
@@ -43,7 +50,7 @@ const createAsciidocFields = doc => {
   })();
   const attributesFields = {
     ...createHeaderAndMetadataAttributes(doc),
-    ...{ pageAttributes: loadPageAttributesField(doc.getAttributes()) },
+    ...{ pageAttributes: loadPageAttributesField(allAttributes) },
   };
 
   return { ...{ html, timeToRead }, ...attributesFields };
@@ -59,6 +66,10 @@ const createNode = (
   createContentDigest
 ) => {
   const node = createAsciidocFields(doc);
+
+  if (node === null) {
+    return null;
+  }
 
   Object.assign(node, {
     fileAbsolutePath,

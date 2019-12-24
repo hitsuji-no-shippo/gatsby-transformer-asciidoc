@@ -46,6 +46,10 @@ async function onCreateNode({
       createContentDigest
     );
 
+    if (asciidocNode === null) {
+      return;
+    }
+
     const { createNode, createParentChildLink } = actions;
 
     createNode(asciidocNode);

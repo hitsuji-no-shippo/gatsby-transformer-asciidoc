@@ -5,6 +5,7 @@ const {
   selfReferencedObject,
 } = require(`@hitsuji_no_shippo/self-referenced-object`);
 
+const { setAttributesOfIgnoreAsciidoc } = require(`./asciidoc-attributes`);
 const { setAsciidoctorOptions } = require(`./asciidoctor`);
 const { setPageAttributePrefix } = require(`./page-attributes-field`);
 const { setSupportExtensions } = require(`./on-node-create`);
@@ -93,6 +94,8 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
     })();
 
     return (async () => {
+      setAttributesOfIgnoreAsciidoc(unifiedOptions.ignore);
+
       const isValueCacheEqual = (value, optionsCache, name) => {
         return _.isEqual(value, optionsCache[name]);
       };
