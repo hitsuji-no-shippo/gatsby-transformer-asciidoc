@@ -554,7 +554,7 @@ plugins: [
   },
 ]
 ----
-<1> `''` is `:unpublish:`, `'true'` is `:unpublish: true`, not 'true'.
+<1> `''` is `:unpublish:`, `'true'` is `:unpublish: true`, not `true`.
 
 == Front Matter support
 
