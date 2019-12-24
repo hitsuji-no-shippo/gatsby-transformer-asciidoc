@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.23.0
-:revdate: 2019-12-24T18:01:31+0900
-:revmark: Change paths field
+:revnumber: v1.24.0
+:revdate: 2019-12-24T18:54:07+0900
+:revmark: Add `paths.from.project.dir` field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -372,6 +372,9 @@ A sample GraphQL query to get AsciiDoc nodes:
             file  // <1>
           }
           from {
+            project {
+              dir
+            }
             source {
               file  // <2>
             }
@@ -401,12 +404,20 @@ A sample GraphQL query to get AsciiDoc nodes:
 },
 ----
 
-[cols=2, options="header, autowidth"]
-|==============================================================================
-|path                                                | `paths.from.source.file`
-|<gatsby-project-root>/content/blog/about.adoc       | /about
-|<gatsby-project-root>/content/blog/post/gatsby.adoc | /about/gatsby
-|==============================================================================
+[cols=3, options="header, autowidth"]
+|===
+|path
+|`paths.from.project.dir`
+|`paths.from.source.file`
+
+|<gatsby-project-root>/content/blog/about.adoc
+|/content/blog
+|/about
+
+|<gatsby-project-root>/content/blog/post/gatsby.adoc
+|/content/blog/post
+|/post/gatsby
+|===
 ====
 --
 

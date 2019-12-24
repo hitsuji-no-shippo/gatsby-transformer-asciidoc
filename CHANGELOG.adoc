@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.53.0
-:revdate: 2019-12-24T17:37:51+0900
-:revmark: Add log that change paths field
+:revnumber: v1.54.0
+:revdate: 2019-12-24T18:54:49+0900
+:revmark: Add log that automatically add attribute of dir path from project
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -44,6 +44,8 @@
 ==== Add
 
 * Ignore option. (close link:{repository-issues-url}/64[#64])
+* Automatically add attribute of dir path from project.
+  (close link:{repository-issues-url}/62[#62])
 
 
 === Refactor

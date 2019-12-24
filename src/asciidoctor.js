@@ -39,6 +39,8 @@ const loadAsciidoc = (asciidoc, pathsFrom) => {
     };
   }
 
+  convertOptions.attributes['dir-path-from-project'] = pathsFrom.project.dir;
+
   return asciidoctor.load(asciidoc, convertOptions);
 };
 

@@ -26,6 +26,16 @@ async function onCreateNode({
   // Load Asciidoc contents
   const content = await loadNodeContent(node);
   const pathsFrom = {
+    project: {
+      dir: (() => {
+        const { description } = node.internal;
+
+        return description.slice(
+          description.indexOf(`"`) + 1,
+          description.lastIndexOf('/')
+        );
+      })(),
+    },
     source: {
       file: (() => {
         const path = `/${node.name}`;
