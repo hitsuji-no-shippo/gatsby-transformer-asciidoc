@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.22.0
-:revdate: 2019-12-05T13:58:20+0900
-:revmark: Add fileAbsolutePath field
+:revnumber: v1.25.0
+:revdate: 2019-12-24T22:17:49+0900
+:revmark: Add ignore description
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -218,7 +218,9 @@ plugins: [
 == Add partials attributes
 
 Use `attributes.options.partials` to add attributes to files with specific path.
-Used path value is xref:relative-full-path-field[relativeFullPath field] value.
+Used path value is xref:path-file-from-source-dir-field[
+`paths.from.source.file` field] value.
+
 *Please read
 link:{github-account-url}/extract-matching-values-in-patterns/tree/c8f32e9528a74d8be9c041c1d21c735393d63663[
 README] for details.*
@@ -282,7 +284,7 @@ plugins: [
 
 [cols=3*a, options="header, autowidth"]
 |===
-|relativeFullPath
+|`paths.from.source.file`
 |Additional attributes
 |GraphQL
 
@@ -365,14 +367,26 @@ A sample GraphQL query to get AsciiDoc nodes:
           number
           remark
         }
-        fileAbsolutePath
-        relativeFullPath  // <1>
+        paths {
+          absolute {
+            file  // <1>
+          }
+          from {
+            project {
+              dir
+            }
+            source {
+              file  // <2>
+            }
+          }
+        }
       }
     }
   }
 }
 ----
-<1> [[relative-full-path-field]]
+<1> `node.absolutePath`
+<2> [[path-file-from-source-dir-field]]
     Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
 +
 --
@@ -390,12 +404,20 @@ A sample GraphQL query to get AsciiDoc nodes:
 },
 ----
 
-[cols=2, options="header, autowidth"]
-|========================================================================
-|path                                                | relativeFullPath
-|<gatsby-project-root>/content/blog/about.adoc       | /about
-|<gatsby-project-root>/content/blog/post/gatsby.adoc | /about/gatsby
-|========================================================================
+[cols=3, options="header, autowidth"]
+|===
+|path
+|`paths.from.project.dir`
+|`paths.from.source.file`
+
+|<gatsby-project-root>/content/blog/about.adoc
+|/content/blog
+|/about
+
+|<gatsby-project-root>/content/blog/post/gatsby.adoc
+|/content/blog/post
+|/post/gatsby
+|===
 ====
 --
 
@@ -512,6 +534,27 @@ plugins: [
 ====
 include::./_includes/attribute-with-empty-value-examples.adoc[tag=main]
 ====
+
+== Ignore
+
+If the attribute matches the value, no Ascidoc node is created.
+Default is `null`.
+
+.gatsby-config.js
+[source, JavaScript]
+----
+plugins: [
+  {
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
+    options: {
+      ignore: {
+        unpublish: ['', 'true']  // <1>
+      }
+    }
+  },
+]
+----
+<1> `''` is `:unpublish:`, `'true'` is `:unpublish: true`, not 'true'.
 
 == Front Matter support
 

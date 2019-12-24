@@ -25,26 +25,45 @@ async function onCreateNode({
   }
   // Load Asciidoc contents
   const content = await loadNodeContent(node);
-  const relativeFullPath = (() => {
-    const path = `/${node.name}`;
+  const pathsFrom = {
+    project: {
+      dir: (() => {
+        const { description } = node.internal;
 
-    return node.relativeDirectory ? `/${node.relativeDirectory}${path}` : path;
-  })();
+        return description.slice(
+          description.indexOf(`"`) + 1,
+          description.lastIndexOf('/')
+        );
+      })(),
+    },
+    source: {
+      file: (() => {
+        const path = `/${node.name}`;
+
+        return node.relativeDirectory
+          ? `/${node.relativeDirectory}${path}`
+          : path;
+      })(),
+    },
+  };
   // We use a `let` here as a warning: some operations,
   // like .convert() mutate the document
-  const doc = await loadAsciidoc(content, relativeFullPath);
+  const doc = await loadAsciidoc(content, pathsFrom);
   let asciidocNode;
 
   try {
     asciidocNode = createAsciidocNode(
+      node,
       content,
       doc,
-      node.absolutePath,
-      relativeFullPath,
-      node.id,
+      pathsFrom,
       createNodeId,
       createContentDigest
     );
+
+    if (asciidocNode === null) {
+      return;
+    }
 
     const { createNode, createParentChildLink } = actions;
 

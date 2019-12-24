@@ -28,13 +28,18 @@ const setAsciidoctorOptions = ({
     attributes.addToAll = _.cloneDeep(convertOptions.attributes);
   }
 };
-const loadAsciidoc = (asciidoc, relativeFullPath) => {
+const loadAsciidoc = (asciidoc, pathsFrom) => {
   if (attributes.shouldAddPartials) {
     convertOptions.attributes = {
       ...attributes.addToAll,
-      ...extractMatchingValuesInPatterns(relativeFullPath, attributes.partials),
+      ...extractMatchingValuesInPatterns(
+        pathsFrom.source.file,
+        attributes.partials
+      ),
     };
   }
+
+  convertOptions.attributes['dir-path-from-project'] = pathsFrom.project.dir;
 
   return asciidoctor.load(asciidoc, convertOptions);
 };

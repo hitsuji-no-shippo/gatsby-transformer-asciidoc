@@ -5,6 +5,22 @@ const { safeLoadCache } = require(`./cache`);
 
 const EMPTY_ATTRIBUTE_FIELD_VALUE = null;
 
+let attributesOfIgnoreAsciidoc;
+
+const setAttributesOfIgnoreAsciidoc = attributes => {
+  if (Object.prototype.toString.call(attributes) === `[object Object]`) {
+    attributesOfIgnoreAsciidoc = attributes;
+  }
+};
+
+const hasAttributesOfIgnoreAsciidoc = attributes => {
+  return attributesOfIgnoreAsciidoc
+    ? Object.entries(attributesOfIgnoreAsciidoc).some(([name, values]) => {
+        return values.includes(attributes[name]);
+      })
+    : false;
+};
+
 // The attribute to create is only in "Header and metadata" of the
 // following url link destination table.
 // https://asciidoctor.org/docs/user-manual/#builtin-attributes-table
@@ -129,6 +145,8 @@ const safeLoadAllAttributesCache = (node, cache) => {
 
 module.exports = {
   EMPTY_ATTRIBUTE_FIELD_VALUE,
+  setAttributesOfIgnoreAsciidoc,
+  hasAttributesOfIgnoreAsciidoc,
   createHeaderAndMetadataAttributes,
   extractAttributes,
   loadEmptyAttributeFieldNames,

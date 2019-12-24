@@ -3,6 +3,7 @@ const _ = require(`lodash`);
 
 const { loadAsciidoc } = require(`./asciidoctor`);
 const {
+  hasAttributesOfIgnoreAsciidoc,
   createHeaderAndMetadataAttributes,
   loadEmptyAttributeFieldNames,
   setAllAttributesCache,
@@ -21,8 +22,23 @@ const createInternalField = (asciidoc, contentDigest) => {
   };
 };
 
+const createPathsField = (absoluteFile, pathsFrom) => {
+  return {
+    absolute: {
+      file: absoluteFile,
+    },
+    from: pathsFrom,
+  };
+};
+
 const createAsciidocFields = doc => {
   const html = doc.convert();
+  const allAttributes = doc.getAttributes();
+
+  if (hasAttributesOfIgnoreAsciidoc(allAttributes)) {
+    return null;
+  }
+
   /*
    * Calculate time to read
    * @returns {number} time to read
@@ -43,28 +59,30 @@ const createAsciidocFields = doc => {
   })();
   const attributesFields = {
     ...createHeaderAndMetadataAttributes(doc),
-    ...{ pageAttributes: loadPageAttributesField(doc.getAttributes()) },
+    ...{ pageAttributes: loadPageAttributesField(allAttributes) },
   };
 
   return { ...{ html, timeToRead }, ...attributesFields };
 };
 
 const createNode = (
+  sourceNode,
   asciidoc,
   doc,
-  fileAbsolutePath,
-  relativeFullPath,
-  sourceNodeId,
+  pathsFrom,
   createNodeId,
   createContentDigest
 ) => {
   const node = createAsciidocFields(doc);
 
+  if (node === null) {
+    return null;
+  }
+
   Object.assign(node, {
-    fileAbsolutePath,
-    relativeFullPath,
-    id: createNodeId(`${sourceNodeId} >>> ASCIIDOC`),
-    parent: sourceNodeId,
+    paths: createPathsField(sourceNode.absolutePath, pathsFrom),
+    id: createNodeId(`${sourceNode.id} >>> ASCIIDOC`),
+    parent: sourceNode.id,
     children: [],
   });
 
@@ -83,7 +101,7 @@ const setAsciidocCaches = (doc, pageAttributes, id, cache) => {
 };
 
 async function updateAsciidocFields(node, cache) {
-  const doc = await loadAsciidoc(node.internal.content, node.relativeFullPath);
+  const doc = await loadAsciidoc(node.internal.content, node.paths.from);
   const asciidocFields = createAsciidocFields(doc);
 
   Object.assign(node, asciidocFields);

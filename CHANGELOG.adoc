@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.49.0
-:revdate: 2019-12-05T14:02:33+0900
-:revmark: Add log of add fileAbsolutePath field
+:revnumber: v1.54.0
+:revdate: 2019-12-24T18:54:49+0900
+:revmark: Add log that automatically add attribute of dir path from project
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -33,13 +33,36 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
+== 0.9.0 (2019-12-24)
+
+=== Breaking changes
+
+* Change paths filed. (close link:{repository-issues-url}/67[#67])
+
+=== Features
+
+==== Add
+
+* Ignore option. (close link:{repository-issues-url}/64[#64])
+* Automatically add attribute of dir path from project.
+  (close link:{repository-issues-url}/62[#62])
+
+
+=== Refactor
+
+* Change arguments in `crateAsciidocNode`.
+  (close link:{repository-issues-url}/66[#66])
+* Rename variable from `relativeFullPath` to `fuilePathFromSource`.
+  (close link:{repository-issues-url}/65[#65])
+
+
 == 0.8.0 (2019-12-05)
 
 === Features
 
 ==== Add
 
-* fileAbsolutePath field. (close link:{repository-issues-url}/61[#61] +
+* fileAbsolutePath field. (close link:{repository-issues-url}/61[#61]) +
   This change is used for
   link:{github-account-url}/gatsby-plugin-i18n/commit/5371f3fcf7bd0f73ec3d4a92e7bf369aa81ca222[
         hitsuji-no-shippo/gatsby-plugin-i18n@5371f3f]
