@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.54.0
-:revdate: 2019-12-24T18:54:49+0900
-:revmark: Add log that automatically add attribute of dir path from project
+:revnumber: v1.55.0
+:revdate: 2019-12-26T08:59:11+0900
+:revmark: Add log that fix typo `option` to `options` in README
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -32,6 +32,15 @@
 :repository-issues-url: {github-account-url}/gatsby-transformer-asciidoc/issues
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
+
+
+== 0.10.0 (2019-12-26)
+
+=== Docs
+
+* Fix typo `option` to `options` in example config in README.
+  (close link:{repository-issues-url}/69[#69])
+
 
 == 0.9.0 (2019-12-24)
 

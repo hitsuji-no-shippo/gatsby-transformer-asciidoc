@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.25.0
-:revdate: 2019-12-24T22:17:49+0900
-:revmark: Add ignore description
+:revnumber: v1.25.1
+:revdate: 2019-12-26T08:59:36+0900
+:revmark: Fix typo `option` to `options` in example config
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -186,7 +186,7 @@ plugins: [
           comment: 'Live in ${this.country}. link:${this.github-my-page-url}[My page].'
         },
       },
-      option: {
+      options: {
         selfReferendObject: {
           runs: true,  // <1>
           shouldConvert: true  // <2>
@@ -242,7 +242,7 @@ plugins: [
           ...
         },
       },
-      option: {
+      options: {
         selfReferendObject: {
           ...
         },
