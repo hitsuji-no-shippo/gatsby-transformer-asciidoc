@@ -40,6 +40,7 @@ const loadAsciidoc = (asciidoc, pathsFrom) => {
   }
 
   convertOptions.attributes['dir-path-from-project'] = pathsFrom.project.dir;
+  convertOptions.attributes['full-path-from-project'] = pathsFrom.project.full;
 
   return asciidoctor.load(asciidoc, convertOptions);
 };

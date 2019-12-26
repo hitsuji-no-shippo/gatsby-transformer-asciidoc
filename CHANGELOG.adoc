@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.55.0
-:revdate: 2019-12-26T08:59:11+0900
-:revmark: Add log that fix typo `option` to `options` in README
+:revnumber: v1.56.0
+:revdate: 2019-12-26T09:04:40+0900
+:revmark: Add log that automatically add attribute of full path from project
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -35,6 +35,14 @@
 
 
 == 0.10.0 (2019-12-26)
+
+=== Features
+
+==== Add
+
+* automatically add attribute of full path from project.
+  (close link:{repository-issues-url}/70[#70])
+
 
 === Docs
 

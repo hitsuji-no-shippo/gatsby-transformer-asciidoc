@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.25.1
-:revdate: 2019-12-26T08:59:36+0900
-:revmark: Fix typo `option` to `options` in example config
+:revnumber: v1.26.0
+:revdate: 2019-12-26T09:13:32+0900
+:revmark: Add `paths.from.project.full` field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -374,6 +374,7 @@ A sample GraphQL query to get AsciiDoc nodes:
           from {
             project {
               dir
+              full
             }
             source {
               file  // <2>
@@ -404,18 +405,21 @@ A sample GraphQL query to get AsciiDoc nodes:
 },
 ----
 
-[cols=3, options="header, autowidth"]
+[cols="4*m", options="header, autowidth"]
 |===
 |path
-|`paths.from.project.dir`
-|`paths.from.source.file`
+|paths.from.project.dir
+|paths.from.project.full
+|paths.from.source.file
 
 |<gatsby-project-root>/content/blog/about.adoc
 |/content/blog
+|/content/blog/about.adoc
 |/about
 
 |<gatsby-project-root>/content/blog/post/gatsby.adoc
 |/content/blog/post
+|/content/blog/post/gatsby.adoc
 |/post/gatsby
 |===
 ====
