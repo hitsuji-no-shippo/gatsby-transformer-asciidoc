@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.56.0
-:revdate: 2019-12-26T09:04:40+0900
-:revmark: Add log that automatically add attribute of full path from project
+:revnumber: v1.57.0
+:revdate: 2019-12-28T11:07:42+0900
+:revmark: Add log that fix jump to id
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -32,6 +32,13 @@
 :repository-issues-url: {github-account-url}/gatsby-transformer-asciidoc/issues
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
+
+== 0.10.1 (2019-12-28)
+
+=== Fix
+
+* Jump to id (close link:{repository-issues-url}/71[#71])
+
 
 
 == 0.10.0 (2019-12-26)

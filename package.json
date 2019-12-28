@@ -1,13 +1,14 @@
 {
   "name": "@hitsuji_no_shippo/gatsby-transformer-asciidoc",
   "description": "Gatsby transformer plugin for Asciidocs using the Asciidoctor.js library",
-  "version": "0.10.0",
+  "version": "0.10.1",
   "author": "hitsuji no shippo",
   "bugs": {
     "url": "https://github.com/hitsuji_no_shippo/gatsby-transformer-asciidoc/issues"
   },
   "files": [
     "gatsby-node.js",
+    "gatsby-browser.js",
     "index.js",
     "page-attributes-field.js",
     "extend-node-type.js",

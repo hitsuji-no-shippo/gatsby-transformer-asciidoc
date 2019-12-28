@@ -1,4 +1,5 @@
 /gatsby-node.js
+/gatsby-browser.js
 /index.js
 /page-attributes-field.js
 /extend-node-type.js
