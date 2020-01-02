@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.26.1
-:revdate: 2020-01-02T11:53:39+0900
-:revmark: Fix `attributes.options` key position
+:revnumber: v1.27.0
+:revdate: 2020-01-02T16:30:41+0900
+:revmark: Add section that replace attributes to field value
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -424,6 +424,31 @@ A sample GraphQL query to get AsciiDoc nodes:
 |===
 ====
 --
+
+== Replace attributes to field value
+
+Values that cannot be referenced when createing a node, such as slug,
+can be replaced as attributes in HTML (`node.html`). Default is empty.
+
+.gatsby-config.js
+[source, JavaScript]
+----
+plugins: [
+  {
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
+    options: {
+      attributes: {
+        options: {
+          replace: {
+            slug: 'fields.slug'  // <1>
+          }
+        },
+      },
+    },
+  },
+]
+----
+<1> Repalce `{slug}` to `node.fields.slug` value.
 
 == Add new node attributes in the asciidoc file
 
