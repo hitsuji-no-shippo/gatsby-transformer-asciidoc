@@ -19,6 +19,7 @@
     "cache.js",
     "asciidoc-attributes.js",
     "asciidoc-node.js",
+    "object.js",
     "_includes"
   ],
   "dependencies": {

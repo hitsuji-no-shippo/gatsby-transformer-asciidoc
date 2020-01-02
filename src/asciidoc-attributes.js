@@ -3,12 +3,14 @@ const yaml = require(`js-yaml`);
 const { reloadAsciidoc } = require(`./asciidoctor`);
 const { safeLoadCache } = require(`./cache`);
 
+const { isObject } = require(`./object`);
+
 const EMPTY_ATTRIBUTE_FIELD_VALUE = null;
 
 let attributesOfIgnoreAsciidoc;
 
 const setAttributesOfIgnoreAsciidoc = attributes => {
-  if (Object.prototype.toString.call(attributes) === `[object Object]`) {
+  if (isObject(attributes)) {
     attributesOfIgnoreAsciidoc = attributes;
   }
 };

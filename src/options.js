@@ -11,17 +11,13 @@ const { setPageAttributePrefix } = require(`./page-attributes-field`);
 const { setSupportExtensions } = require(`./on-node-create`);
 const { setEnablesEmptyAttribute } = require(`./extend-node-type`);
 
+const { isObject, hasProperty } = require(`./object`);
+
 const setOptions = async (configOptions, pathPrefix, cache) => {
   const {
     asciidoctor: asciidoctorOptions,
     isOptionsCacheEqual,
   } = await (async () => {
-    const isObject = value => {
-      return Object.prototype.toString.call(value) === `[object Object]`;
-    };
-    const hasProperty = (object, key) => {
-      return Object.prototype.hasOwnProperty.call(object, key);
-    };
     const setDefaultProperties = (object, properties) => {
       Object.entries(properties).forEach(([key, value]) => {
         if (hasProperty(object, key)) {
