@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.61.0
-:revdate: 2020-01-02T17:23:03+0900
-:revmark: Add log that replace attributs to field value
+:revnumber: v1.62.0
+:revdate: 2020-01-02T22:26:04+0900
+:revmark: Add log that add `attributes.options` key in not tailor options
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -40,6 +40,8 @@
 ==== Add
 
 * Replace attributs to field value. (close link:{repository-issues-url}/72[#72])
+* `attributes.options` key in not tailor options.
+  (close link:{repository-issues-url}/80[#80])
 
 
 === Fix

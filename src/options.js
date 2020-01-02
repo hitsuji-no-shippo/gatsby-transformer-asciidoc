@@ -171,27 +171,37 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
               }, {});
             };
 
-            const attributes = (() => {
-              const options = getProperty(unifiedOptions, 'attributes.options');
+            const attributes = {
+              options: (() => {
+                const options = getProperty(
+                  unifiedOptions,
+                  'attributes.options'
+                );
 
-              if (!isObject(options)) {
-                return null;
-              }
-
-              const extracedOptions = {
-                replace: setReplacedAttributesToFieldValue,
-              };
-              const values = extractValues(
-                Object.keys(extracedOptions),
-                options
-              );
-              Object.entries(extracedOptions).forEach(([name, setFunction]) => {
-                if (hasProperty(values, name)) {
-                  setFunction(values[name]);
+                if (!isObject(options)) {
+                  return {};
                 }
-              });
-              return values;
-            })();
+
+                const extracedOptions = {
+                  replace: setReplacedAttributesToFieldValue,
+                };
+
+                const values = extractValues(
+                  Object.keys(extracedOptions),
+                  options
+                );
+
+                Object.entries(extracedOptions).forEach(
+                  ([name, setFunction]) => {
+                    if (hasProperty(values, name)) {
+                      setFunction(values[name]);
+                    }
+                  }
+                );
+
+                return values;
+              })(),
+            };
 
             const valuesExceptAttributes = extractValues(
               [
@@ -213,7 +223,8 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
               ],
               unifiedOptions
             );
-            return { ...attributes, ...valuesExceptAttributes };
+
+            return { ...{ attributes }, ...valuesExceptAttributes };
           })();
 
           if (!updateCache(notTailor, asciidoctorConvertCache, `notTailor`)) {
