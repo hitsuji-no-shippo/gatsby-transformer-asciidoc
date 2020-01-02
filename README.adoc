@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.29.0
-:revdate: 2020-01-03T09:43:13+0900
-:revmark: Add `paths.from.source.full` field
+:revnumber: v1.30.0
+:revdate: 2020-01-03T11:28:01+0900
+:revmark: Add section that add path attributes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -392,6 +392,7 @@ A sample GraphQL query to get AsciiDoc nodes:
     Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
 <3> `node.relativePath`
 
+[[paths-field-example]]
 [example]
 ====
 .gatsby-config.js
@@ -452,6 +453,40 @@ plugins: [
 ]
 ----
 <1> Replace `{slug}` to `node.fields.slug` value.
+
+== Add path attributes
+
+The values of xref:paths-field-example[
+`node.paths` field] is avaliable as an attributes. Default is empty.
+
+.gatsby-config.js
+[source, JavaScript]
+----
+plugins: [
+  {
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
+    options: {
+      attributes: {
+        options: {
+          paths: {
+            dir: `from.project.dir`   // <1>
+            full: `from.source.full`  // <2>
+          }
+        },
+      },
+    },
+  },
+]
+----
+
+.Asciidoc
+[source, AsciiDoc]
+----
+:include-dir: {dir}/_includes  // <1>
+:github-edit-link: link:{repository-url}/edit/master/{full}[Edit on GitHub]  // <2>
+----
+<1> Replace `{dir}` to `node.paths.from.project.dir`
+<2> Replace `{full}` to `node.paths.from.source.full`
 
 == Add new node attributes in the asciidoc file
 

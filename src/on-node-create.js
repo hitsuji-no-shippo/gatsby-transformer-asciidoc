@@ -25,34 +25,39 @@ async function onCreateNode({
   }
   // Load Asciidoc contents
   const content = await loadNodeContent(node);
-  const pathsFrom = {
-    project: (() => {
-      const full = (() => {
-        const delimiter = `"`;
-        const { description } = node.internal;
+  const paths = {
+    absolute: {
+      file: node.absolutePath,
+    },
+    from: {
+      project: (() => {
+        const full = (() => {
+          const delimiter = `"`;
+          const { description } = node.internal;
 
-        return description.slice(
-          description.indexOf(delimiter) + 1,
-          description.lastIndexOf(delimiter)
-        );
-      })();
+          return description.slice(
+            description.indexOf(delimiter) + 1,
+            description.lastIndexOf(delimiter)
+          );
+        })();
 
-      return { full, dir: full.slice(0, full.lastIndexOf(`/`)) };
-    })(),
-    source: {
-      file: (() => {
-        const path = `${node.name}`;
-
-        return node.relativeDirectory
-          ? `${node.relativeDirectory}/${path}`
-          : path;
+        return { full, dir: full.slice(0, full.lastIndexOf(`/`)) };
       })(),
-      full: node.relativePath,
+      source: {
+        file: (() => {
+          const path = `${node.name}`;
+
+          return node.relativeDirectory
+            ? `${node.relativeDirectory}/${path}`
+            : path;
+        })(),
+        full: node.relativePath,
+      },
     },
   };
   // We use a `let` here as a warning: some operations,
   // like .convert() mutate the document
-  const doc = await loadAsciidoc(content, pathsFrom);
+  const doc = await loadAsciidoc(content, paths);
   let asciidocNode;
 
   try {
@@ -60,7 +65,7 @@ async function onCreateNode({
       node,
       content,
       doc,
-      pathsFrom,
+      paths,
       createNodeId,
       createContentDigest
     );

@@ -184,6 +184,7 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
 
                 const extracedOptions = {
                   replace: setReplacedAttributesToFieldValue,
+                  paths: null,
                 };
 
                 const values = extractValues(
@@ -194,7 +195,9 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
                 Object.entries(extracedOptions).forEach(
                   ([name, setFunction]) => {
                     if (hasProperty(values, name)) {
-                      setFunction(values[name]);
+                      if (setFunction !== null) {
+                        setFunction(values[name]);
+                      }
                     }
                   }
                 );
@@ -327,7 +330,10 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
           asciidoctor: {
             converterFactory: unifiedOptions.converterFactory,
             convertOptions,
-            partialsAttributes: attributesCache.tailored.partials,
+            attributes: {
+              partials: tailored.partials,
+              paths: asciidoctorConvertCache.notTailor.attributes.options.paths,
+            },
           },
           isConvertOptionsCacheEqual,
         };

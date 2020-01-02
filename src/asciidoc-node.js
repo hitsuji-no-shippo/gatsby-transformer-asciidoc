@@ -22,15 +22,6 @@ const createInternalField = (asciidoc, contentDigest) => {
   };
 };
 
-const createPathsField = (absoluteFile, pathsFrom) => {
-  return {
-    absolute: {
-      file: absoluteFile,
-    },
-    from: pathsFrom,
-  };
-};
-
 const createAsciidocFields = doc => {
   const html = doc.convert();
   const allAttributes = doc.getAttributes();
@@ -69,7 +60,7 @@ const createNode = (
   sourceNode,
   asciidoc,
   doc,
-  pathsFrom,
+  paths,
   createNodeId,
   createContentDigest
 ) => {
@@ -80,7 +71,7 @@ const createNode = (
   }
 
   Object.assign(node, {
-    paths: createPathsField(sourceNode.absolutePath, pathsFrom),
+    paths,
     id: createNodeId(`${sourceNode.id} >>> ASCIIDOC`),
     parent: sourceNode.id,
     children: [],
