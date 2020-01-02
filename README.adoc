@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.28.0
-:revdate: 2020-01-03T09:42:53+0900
-:revmark: delete `/` at head of line in `node.paths.from.source.file`
+:revnumber: v1.29.0
+:revdate: 2020-01-03T09:43:13+0900
+:revmark: Add `paths.from.source.full` field
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -378,6 +378,7 @@ A sample GraphQL query to get AsciiDoc nodes:
             }
             source {
               file  // <2>
+              full  // <3>
             }
           }
         }
@@ -389,6 +390,7 @@ A sample GraphQL query to get AsciiDoc nodes:
 <1> `node.absolutePath`
 <2> [[path-file-from-source-dir-field]]
     Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
+<3> `node.relativePath`
 
 [example]
 ====
@@ -404,22 +406,25 @@ A sample GraphQL query to get AsciiDoc nodes:
 },
 ----
 
-[cols="4*m", options="header, autowidth"]
+[cols="5*m", options="header, autowidth"]
 |===
 |path
 |paths.from.project.dir
 |paths.from.project.full
 |paths.from.source.file
+|paths.from.source.full
 
 |<gatsby-project-root>/content/blog/about.adoc
 |content/blog
 |content/blog/about.adoc
 |about
+|about.adoc
 
 |<gatsby-project-root>/content/blog/post/gatsby.adoc
 |content/blog/post
 |content/blog/post/gatsby.adoc
 |post/gatsby
+|post/gatsby.adoc
 |===
 ====
 

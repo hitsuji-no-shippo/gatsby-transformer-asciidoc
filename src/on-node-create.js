@@ -47,6 +47,7 @@ async function onCreateNode({
           ? `${node.relativeDirectory}/${path}`
           : path;
       })(),
+      full: node.relativePath,
     },
   };
   // We use a `let` here as a warning: some operations,
