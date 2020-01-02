@@ -5,23 +5,22 @@ const {
   selfReferencedObject,
 } = require(`@hitsuji_no_shippo/self-referenced-object`);
 
-const { setAttributesOfIgnoreAsciidoc } = require(`./asciidoc-attributes`);
+const {
+  setAttributesOfIgnoreAsciidoc,
+  setReplacedAttributesToFieldValue,
+} = require(`./asciidoc-attributes`);
 const { setAsciidoctorOptions } = require(`./asciidoctor`);
 const { setPageAttributePrefix } = require(`./page-attributes-field`);
 const { setSupportExtensions } = require(`./on-node-create`);
 const { setEnablesEmptyAttribute } = require(`./extend-node-type`);
+
+const { isObject, hasProperty, getProperty } = require(`./object`);
 
 const setOptions = async (configOptions, pathPrefix, cache) => {
   const {
     asciidoctor: asciidoctorOptions,
     isOptionsCacheEqual,
   } = await (async () => {
-    const isObject = value => {
-      return Object.prototype.toString.call(value) === `[object Object]`;
-    };
-    const hasProperty = (object, key) => {
-      return Object.prototype.hasOwnProperty.call(object, key);
-    };
     const setDefaultProperties = (object, properties) => {
       Object.entries(properties).forEach(([key, value]) => {
         if (hasProperty(object, key)) {
@@ -157,33 +156,65 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
         let isConvertOptionsCacheEqual = true;
         const asciidoctorConvertCache = optionsCache.asciidoctorConvert;
         const convertOptions = (() => {
-          // asciidoctor.js convert options without attributes
-          // https://asciidoctor-docs.netlify.com/asciidoctor.js/processor/convert-options/
-          const notTailor = [
-            `backend`,
-            `base_dir`,
-            `catalog_assets`,
-            `doctype`,
-            `extensions_registry`,
-            `header_footer`,
-            `mkdirs`,
-            `parse`,
-            `safe`,
-            `sourcemap`,
-            `template_dirs`,
-            `to_dir`,
-            `to_file`,
-          ].reduce((optionValues, name) => {
-            const value = unifiedOptions[name];
-            const values = optionValues;
+          const notTailor = (() => {
+            const extractValues = (optionsNames, obj) => {
+              return optionsNames.reduce((values, name) => {
+                const value = obj[name];
 
-            // The convert options contain boolean value
-            if (value !== null && value !== undefined) {
-              values[name] = value;
-            }
+                if (value !== null && value !== undefined) {
+                  Object.assign(values, {
+                    [name]: value,
+                  });
+                }
 
-            return values;
-          }, {});
+                return values;
+              }, {});
+            };
+
+            const attributes = (() => {
+              const options = getProperty(unifiedOptions, 'attributes.options');
+
+              if (!isObject(options)) {
+                return null;
+              }
+
+              const extracedOptions = {
+                replace: setReplacedAttributesToFieldValue,
+              };
+              const values = extractValues(
+                Object.keys(extracedOptions),
+                options
+              );
+              Object.entries(extracedOptions).forEach(([name, setFunction]) => {
+                if (hasProperty(values, name)) {
+                  setFunction(values[name]);
+                }
+              });
+              return options;
+            })();
+
+            const valuesExceptAttributes = extractValues(
+              [
+                // asciidoctor.js convert options
+                // https://asciidoctor-docs.netlify.com/asciidoctor.js/processor/convert-options/
+                `backend`,
+                `base_dir`,
+                `catalog_assets`,
+                `doctype`,
+                `extensions_registry`,
+                `header_footer`,
+                `mkdirs`,
+                `parse`,
+                `safe`,
+                `sourcemap`,
+                `template_dirs`,
+                `to_dir`,
+                `to_file`,
+              ],
+              unifiedOptions
+            );
+            return { ...attributes, ...valuesExceptAttributes };
+          })();
 
           if (!updateCache(notTailor, asciidoctorConvertCache, `notTailor`)) {
             isConvertOptionsCacheEqual = false;

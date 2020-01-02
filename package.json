@@ -14,11 +14,13 @@
     "extend-node-type.js",
     "on-node-create.js",
     "on-pre-bootstrap.js",
+    "create-pages.js",
     "options.js",
     "asciidoctor.js",
     "cache.js",
     "asciidoc-attributes.js",
     "asciidoc-node.js",
+    "object.js",
     "_includes"
   ],
   "dependencies": {

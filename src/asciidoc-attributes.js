@@ -3,12 +3,14 @@ const yaml = require(`js-yaml`);
 const { reloadAsciidoc } = require(`./asciidoctor`);
 const { safeLoadCache } = require(`./cache`);
 
+const { isObject, getProperty } = require(`./object`);
+
 const EMPTY_ATTRIBUTE_FIELD_VALUE = null;
 
 let attributesOfIgnoreAsciidoc;
 
 const setAttributesOfIgnoreAsciidoc = attributes => {
-  if (Object.prototype.toString.call(attributes) === `[object Object]`) {
+  if (isObject(attributes)) {
     attributesOfIgnoreAsciidoc = attributes;
   }
 };
@@ -19,6 +21,45 @@ const hasAttributesOfIgnoreAsciidoc = attributes => {
         return values.includes(attributes[name]);
       })
     : false;
+};
+
+let replacedAttributesToFieldValue;
+
+const setReplacedAttributesToFieldValue = obj => {
+  if (isObject(obj)) {
+    replacedAttributesToFieldValue = obj;
+  }
+};
+
+const replaceToFieldValue = async getNodesByType => {
+  if (!replacedAttributesToFieldValue) {
+    return;
+  }
+
+  await Promise.all(
+    getNodesByType(`Asciidoc`).reduce((replaces, node) => {
+      replaces.push(
+        new Promise(resolve => {
+          Object.entries(replacedAttributesToFieldValue).forEach(
+            ([name, fieldPath]) => {
+              const value = getProperty(node, fieldPath);
+
+              if (!value) {
+                return;
+              }
+
+              Object.assign(node, {
+                html: node.html.replace(`{${name}}`, value),
+              });
+            }
+          );
+          resolve();
+        })
+      );
+
+      return replaces;
+    }, [])
+  );
 };
 
 // The attribute to create is only in "Header and metadata" of the
@@ -147,6 +188,8 @@ module.exports = {
   EMPTY_ATTRIBUTE_FIELD_VALUE,
   setAttributesOfIgnoreAsciidoc,
   hasAttributesOfIgnoreAsciidoc,
+  setReplacedAttributesToFieldValue,
+  replaceToFieldValue,
   createHeaderAndMetadataAttributes,
   extractAttributes,
   loadEmptyAttributeFieldNames,

@@ -3,10 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.59.0
-:revdate: 2020-01-02T14:40:22+0900
-:revmark: Add log that fix all attributes cache may not include \
-          file path attributes
+:revnumber: v1.60.0
+:revdate: 2020-01-02T16:33:15+0900
+:revmark: Add log that Move object process code to one file
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -36,10 +35,22 @@
 
 == 0.11.0 (2020-01-02)
 
+=== Features
+
+==== Add
+
+* Replace attributs to field value. (close link:{repository-issues-url}/72[#72])
+
+
 === Fix
 
 * All attributes cache may not include file path attributes.
   (close link:{repository-issues-url}/78[#78])
+
+=== Refactor
+
+* Move object process code to one file.
+  (close link:{repository-issues-url}/76[#76])
 
 === Docs
 
