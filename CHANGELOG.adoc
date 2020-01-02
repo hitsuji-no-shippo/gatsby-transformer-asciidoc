@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.60.0
-:revdate: 2020-01-02T16:33:15+0900
-:revmark: Add log that Move object process code to one file
+:revnumber: v1.61.0
+:revdate: 2020-01-02T17:23:03+0900
+:revmark: Add log that replace attributs to field value
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
