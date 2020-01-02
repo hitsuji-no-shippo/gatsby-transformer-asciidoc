@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.27.2
-:revdate: 2020-01-03T09:41:55+0900
-:revmark: delete `/` at head of line in paths field table
+:revnumber: v1.28.0
+:revdate: 2020-01-03T09:42:53+0900
+:revmark: delete `/` at head of line in `node.paths.from.source.file`
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -288,7 +288,7 @@ plugins: [
 |Additional attributes
 |GraphQL
 
-|`/posts/gatsby`
+|`posts/gatsby`
 |
 
 [source, JavaScript]
@@ -313,7 +313,7 @@ plugins: [
 ----
 <1> If input `page-pages: false`, the value is `null`.
 
-|`/pages/profile`
+|`pages/profile`
 |
 
 [source, JavaScript]
@@ -414,12 +414,12 @@ A sample GraphQL query to get AsciiDoc nodes:
 |<gatsby-project-root>/content/blog/about.adoc
 |content/blog
 |content/blog/about.adoc
-|/about
+|about
 
 |<gatsby-project-root>/content/blog/post/gatsby.adoc
 |content/blog/post
 |content/blog/post/gatsby.adoc
-|/post/gatsby
+|post/gatsby
 |===
 ====
 

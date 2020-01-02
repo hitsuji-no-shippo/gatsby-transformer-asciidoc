@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.63.0
-:revdate: 2020-01-03T08:58:52+0900
-:revmark: Add log that delete `/` at head of line in paths field table in README
+:revnumber: v1.64.0
+:revdate: 2020-01-03T09:05:12+0900
+:revmark: Add log that delete `/` at head of line in field that file path from  \
+          file
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -34,6 +35,11 @@
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
 == 0.11.0 (2020-01-03)
+
+=== Breaking changes
+
+* Delete `/` at head of line in field that file path from source file.
+  (close link:{repository-issues-url}/75[#75])
 
 === Features
 

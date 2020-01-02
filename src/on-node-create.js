@@ -41,10 +41,10 @@ async function onCreateNode({
     })(),
     source: {
       file: (() => {
-        const path = `/${node.name}`;
+        const path = `${node.name}`;
 
         return node.relativeDirectory
-          ? `/${node.relativeDirectory}${path}`
+          ? `${node.relativeDirectory}/${path}`
           : path;
       })(),
     },
