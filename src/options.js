@@ -190,7 +190,7 @@ const setOptions = async (configOptions, pathPrefix, cache) => {
                   setFunction(values[name]);
                 }
               });
-              return options;
+              return values;
             })();
 
             const valuesExceptAttributes = extractValues(
