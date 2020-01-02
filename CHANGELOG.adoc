@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.57.0
-:revdate: 2019-12-28T11:07:42+0900
-:revmark: Add log that fix jump to id
+:revnumber: v1.58.0
+:revdate: 2020-01-02T11:55:47+0900
+:revmark: Add log that fix `Attributes.options` key position in README
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -33,12 +33,19 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
+== 0.11.0 (2020-01-02)
+
+=== Docs
+
+* Fix `attributes.options` key positions in option examples in README.
+  (close link:{repository-issues-url}/77[#77])
+
+
 == 0.10.1 (2019-12-28)
 
 === Fix
 
 * Jump to id (close link:{repository-issues-url}/71[#71])
-
 
 
 == 0.10.0 (2019-12-26)

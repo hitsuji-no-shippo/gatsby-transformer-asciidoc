@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.26.0
-:revdate: 2019-12-26T09:13:32+0900
-:revmark: Add `paths.from.project.full` field
+:revnumber: v1.26.1
+:revdate: 2020-01-02T11:53:39+0900
+:revmark: Fix `attributes.options` key position
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -185,13 +185,13 @@ plugins: [
           country: 'Japan',
           comment: 'Live in ${this.country}. link:${this.github-my-page-url}[My page].'
         },
+        options: {
+          selfReferendObject: {
+            runs: true,  // <1>
+            shouldConvert: true  // <2>
+          },
+        },
       },
-      options: {
-        selfReferendObject: {
-          runs: true,  // <1>
-          shouldConvert: true  // <2>
-        }
-      }
     },
   },
 ]
@@ -241,26 +241,26 @@ plugins: [
         values: {
           ...
         },
-      },
-      options: {
-        selfReferendObject: {
-          ...
-        },
-        partials: {
-          shouldReferSelf: true,  // <1>
-          shouldConvert: true,    // <2>
-          shouldReferToAttributesToAddToAll: true,  // <3>
-          attributes: {  // <4>
-            posts: {
-              values: {
-                page-posts: '',  // <5>
-                page-index: '',
-                page-disqus: '',
-              },
-            }
-            pages: {
-              values: {
-                page-pages: '',
+        options: {
+          selfReferendObject: {
+            ...
+          },
+          partials: {
+            shouldReferSelf: true,  // <1>
+            shouldConvert: true,    // <2>
+            shouldReferToAttributesToAddToAll: true,  // <3>
+            attributes: {  // <4>
+              posts: {
+                values: {
+                  page-posts: '',  // <5>
+                  page-index: '',
+                  page-disqus: '',
+                },
+              }
+              pages: {
+                values: {
+                  page-pages: '',
+                },
               },
             },
           },
