@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.58.0
-:revdate: 2020-01-02T11:55:47+0900
-:revmark: Add log that fix `Attributes.options` key position in README
+:revnumber: v1.59.0
+:revdate: 2020-01-02T14:40:22+0900
+:revmark: Add log that fix all attributes cache may not include \
+          file path attributes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -34,6 +35,11 @@
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
 == 0.11.0 (2020-01-02)
+
+=== Fix
+
+* All attributes cache may not include file path attributes.
+  (close link:{repository-issues-url}/78[#78])
 
 === Docs
 

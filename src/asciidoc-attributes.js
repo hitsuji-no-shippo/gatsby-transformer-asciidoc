@@ -1,6 +1,6 @@
 const yaml = require(`js-yaml`);
 
-const { loadAsciidoc } = require(`./asciidoctor`);
+const { reloadAsciidoc } = require(`./asciidoctor`);
 const { safeLoadCache } = require(`./cache`);
 
 const EMPTY_ATTRIBUTE_FIELD_VALUE = null;
@@ -137,7 +137,7 @@ const setAllAttributesCache = (doc, nodeId, cache) => {
 
 const safeLoadAllAttributesCache = (node, cache) => {
   return safeLoadCache(getAllAttributesCacheKey(node.id), cache, async () => {
-    const doc = await loadAsciidoc(node.internal.content);
+    const doc = await reloadAsciidoc(node);
 
     return doc.getAttributes();
   });

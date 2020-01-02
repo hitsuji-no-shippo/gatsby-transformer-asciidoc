@@ -44,8 +44,12 @@ const loadAsciidoc = (asciidoc, pathsFrom) => {
 
   return asciidoctor.load(asciidoc, convertOptions);
 };
+const reloadAsciidoc = node => {
+  return loadAsciidoc(node.internal.content, node.paths.from);
+};
 
 module.exports = {
   setAsciidoctorOptions,
   loadAsciidoc,
+  reloadAsciidoc,
 };

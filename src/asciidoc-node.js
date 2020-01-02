@@ -1,7 +1,7 @@
 const sanitizeHTML = require(`sanitize-html`);
 const _ = require(`lodash`);
 
-const { loadAsciidoc } = require(`./asciidoctor`);
+const { reloadAsciidoc } = require(`./asciidoctor`);
 const {
   hasAttributesOfIgnoreAsciidoc,
   createHeaderAndMetadataAttributes,
@@ -101,7 +101,7 @@ const setAsciidocCaches = (doc, pageAttributes, id, cache) => {
 };
 
 async function updateAsciidocFields(node, cache) {
-  const doc = await loadAsciidoc(node.internal.content, node.paths.from);
+  const doc = await reloadAsciidoc(node);
   const asciidocFields = createAsciidocFields(doc);
 
   Object.assign(node, asciidocFields);
