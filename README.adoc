@@ -3,10 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.27.1
-:revdate: 2020-01-03T09:36:48+0900
-:revmark: Fix typo `Repalce` to `Replace` in section that replace attributes to \
-          field value
+:revnumber: v1.27.2
+:revdate: 2020-01-03T09:41:55+0900
+:revmark: delete `/` at head of line in paths field table
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -390,9 +389,8 @@ A sample GraphQL query to get AsciiDoc nodes:
 <1> `node.absolutePath`
 <2> [[path-file-from-source-dir-field]]
     Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
-+
---
-[EXAMPLE]
+
+[example]
 ====
 .gatsby-config.js
 [source, JavaScript]
@@ -414,17 +412,16 @@ A sample GraphQL query to get AsciiDoc nodes:
 |paths.from.source.file
 
 |<gatsby-project-root>/content/blog/about.adoc
-|/content/blog
-|/content/blog/about.adoc
+|content/blog
+|content/blog/about.adoc
 |/about
 
 |<gatsby-project-root>/content/blog/post/gatsby.adoc
-|/content/blog/post
-|/content/blog/post/gatsby.adoc
+|content/blog/post
+|content/blog/post/gatsby.adoc
 |/post/gatsby
 |===
 ====
---
 
 == Replace attributes to field value
 
