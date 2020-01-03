@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.30.0
-:revdate: 2020-01-03T11:28:01+0900
-:revmark: Add section that add path attributes
+:revnumber: v1.31.0
+:revdate: 2020-01-03T20:45:06+0900
+:revmark: Change layout
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -89,6 +89,99 @@ attributes: {
 <2> same as `:!page-draft:`
 ====
 
+== How to query
+
+A sample GraphQL query to get AsciiDoc nodes:
+
+[source, GraphQL]
+----
+{
+  allAsciidoc {
+    edges {
+      node {
+        html
+        timeToRead
+        document {
+          title
+          subtitle
+          main
+          description
+        }
+        author {
+          fullName
+          firstName
+          lastName
+          middleName
+          authorInitials
+          email
+        }
+        revision {
+          date
+          number
+          remark
+        }
+        paths {
+          absolute {
+            file  // <1>
+          }
+          from {
+            project {
+              dir
+              full
+            }
+            source {
+              file  // <2>
+              full  // <3>
+            }
+          }
+        }
+      }
+    }
+  }
+}
+----
+<1> `node.absolutePath`
+<2> [[path-file-from-source-dir-field]]
+    Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
+<3> `node.relativePath`
+
+[[paths-field-example]]
+[example]
+====
+.gatsby-config.js
+[source, JavaScript]
+----
+{
+  resolve: `gatsby-source-filesystem`,
+  options: {
+    path: `${__dirname}/content/blog`,
+    name: `blog`,
+  },
+},
+----
+
+[cols="5*m", options="header, autowidth"]
+|===
+|path
+|paths.from.project.dir
+|paths.from.project.full
+|paths.from.source.file
+|paths.from.source.full
+
+|<gatsby-project-root>/content/blog/about.adoc
+|content/blog
+|content/blog/about.adoc
+|about
+|about.adoc
+
+|<gatsby-project-root>/content/blog/post/gatsby.adoc
+|content/blog/post
+|content/blog/post/gatsby.adoc
+|post/gatsby
+|post/gatsby.adoc
+|===
+====
+
 == Parsing algorithm
 
 It recognizes files with the following
@@ -157,8 +250,70 @@ In the asciidoc file you can insert your image just by using:
   (e.g. `imagesdir@`).
 ====
 
+== Add new node attributes in the asciidoc file
+
+You can define in the asciidoc file your own data that will be automatically
+be attached to the node attributes.
+
+.Example
+[source, AsciiDoc]
+----
+= AsciiDoc Article Title
+Firstname Lastname <author@example.org>
+1.0, July 29, 2018, Asciidoctor article template
+
+:page-title: Article
+:page-path: /my-blog-entry
+:page-category: My Category
+----
+
+Each attribute with the prefix xref:pageAttributePrefix[] option value
+(default: `page-`) will be automatically added under `pageAttributes` so it can
+be used with GraphQL. Name is the attribute name with the prefix removed.
+Attribute value is processed as link:{yaml-example-url}[YAML] data.
+
+[source, GraphQL]
+----
+{
+  allAsciidoc {
+    edges {
+      node {
+        pageAttributes {
+          title
+          path
+          category
+        }
+      }
+    }
+  }
+}
+----
+
+[CAUTION]
+====
+.Error
+
+If the value starts with `{` (e.g. `{github-url}/hitsuji_no_shippo`),
+the following error occurs:
+
+[literal]
+....
+YAMLException: end of the stream or a document separator is expected at line 1, column 13:
+    {github-url}/hitsuji_no_shippo
+                ^
+....
+
+There is a way to avoid the error, but I'm not sure if it should be avoided.
+(link:{issues-url}/56[#56])
+====
+
+
+== Options
+
+=== Attributes
+
 :self-reference-object-url: {github-account-url}/self-referenced-object/tree/60f18190c552116aa5a4e30879b7a7d4832b9362
-== Refer to self attributes
+==== Refer to self attributes
 
 You can use `attributes.options.selfReferendObject` to refer to the value in
 `options.attributes.values.all`.
@@ -215,7 +370,7 @@ plugins: [
 }
 ----
 
-== Add partials attributes
+==== Add partials attributes
 
 Use `attributes.options.partials` to add attributes to files with specific path.
 Used path value is xref:path-file-from-source-dir-field[
@@ -336,100 +491,7 @@ plugins: [
 |===
 ====
 
-== How to query
-
-A sample GraphQL query to get AsciiDoc nodes:
-
-[source, GraphQL]
-----
-{
-  allAsciidoc {
-    edges {
-      node {
-        html
-        timeToRead
-        document {
-          title
-          subtitle
-          main
-          description
-        }
-        author {
-          fullName
-          firstName
-          lastName
-          middleName
-          authorInitials
-          email
-        }
-        revision {
-          date
-          number
-          remark
-        }
-        paths {
-          absolute {
-            file  // <1>
-          }
-          from {
-            project {
-              dir
-              full
-            }
-            source {
-              file  // <2>
-              full  // <3>
-            }
-          }
-        }
-      }
-    }
-  }
-}
-----
-<1> `node.absolutePath`
-<2> [[path-file-from-source-dir-field]]
-    Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
-<3> `node.relativePath`
-
-[[paths-field-example]]
-[example]
-====
-.gatsby-config.js
-[source, JavaScript]
-----
-{
-  resolve: `gatsby-source-filesystem`,
-  options: {
-    path: `${__dirname}/content/blog`,
-    name: `blog`,
-  },
-},
-----
-
-[cols="5*m", options="header, autowidth"]
-|===
-|path
-|paths.from.project.dir
-|paths.from.project.full
-|paths.from.source.file
-|paths.from.source.full
-
-|<gatsby-project-root>/content/blog/about.adoc
-|content/blog
-|content/blog/about.adoc
-|about
-|about.adoc
-
-|<gatsby-project-root>/content/blog/post/gatsby.adoc
-|content/blog/post
-|content/blog/post/gatsby.adoc
-|post/gatsby
-|post/gatsby.adoc
-|===
-====
-
-== Replace attributes to field value
+==== Replace attributes to field value
 
 Values that cannot be referenced when createing a node, such as slug,
 can be replaced as attributes in HTML (`node.html`). Default is empty.
@@ -454,7 +516,7 @@ plugins: [
 ----
 <1> Replace `{slug}` to `node.fields.slug` value.
 
-== Add path attributes
+==== Add path attributes
 
 The values of xref:paths-field-example[
 `node.paths` field] is avaliable as an attributes. Default is empty.
@@ -488,62 +550,6 @@ plugins: [
 <1> Replace `{dir}` to `node.paths.from.project.dir`
 <2> Replace `{full}` to `node.paths.from.source.full`
 
-== Add new node attributes in the asciidoc file
-
-You can define in the asciidoc file your own data that will be automatically
-be attached to the node attributes.
-
-.Example
-[source, AsciiDoc]
-----
-= AsciiDoc Article Title
-Firstname Lastname <author@example.org>
-1.0, July 29, 2018, Asciidoctor article template
-
-:page-title: Article
-:page-path: /my-blog-entry
-:page-category: My Category
-----
-
-Each attribute with the prefix xref:pageAttributePrefix[] option value
-(default: `page-`) will be automatically added under `pageAttributes` so it can
-be used with GraphQL. Name is the attribute name with the prefix removed.
-Attribute value is processed as link:{yaml-example-url}[YAML] data.
-
-[source, GraphQL]
-----
-{
-  allAsciidoc {
-    edges {
-      node {
-        pageAttributes {
-          title
-          path
-          category
-        }
-      }
-    }
-  }
-}
-----
-
-[CAUTION]
-====
-.Error
-
-If the value starts with `{` (e.g. `{github-url}/hitsuji_no_shippo`),
-the following error occurs:
-
-[literal]
-....
-YAMLException: end of the stream or a document separator is expected at line 1, column 13:
-    {github-url}/hitsuji_no_shippo
-                ^
-....
-
-There is a way to avoid the error, but I'm not sure if it should be avoided.
-(link:{issues-url}/56[#56])
-====
 
 === pageAttributePrefix
 
@@ -602,7 +608,7 @@ plugins: [
 include::./_includes/attribute-with-empty-value-examples.adoc[tag=main]
 ====
 
-== Ignore
+=== Ignore
 
 If the attribute matches the value, no Ascidoc node is created.
 Default is `null`.
@@ -623,52 +629,59 @@ plugins: [
 ----
 <1> `''` is `:unpublish:`, `'true'` is `:unpublish: true`, not `true`.
 
-== Front Matter support
+=== OptionFile
 
-You can front matter as `frontmatter` fields. Front Matter value is processed
-link:{yaml-example-url}[YAML] data.
+You can change the option file with the `OptionFile` option.
 
-To make the same field name for each
-link:{github-url}/gatsbyjs/gatsby/tree/master/packages/gatsby-transformer-remark#how-to-query[
-gatsby-transformer-remark], I named it `frontmatter`.
-
-.AsciiDoc file
-[source, Asciidoc]
+.gatsby-config.js
+[source, JavaScript]
 ----
----
-author: {name: hitsuji no shippo, email: xxx@gmail.com}
-category: transformer
-tags: [gatsby, asciidoc]
----
-= doctitle
-:author: hitsuji no shippo
-----
-
-.GraphQL
-[source, GraphQL]
-----
-{
-  allAsciidoc {
-    edges {
-      node {
-        frontmatter {
-          author {
-            name
-            email
-          }
-          category
-          tags
-        }
+plugins: [
+  {
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
+    options: {
+      OptionFile: {
+        path: `file-path` <1>
+        encoding: `file-encoding` <2>
       }
-    }
-  }
-}
+    },
+  },
+]
+----
+<1> Default `./asciidoctor-option.yaml`
+<2> Default `utf8`
+
+[IMPORTANT]
+====
+When reading, the attributes option must be of type object.
+====
+
+==== Option File
+
+link:{yaml-example-url}[YAML] file can be load. Default option file path is
+`./asciidoctor-option.yaml`.  The value of *`gatsby-config.js` takes precedence
+over YAML file*.
+
+.Example
+[source, YAML]
+----
+attributes:
+  values:
+    gatsby-url: https://www.gatsbyjs.org
+    asciidoctor-url: https://asciidoctor
+
+pageAttributePrefix: gatsby-
+enablesEmptyAttribute: true
 ----
 
-[NOTE]
+[TIP]
 ====
-Asciidoctor attribute `skip-front-matter` is always `true`.
+You can also xref:refer-to-self-attributes[refer to the attributes value] in
+option file.
 ====
+
+JSON is hard to write, so I chose yaml.
+
 
 == Define a custom converter
 
@@ -715,57 +728,51 @@ class TemplateConverter {
 }
 ----
 
-== Option File
+== Front Matter support
 
-link:{yaml-example-url}[YAML] file can be load. Default option file path is
-`./asciidoctor-option.yaml`.  The value of *`gatsby-config.js` takes precedence
-over YAML file*.
+You can front matter as `frontmatter` fields. Front Matter value is processed
+link:{yaml-example-url}[YAML] data.
 
-.Example
-[source, YAML]
+To make the same field name for each
+link:{github-url}/gatsbyjs/gatsby/tree/master/packages/gatsby-transformer-remark#how-to-query[
+gatsby-transformer-remark], I named it `frontmatter`.
+
+.AsciiDoc file
+[source, Asciidoc]
 ----
-attributes:
-  values:
-    gatsby-url: https://www.gatsbyjs.org
-    asciidoctor-url: https://asciidoctor
-
-pageAttributePrefix: gatsby-
-enablesEmptyAttribute: true
+---
+author: {name: hitsuji no shippo, email: xxx@gmail.com}
+category: transformer
+tags: [gatsby, asciidoc]
+---
+= doctitle
+:author: hitsuji no shippo
 ----
 
-[TIP]
-====
-You can also xref:refer-to-self-attributes[refer to the attributes value] in
-option file.
-====
-
-JSON is hard to write, so I chose yaml.
-
-=== OptionFile
-
-You can change the option file with the `OptionFile` option.
-
-.gatsby-config.js
-[source, JavaScript]
+.GraphQL
+[source, GraphQL]
 ----
-plugins: [
-  {
-    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
-    options: {
-      OptionFile: {
-        path: `file-path` <1>
-        encoding: `file-encoding` <2>
+{
+  allAsciidoc {
+    edges {
+      node {
+        frontmatter {
+          author {
+            name
+            email
+          }
+          category
+          tags
+        }
       }
-    },
-  },
-]
+    }
+  }
+}
 ----
-<1> Default `./asciidoctor-option.yaml`
-<2> Default `utf8`
 
-[IMPORTANT]
+[NOTE]
 ====
-When reading, the attributes option must be of type object.
+Asciidoctor attribute `skip-front-matter` is always `true`.
 ====
 
 == Auto update for attributes
