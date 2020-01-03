@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.67.0
-:revdate: 2020-01-03T20:45:09+0900
-:revmark: Add log that change layout in README
+:revnumber: v1.68.0
+:revdate: 2020-01-03T20:45:32+0900
+:revmark: Add log that change toclevels to 3 in README
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -71,6 +71,7 @@
 * Delete `/` at head of line in paths field table in README.
   (close link:{repository-issues-url}/82[#82])
 * Change layout in README. (close link:{repository-issues-url}/84[#84])
+* Change toclevels to 3 in README. (close link:{repository-issues-url}/85[#85])
 
 
 == 0.10.1 (2019-12-28)

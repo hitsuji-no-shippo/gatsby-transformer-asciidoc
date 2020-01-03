@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.31.0
-:revdate: 2020-01-03T20:45:06+0900
-:revmark: Change layout
+:revnumber: v1.32.0
+:revdate: 2020-01-03T20:45:29+0900
+:revmark: Change toclevels to 3
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -13,6 +13,7 @@
 :!sectnums:
 :sectids:
 :toc: preamble
+:toclevels: 3
 :sectlinks:
 :sectanchors:
 :idprefix:
