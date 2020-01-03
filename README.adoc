@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.27.0
-:revdate: 2020-01-02T16:30:41+0900
-:revmark: Add section that replace attributes to field value
+:revnumber: v1.27.1
+:revdate: 2020-01-03T09:36:48+0900
+:revmark: Fix typo `Repalce` to `Replace` in section that replace attributes to \
+          field value
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -448,7 +449,7 @@ plugins: [
   },
 ]
 ----
-<1> Repalce `{slug}` to `node.fields.slug` value.
+<1> Replace `{slug}` to `node.fields.slug` value.
 
 == Add new node attributes in the asciidoc file
 
