@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.32.0
-:revdate: 2020-01-03T20:45:29+0900
-:revmark: Change toclevels to 3
+:revnumber: v1.33.0
+:revdate: 2020-01-03T20:48:27+0900
+:revmark: Add test environment
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -36,6 +36,12 @@
 
 Parses AsciiDoc files using
 link:{asciidoctor-official-docs-url}/asciidoctor.js/[Asciidoctor.js].
+
+[WARNING]
+====
+Tested only with link:https://github.com/gatsbyjs/gatsby/tree/master/packages/gatsby-source-filesystem[
+gatsby-source-filesystem^]. Have not tested with other source plugins.
+====
 
 == Install
 
