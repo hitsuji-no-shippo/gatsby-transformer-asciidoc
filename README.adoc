@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.33.0
-:revdate: 2020-01-03T20:48:27+0900
-:revmark: Add test environment
+:revnumber: v1.34.0
+:revdate: 2020-01-03T20:54:53+0900
+:revmark: Change admonition icons in GitHub environment
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -23,6 +23,14 @@
 :!figure-caption:
 :!table-caption:
 :!listing-caption:
+ifdef::env-github[]
+:caution-caption: :fire:
+:important-caption: :exclamation:
+:note-caption: :paperclip:
+:tip-caption: :bulb:
+:warning-caption: :warning:
+endif::[]
+ifndef::env-github[:icons: font]
 // Page Attributes
 :page-create-date: 2019-08-13T16:42:02+0900
 // Variables
