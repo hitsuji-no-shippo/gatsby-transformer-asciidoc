@@ -3,10 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.27.1
-:revdate: 2020-01-03T09:36:48+0900
-:revmark: Fix typo `Repalce` to `Replace` in section that replace attributes to \
-          field value
+:revnumber: v1.30.0
+:revdate: 2020-01-03T11:28:01+0900
+:revmark: Add section that add path attributes
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -289,7 +288,7 @@ plugins: [
 |Additional attributes
 |GraphQL
 
-|`/posts/gatsby`
+|`posts/gatsby`
 |
 
 [source, JavaScript]
@@ -314,7 +313,7 @@ plugins: [
 ----
 <1> If input `page-pages: false`, the value is `null`.
 
-|`/pages/profile`
+|`pages/profile`
 |
 
 [source, JavaScript]
@@ -379,6 +378,7 @@ A sample GraphQL query to get AsciiDoc nodes:
             }
             source {
               file  // <2>
+              full  // <3>
             }
           }
         }
@@ -390,9 +390,10 @@ A sample GraphQL query to get AsciiDoc nodes:
 <1> `node.absolutePath`
 <2> [[path-file-from-source-dir-field]]
     Relative Directory (`node.relativeDirectory`) + Name (`node.name`)
-+
---
-[EXAMPLE]
+<3> `node.relativePath`
+
+[[paths-field-example]]
+[example]
 ====
 .gatsby-config.js
 [source, JavaScript]
@@ -406,25 +407,27 @@ A sample GraphQL query to get AsciiDoc nodes:
 },
 ----
 
-[cols="4*m", options="header, autowidth"]
+[cols="5*m", options="header, autowidth"]
 |===
 |path
 |paths.from.project.dir
 |paths.from.project.full
 |paths.from.source.file
+|paths.from.source.full
 
 |<gatsby-project-root>/content/blog/about.adoc
-|/content/blog
-|/content/blog/about.adoc
-|/about
+|content/blog
+|content/blog/about.adoc
+|about
+|about.adoc
 
 |<gatsby-project-root>/content/blog/post/gatsby.adoc
-|/content/blog/post
-|/content/blog/post/gatsby.adoc
-|/post/gatsby
+|content/blog/post
+|content/blog/post/gatsby.adoc
+|post/gatsby
+|post/gatsby.adoc
 |===
 ====
---
 
 == Replace attributes to field value
 
@@ -450,6 +453,40 @@ plugins: [
 ]
 ----
 <1> Replace `{slug}` to `node.fields.slug` value.
+
+== Add path attributes
+
+The values of xref:paths-field-example[
+`node.paths` field] is avaliable as an attributes. Default is empty.
+
+.gatsby-config.js
+[source, JavaScript]
+----
+plugins: [
+  {
+    resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
+    options: {
+      attributes: {
+        options: {
+          paths: {
+            dir: `from.project.dir`   // <1>
+            full: `from.source.full`  // <2>
+          }
+        },
+      },
+    },
+  },
+]
+----
+
+.Asciidoc
+[source, AsciiDoc]
+----
+:include-dir: {dir}/_includes  // <1>
+:github-edit-link: link:{repository-url}/edit/master/{full}[Edit on GitHub]  // <2>
+----
+<1> Replace `{dir}` to `node.paths.from.project.dir`
+<2> Replace `{full}` to `node.paths.from.source.full`
 
 == Add new node attributes in the asciidoc file
 

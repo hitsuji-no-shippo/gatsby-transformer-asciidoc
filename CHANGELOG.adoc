@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.62.0
-:revdate: 2020-01-02T22:26:04+0900
-:revmark: Add log that add `attributes.options` key in not tailor options
+:revnumber: v1.66.0
+:revdate: 2020-01-03T09:44:30+0900
+:revmark: Add log that add paths in attributes options
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -33,7 +33,13 @@
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
 
-== 0.11.0 (2020-01-02)
+== 0.11.0 (2020-01-03)
+
+=== Breaking changes
+
+* Delete `/` at head of line in field that file path from source file.
+  (close link:{repository-issues-url}/75[#75])
+* Add paths in attributes options. (close link:{repository-issues-url}/74[#74])
 
 === Features
 
@@ -42,6 +48,10 @@
 * Replace attributs to field value. (close link:{repository-issues-url}/72[#72])
 * `attributes.options` key in not tailor options.
   (close link:{repository-issues-url}/80[#80])
+* Field that full path from source directory.
+  (close link:{repository-issues-url}/73[#73]) +
+  Implement for link:{github-account-url}/gatsby-simple-blog-with-asciidoctor/issues/92[
+  link of edit on GitHub in gatsby-simple-blog-with-asciidoctor].
 
 
 === Fix
@@ -58,6 +68,8 @@
 
 * Fix `attributes.options` key positions in option examples in README.
   (close link:{repository-issues-url}/77[#77])
+* Delete `/` at head of line in paths field table in README.
+  (close link:{repository-issues-url}/82[#82])
 
 
 == 0.10.1 (2019-12-28)
