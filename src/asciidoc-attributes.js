@@ -49,7 +49,7 @@ const replaceToFieldValue = async getNodesByType => {
               }
 
               Object.assign(node, {
-                html: node.html.replace(`{${name}}`, value),
+                html: node.html.replace(RegExp(`{${name}}`, `g`), value),
               });
             }
           );
