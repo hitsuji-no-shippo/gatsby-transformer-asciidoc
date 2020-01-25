@@ -5,7 +5,7 @@ const {
   safeLoadEmptyAttributeFieldNamesWithinPageAttributesCache,
 } = require(`./page-attributes-field`);
 
-let enablesEmptyAttribute = true;
+let enablesEmptyAttribute = false;
 
 const setEnablesEmptyAttribute = enables => {
   if (typeof enables === `boolean`) {

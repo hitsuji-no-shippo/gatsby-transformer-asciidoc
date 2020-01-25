@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.70.0
-:revdate: 2020-01-03T20:56:53+0900
-:revmark: Add log that change admonition icons in GitHub environment in README
+:revnumber: v1.71.0
+:revdate: 2020-01-25T15:59:54+0900
+:revmark: Add log that \
+          change default value of `enablesEmptyAttribute` to `false`.
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -32,6 +33,14 @@
 :repository-issues-url: {github-account-url}/gatsby-transformer-asciidoc/issues
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
+
+== 0.12.0 (2020-01-25)
+
+=== Breaking changes
+
+* Change default value of `enablesEmptyAttribute` to `false`.
+  (close link:{repository-issues-url}/89[#89])
+
 
 == 0.11.0 (2020-01-03)
 

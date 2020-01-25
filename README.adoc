@@ -3,9 +3,9 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.34.0
-:revdate: 2020-01-03T20:54:53+0900
-:revmark: Change admonition icons in GitHub environment
+:revnumber: v1.35.0
+:revdate: 2020-01-25T15:57:43+0900
+:revmark: Add default value of `enablesEmptyAttribute`
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -600,8 +600,8 @@ GraphQL field.
 
 [NOTE]
 ====
-This process is not executed when `enablesEmptyAttribute` option is `false`.
-The empty attribute is not defined in GraphQL field.
+This process is not executed when `enablesEmptyAttribute` option is `false`
+(Default is `false`). The empty attribute is not defined in GraphQL field.
 
 .gatsby-config.js
 [source, JavaScript]
