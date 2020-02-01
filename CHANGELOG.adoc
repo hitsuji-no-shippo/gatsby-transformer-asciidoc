@@ -3,10 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.71.0
-:revdate: 2020-01-25T15:59:54+0900
+:revnumber: v1.72.0
+:revdate: 2020-02-01T09:17:55+0900
 :revmark: Add log that \
-          change default value of `enablesEmptyAttribute` to `false`.
+          fix option key from `OptionFile` to `OptionFile` in README.
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -33,6 +33,13 @@
 :repository-issues-url: {github-account-url}/gatsby-transformer-asciidoc/issues
 :asciidoctor-official-user-manual-url: https://asciidoctor.org/docs/user-manual
 :gatsby-official-docs-node-apis-url: https://www.gatsbyjs.org/docs/node-apis/
+
+== 0.12.1 (2020-02-01)
+
+=== Docs
+
+* Fix option key from `OptionFile` to `OptionFile` in README.
+  (close link:{repository-issues-url}/90[#90])
 
 == 0.12.0 (2020-01-25)
 

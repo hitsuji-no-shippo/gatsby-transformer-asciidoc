@@ -3,9 +3,10 @@
 :!author-email:
 :author: {author-name}
 :!email: {author-email}
-:revnumber: v1.35.0
-:revdate: 2020-01-25T15:57:43+0900
-:revmark: Add default value of `enablesEmptyAttribute`
+:revnumber: v1.35.1
+:revdate: 2020-02-01T09:14:58+0900
+:revmark: Fix option key from `OptionFile` to `optionFile` \
+          in OptionFile section.
 :doctype: article
 :copyright: Copyright (c) 2019 {author-name}
 :title-separtor: :
@@ -646,7 +647,7 @@ plugins: [
 
 === OptionFile
 
-You can change the option file with the `OptionFile` option.
+You can change the option file with the `optionFile` option.
 
 .gatsby-config.js
 [source, JavaScript]
@@ -655,7 +656,7 @@ plugins: [
   {
     resolve: `@hitsuji_no_shippo/gatsby-transformer-asciidoc`,
     options: {
-      OptionFile: {
+      optionFile: {
         path: `file-path` <1>
         encoding: `file-encoding` <2>
       }
